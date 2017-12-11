@@ -1,0 +1,54 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 pageTop">
+        <div class="row">
+          <div class="col-md-12 pageTopMenu">
+            <div class="navbar-header">
+              <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <%= link_to root_path, :class => "topLogo" do %>
+                <%#= image_tag 'mainLogo.png' %>
+              <% end %>
+            </div>
+            <!-- <div class="navbar-collapse navbar-ex1-collapse collapse"> -->
+            <div class="navbar-collapse navbar-ex1-collapse navbar-inverse-collapse collapse">
+
+              <ul class="nav navbar-nav">
+                <% if user_signed_in? %>
+                  <%= nav_link "Pad", "pencil-square-o", root_path%>
+                <% end %>
+                <%= nav_link "Starters", "user", starters_path %>
+                <%= nav_link "Startups", "rocket", startups_path %>
+                <%= nav_link "Groups", "users", groups_path %>
+                <%= nav_link "Discuss", "bullhorn", items_path %>
+                <div style="clear:both;"></div>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <% if user_signed_in? %>
+                  <% if current_user.title? %>
+                    <%= nav_icon_link "Settings", "cog", my_profile_path, 0 %>
+                  <% end %>
+                  <%= nav_icon_link "Notifications", "bell-o", notifications_path, @notification_counter.to_i %>
+                  <%= nav_icon_link "Messages", "comments-o", conversations_path, @messages_counter.to_i %>
+                  <% if is_admin? %>
+                    <%= nav_icon_link "Admin", "paw", admin_dashboard_path, 0 %>
+                  <% end %>
+                  <%= nav_icon_link "Logout", "sign-out", destroy_user_session_path, 0, true %>
+
+                <% else %>
+                  <li><%= link_to ('Sign Up'), '/users/sign_up' %></li>
+                  <li><%= link_to ('Login'), '/users/sign_in' %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- .row -->
+  </div> <!-- .container -->
+</div> <!-- .pageTopLine -->

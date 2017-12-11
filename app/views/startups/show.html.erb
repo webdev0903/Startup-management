@@ -1,0 +1,173 @@
+<% if @startup.title.present? %>
+	<% keyword_full = @startup.title %>
+	<% keyword = keyword_full.gsub(/[^A-Z0-9a-z ]/i, '') %>
+	<% keywords = keyword.split().join(",") %>
+<% else %>
+	<% keywords = "2014" %>
+<% end %>
+<%
+meta :title => "#{@startup.title}",
+     :description => "#{@startup.title} - #{@startup.summary} (a startup listed on StarterPad)",
+	 :keywords => "#{keywords},starterpad,startups,startup,entrepreneurs"
+%>
+<% content_for :title do %>
+	<div style="float:left;">
+		<%= @startup.title %>
+	</div>
+	<% if user_signed_in? %>
+		<% if current_user.id == @startup.user_id %>
+			<%= link_to edit_startup_path(@startup) do %>
+				<div  style="margin: 8px 0 0 10px; float:left;" class="btn btn-warning btn-xs">Edit</div>
+			<% end %>
+		<% else %>
+			<% if current_user.is_following_startup?(@startup) %>
+				<%= button_to unfollow_startup_path(@startup), class: "btn btn-success btn-xs", style: "float:left; margin: 8px 0 0 10px;" do %>
+					<div class="title join">
+						Following
+					</div>
+				<% end %>
+			<% else %>
+				<%= button_to follow_startup_path(@startup), class: "btn btn-primary btn-xs", style: "float:left; margin: 8px 0 0 10px;" do %>
+					<div class="title join">
+						Follow
+					</div>
+				<% end %>
+			<% end %>
+		<% end %>
+	<% end %>
+<% end %>
+<div class="row">
+	<!-- <div class="col-md-12"> -->
+		<div class="col-md-4 col-sm-3">
+			<div class="userProfileLeftPhoto">
+				<%= image_tag @startup._photo(:middle), {:style=>'margin:0 auto;', :class=>'img-responsive'} %>
+			</div>
+			<div class="userProfileInformation">
+				<div class="userProfileLeftText" style="margin-bottom:18px;">
+					<%= @startup.summary %>
+				</div>
+				<div class="userProfileLeftText">
+					<% if @startup.city.present? %>
+						<%= image_tag('old/iconPlaceMin.png') %>
+						<% if @startup.country.title.present? %>
+							<%= @startup.country.title %>,
+						<% end %>
+						<%= @startup.city %>
+					<% elsif defined? @startup.country.title %>
+						<%= image_tag('old/iconPlaceMin.png') %>
+						<%= @startup.country.title %>
+					<% end %>
+				</div>
+				<div class="userProfileLeftLinks">
+					<%
+					links = ['website', 'angellist', 'linkedin', 'twitter', 'facebook']
+					links.each do |link|
+						if !@startup[link].blank?
+							show_link = @startup[link]
+							show_link.slice! "https://"
+							show_link.slice! "http://"
+							show_link.slice! "www."
+							show_link = truncate(show_link, :length => 25)
+
+							make_url = @startup[link]
+							make_url.slice! "http://"
+							make_url = 'http://'+make_url
+						%>
+							<div class="userProfileLeftLink">
+								<%= link_to "", make_url, target: 'blank', :class => link %>
+							</div>
+						<% end %>
+					<% end %>
+					<div style="clear:both;"></div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-8 col-sm-9">
+			<% if @startup.markets.present? %>
+				<div class="aboutTab">
+					<div class="aboutTabTitle">
+						Markets
+					</div>
+					<%= render :partial => 'keywords/echo', :collection => @markets, :as => :keyword, :locals => { :skill => false } %>
+					<div style="clear:both"></div>
+				</div>
+				<p>&nbsp;</p>
+			<% end %>
+			
+			<% if @startup.require.present? %>
+				<div class="aboutTab">
+					<div class="aboutTabTitle">
+						Looking for
+					</div>
+					<p><%= @startup.require %>
+					</p>
+				</div>
+			<% end %>
+			<% if @startup.about.present? %>
+				<div class="aboutTab">
+					<div class="aboutTabTitle">
+						About product
+					</div>					
+					<p>
+					<%= auto_link @startup.about.gsub("\n", '<br/>').gsub("\r", '' ).html_safe %>
+					</p>
+				</div>
+			<% end %>
+			<% if @startup.posts.present? %>
+			<div class="startupItemsTitle">
+				Posts 
+			</div>
+			<% end %>
+			<div class="clearfix"></div>
+			<div class="padPosts">
+				<% if @startup.founder?(current_user) %>
+					<div id="addPostArea" style="display: block;">
+						<%= form_for @post, url: startup_posts_path(params[:id]), remote: true, html: { id: 'formAddPost' } do |f| %>
+							<div class="input textarea">
+								<%= f.text_area :text, placeholder: "What's New.. ?", class: 'makeHigherTextarea'  %>
+							</div>
+							<div class="clearfix"></div>
+							<div class="formAddPostSubmit">
+								<div class="submit">
+									<%= button_tag "Post", class: "btn btn-primary", 'data-disable-with' => "<i class='fa fa-spinner fa-spin'></i>".html_safe %>
+                  
+								</div>
+							</div>
+						<% end %>
+					</div>
+				<% end %>
+				<div id="postsList">
+					<% @startup.posts.each do |post| %>
+						<%= render '/startup_posts/post', post: post %>
+					<% end %>
+				</div>
+			</div>
+			<div style="clear:both"></div>
+			<% if @startup.founders.present? and @startup.founders.count > 0 %>
+				<div class="startupItemsTitle">
+					<%= @startup.founders.count==1? 'Founder' : 'Cofounders' %> 
+				</div>
+				<div class="groupItems row" style="margin-left:0px;">
+					<div class="groupItemsInside col-md-12">
+						<%= render :partial => 'users/partials/medium_tab', :collection => @startup.founders, :as => :user %>
+					</div>
+				</div>
+			<% end %>
+			
+			<div class="startupItemsTitle">
+				Followers (<%= @startup.followers.count %>)
+			</div>
+			<div class="groupItems row" style="margin-left:0px;">
+				<% if @startup.followers.present? %>
+					<div class="groupItemsInside col-md-12">
+						<%= render :partial => 'followers', :collection => @startup.followers.includes(:profile), :as => :follower %>
+
+					</div>
+				<% else %>
+					<div class="text-center"><strong>No followers yet</strong></div>
+				<% end -%>
+			</div>
+			
+		</div>
+	<!-- </div> -->
+</div>

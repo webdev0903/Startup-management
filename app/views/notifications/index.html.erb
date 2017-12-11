@@ -1,0 +1,23 @@
+<%
+meta :title => "Notifications",
+     :description => "Here you can find all your StarterPad notifications, such as friend requests, private messages, and activity in your Groups or Startups.",
+     :keywords => "notifications, starterpad"
+%>
+<%= content_for :title do %>
+  Notifications 
+<% end %>
+<div class="row">
+  <div class="col-md-8 col-sm-8 col-xs-12">
+  	<div class="notificationsArea">
+	  	<% @notifications.each do |n| %>
+	  		<%= notificationParam(n,'web') %>
+  		<% end %>
+      <% if @notifications.blank? %>
+        <span>You don't have any notifications</span>
+      <% end %>
+  	</div>
+  </div>
+  <div class="col-md-4 col-sm-4 col-xs-12 ">
+      <%= render 'users/partials/menu' %>
+  </div>
+</div>

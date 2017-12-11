@@ -1,0 +1,9 @@
+$('#add-friend-link-next').hide();
+$('#waiting-response-link').show();
+link = $('#waiting-response-link').attr('href').split('/');
+var cancel = link.pop();
+var request_id = link.pop();
+link.push('<%= @friend_request.id %>');
+link.push(cancel);
+link = link.join('/');
+$('#waiting-response-link').attr('href', link);

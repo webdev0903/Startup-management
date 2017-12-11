@@ -1,0 +1,27 @@
+<%
+@content_title = 'Forgot your password?' 
+%>
+
+<div class="infoBlok" style="margin-top:20px; width:450px; color:rgb(100,100,100)">
+	<div class="infoBlokInside">
+		<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+		<%= devise_error_messages! %>
+		<div class="paramTab first">
+			<div class="ptFirst">
+				
+			</div>
+			<div class="ptSecond"> 
+				<%= f.email_field :email, {:autofocus => true, :style=>'width:350px;', :placeholder=>"Your Email"} %>
+			</div>
+			<div style="clear:both;"></div>
+		</div>
+		<div class="paramTab last">
+			<div class="ptFirst">&nbsp;</div>
+			<div class="ptSecond"> 
+				<%= f.submit "Send me reset password instructions", {:class=>'btnMiddle btnGreen'} %>
+			</div>
+			<div style="clear:both;"></div>
+		</div>
+		<% end %>
+	</div>
+</div>

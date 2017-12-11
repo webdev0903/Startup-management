@@ -1,0 +1,206 @@
+<div class="firstLine">
+  <div class="firstLineInside">
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="col-md-12 pageTopMenu">
+          <div class="navbar-header">
+            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="col-md-6 col-sm-6 col-xs-6" style="padding-top: 10px; padding-bottom: 10px;">
+              <%= link_to root_path do %>
+                <img class="img-responsive" src="<%= asset_path("starterPadLogo.png")%>" />
+              <% end %>
+            </div>
+            
+          </div>
+          <!-- <div class="navbar-collapse navbar-ex1-collapse collapse"> -->
+          <div class="navbar-collapse navbar-ex1-collapse navbar-inverse-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li>
+                <%= link_to new_user_session_path do %>
+                  <i class="fa fa-sign-in" style="vertical-align:middle;"></i>&nbsp;&nbsp;Login
+                <% end %>
+              </li>
+              <li>
+                <%= link_to new_user_registration_path do %>
+                  <i class="fa fa-pencil-square-o" style="vertical-align:middle;"></i>&nbsp;Signup
+                <% end %>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="onFirstLine">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2">
+            &nbsp;
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+            <div class="firstLineDescription">
+              <span>Thousands</span> of Startup Founders are here to <span>help you!</span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="firstLineInsideSocial col-md-6 col-md-offset-3 col-xs-6 col-xs-offset-3">
+            <span>Sign up via</span>
+            <a href="/auth/twitter"><%= image_tag("old/home-twitter.png", :id=>"home-twitter") %></a>
+            <a href="/auth/facebook"><%= image_tag("old/home-facebook.png", :id=>"home-facebook") %></a>
+            <div class="clear"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <img class="img-responsive" src="<%= asset_path("starterPadSteps.png")%>" />
+          </div>
+        </div>
+      </div> <!-- .container -->
+    </div> <!-- .onFirstLine -->
+  </div> <!-- .firstLineInside -->
+</div> <!-- .firstLine -->
+<div class="secondLine">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2 secondLineInside">
+        <div class="row">
+          <div class="col-md-12">
+            <h4>Help for Startups</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h5>Select any topic and get free help for your Startup!</h5>
+          </div>
+        </div>
+        <div class="row secondLineInsideButtons">
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <span class="btn-light-blue">MVP PLAN</span>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <span class="btn-light-blue">Forming a Company</span>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <span class="btn-light-blue">Outsourcing</span>
+          </div>
+        </div>
+        <div class="row secondLineInsideButtons">
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <span class="btn-medium-blue">Fund Raise Strategy</span>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <span class="btn-medium-blue">Legal Help</span>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <span class="btn-medium-blue">Accounting</span>
+          </div>
+        </div>
+        <div class="row secondLineInsideButtons">
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <span class="btn-dark-blue">Growth Hack Strategy</span>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <span class="btn-dark-blue">Early Adopters</span>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <span class="btn-dark-blue">Project Management</span>
+          </div>
+        </div>
+      </div> <!-- .secondLineInside -->
+    </div>
+  </div> <!-- .container -->
+</div> <!-- .secondLine -->
+<div class="thirdLine">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2 thirdLineInside">
+      <div class="row thirdLineTitle">
+        <div class="col-md-12">
+          <h4>Startup Founders</h4>
+        </div>
+      </div>
+      <div class="row thirdLineTitle">
+        <div class="col-md-12">
+          <h5>Join thousands of other startup founders, helping one another to achieve success.</h5>
+        </div>
+      </div>
+      <div class="row thirdLineUsers">
+        <% @users.each do |u| %>
+          <%= link_to u.url do %>
+            <div class="col-md-3 col-sm-4 col-xs-6">
+              <div class="userTab">
+                <div class="userPhoto">
+                  <%= image_tag(u._photo(:thumb), :style=>'width:45px; border-radius:30px;') %>
+                </div>
+                <div class="userText">
+                  <%= truncate(u.title, :length=>14, :separator=>' ', :omission => ' ') %>
+                  <br/>
+                  <span style="border-radius:3px; font-size:15px; color:rgb(190,190,190)">
+                    <%#= u.profile.current_position if u.profile.summary.present? %>
+                    <%= truncate(u.profile.summary, :length=>14, :separator=>' ', :omission => ' ') if u.profile.summary.present? %>
+                  </span>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+        <div style="clear:both"></div>
+      </div>
+    </div> <!-- .thirdLineInside -->
+  </div>
+</div> <!-- .thirdLine -->
+<div class="row">
+  <div class="col-md-12">
+    <div class="bottomLine-main">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1 bottomLineInside">
+          <ul>
+            <li>© <%= Time.now.year %> StarterPad</li>
+            <% if defined? current_user[:name] %>
+              <li><%= link_to "Badges", badges_path %></li>
+            <% end %>
+            <li><%= link_to "Contact", contact_index_path %></li>
+            <li><%= link_to "Starters", starters_path %></li>
+            <li><%= link_to "Startups", startups_path %></li>
+            <li><%= link_to "Groups", groups_path %></li>
+            <li><%= link_to "Discuss", items_path %></li>
+            <li><%= link_to "Blog", '/blog/' %></li>
+            <li><%= link_to "Resources", '/blog/resources/' %></li>
+            <li><%= link_to "Terms", terms_path %></li>
+            <li><%= link_to "Privacy", privacy_path %></li>
+            <div style="clear:both"></div>
+          </ul>
+        </div> <!-- .bottomLineInside -->
+      </div>
+      <div style="text-align:center;">
+        <a href="//twitter.com/StarterPad" target="_blank">
+        <i class="fa fa-twitter-square fa-2x" style="margin-top:3px;margin-left: 3px;"></i>
+      </a>
+      <a href="//fb.com/StarterPad" target="_blank">
+        <i class="fa fa-facebook-square fa-2x" style="margin-top:3px;margin-left: 3px;"></i>
+      </a>
+      <a href="//plus.google.com/+Starterpad/posts" rel="publisher" target="_blank">
+        <i class="fa fa-google-plus-square fa-2x" style="margin-top:3px;margin-left: 3px;"></i>
+      </a>
+      <a href="//www.linkedin.com/company/starterpad" target="_blank">
+        <i class="fa fa-linkedin-square fa-2x" style="margin-top:3px;margin-left: 3px;"></i>
+      </a>
+      <a href="//www.pinterest.com/starterpad/" target="_blank">
+        <i class="fa fa-pinterest-square fa-2x" style="margin-top:3px;margin-left: 3px;"></i>
+      </a>
+      <a href="//starterpad.tumblr.com/" target="_blank">
+        <i class="fa fa-tumblr-square fa-2x" style="margin-top:3px;margin-left: 3px;"></i>
+      </a>
+      </div><!-- .bottomLineInside -->
+      <div class="row text-right" style="padding-right:15px;">
+        <a href="https://mixpanel.com/f/partner" target="_blank"><img src="//cdn.mxpnl.com/site_media/images/partner/badge_light.png" alt="Mobile Analytics" /></a>
+      </div>
+    </div> <!-- .bottomLine-main -->
+  </div>
+</div>

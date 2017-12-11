@@ -1,0 +1,90 @@
+<%
+meta :title => "Social Networks",
+     :description => "Here you can hook up your Facebook or Twitter account to StarterPad.",
+     :keywords => "social networks, facebook, twitter, settings, starterpad"
+%>
+
+<%= content_for :title do %>
+  Social Networks
+<% end %>
+<div class="row">
+  <div class="col-md-8 col-sm-8 col-xs-12">
+    <div class="infoBlok">
+      <div class="infoBlokInside" style=" display:table; font-size:15px;">
+        <div style="float:left; width:250px;">
+          <div style="font-size:22px; font-weight:bolder; margin-bottom:7px;">
+            Twitter
+          </div>
+          <% if current_user.twitter_auth.present? %>
+            Connected with Twitter <%= "(#{current_user.twitter_auth.name})" if current_user.twitter_auth.name %>
+            <div style="margin-top:10px;">
+              <div class="btn btn-success" style="cursor:default; float:left;">Connected</div>
+              <div style="float:left; margin-left: 10px;">
+                <%= link_to 'Disconnect', '/twitter_disconnect', :class => "btn btn-danger", :confirm=>'Do you really want to disconnect?' %>
+              </div>
+            </div>
+
+          <% else %>
+            Your profile is not connected with Twitter.
+            <br/>
+            <%= link_to 'Connect with Twitter', '/auth/twitter', :class=>'btn btn-primary', :style=>'margin-top:10px;' %>
+          <% end %>
+        </div>
+
+        <div style="float:left; width:250px;">
+          <div style="font-size:22px; font-weight:bolder; margin-bottom:7px;">
+            Facebook
+          </div>
+          <% if current_user.facebook_auth.present? %>
+            Connected with Facebook <%= "(#{current_user.facebook_auth.name})" if current_user.facebook_auth.name %>
+            <div style="margin-top:10px;">
+              <div class="btn btn-success" style="cursor:default; float:left;">Connected</div>
+              <div style="float:left; padding:1px 0px 0px 12px;">
+                <%= link_to 'Disconnect', '/facebook_disconnect', :class => "btn btn-danger", :confirm=>'Do you really want to disconnect?' %>
+              </div>
+            </div>
+          <% else %>
+            Your profile is not connected with Facebook yet!
+            <br/>
+            <%= link_to 'Connect with Facebook', '/auth/facebook', :class=>'btn btn-primary', :style=>'margin-top:10px;' %>
+          <% end %>
+        </div>
+        <div style="clear:both"></div>
+        <div style="padding-top:30px;">
+          Connections let's you to login without filling in email 
+          and password every time.
+        </div>
+        <div style="clear:both"></div>
+        <hr>
+        <%= form_for current_user, :url => update_settings_user_path(current_user) do |f| %>
+          <div class="formRow"> 
+            <div style="float:left">
+              <%= f.check_box :tweet_opt_in, { :id => 'user_tweet_opt_in' }, false, true %>
+              <%= f.label :tweet_opt_in, '<span></span>'.html_safe %>
+            </div>
+            <div style="float:left; padding-left:10px; padding-top:1px;">
+              <label><b>Tweet Opt-out</b></label>
+              <br/>
+              Opt-out of other members Tweeting about you and your startup.
+              <br/><br/>
+            </div>
+          </div>
+          <div class="formRow last">
+            <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+              &nbsp;
+            </div>
+            <div class="col-md-8 col-sm-8 col-xs-12 frRight">
+              <%= f.submit "Update", class: "btn btn-primary", style: "width:100px;" %>
+            </div>
+            <div style="clear:both"></div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="col-md-4 col-sm-4 col-xs-12 ">
+      <%= render 'users/partials/menu' %>
+  </div>
+</div>

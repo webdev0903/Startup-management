@@ -1,0 +1,30 @@
+<div>
+  <div style="font-size:16px">
+    <p>Before your account can be activated, you need to do the following:</p>
+    <ol>
+      <li>Use a <b>real photo</b>, not a cartoon or a company logo.  This encourages more open and honest communication between members.<br/>
+        <img src="<%= asset_path("Profile-pic-examples.jpg")%>" style="max-width:250px;" />
+      </li>
+      <li>Fill out as many details as you can here:  <%= link_to my_profile_url, my_profile_url, :target => '_blank' %></li>
+      <li>And here: <%= link_to my_profile_details_url, my_profile_details_url, :target => '_blank' %></li>
+    </ol>
+  </div>
+  <br>
+  <hr>
+  <span>
+    <font color="#888888">
+    <div>
+      <div style="float:left; padding:0 7px 0 2px;">
+        <img src="<%= asset_path("starterpad-icon-square-40.png")%>" />
+      </div>
+      <strong>StarterPad</strong> - Helping Entrepreneurs Succeed
+      <br>
+      <a href="https://starterpad.com" target="_blank">https://starterpad.com</a>
+      <div style="font-style:italic; float: left">
+        <hr>
+        * You are receiving this email because you're a registered member of StarterPad.  If you'd like to opt-out of future emails, simply reply to it and let us know.  We're not spammers! *
+      </div>
+    </div>
+    </font>
+  </span>
+</div>

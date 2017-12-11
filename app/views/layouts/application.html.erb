@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= metamagic :site => "StarterPad", :title => "StarterPad", title: [:title, :site], separator: " | ", :description => "Platform to build Startups. Connect with other entrepreneurs to help each other achieve success. Share tools and tactics to grow your company. Sign up for free today!", :keywords => "startup, startups, entrepreneurs, founders, jobs, careers, business" %>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.2/spacelab/bootstrap.min.css" rel="stylesheet">
+  <script src="//maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
+  <%= stylesheet_link_tag    "application", media: "all", :data => {:'turbolinks-track' => true} %>
+  <%= javascript_include_tag "application", :data => {:'turbolinks-track' => true}  %>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <meta http-equiv="Content-Type" content="application/vnd.wap.xhtml+xml; charset=utf-8" />
+  <meta name="HandheldFriendly" content="true" />
+  <meta name="apple-mobile-web-app-capable" content="yes" /> 
+  <link rel="icon" type="image/x-icon" href="/favicon.png" />
+  <script type="text/javascript">
+    $(function() {
+      $('a').tooltip({placement: 'bottom'});
+    });
+  </script>
+  <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+  <% if Rails.env.production? %>
+mixpanel.init("5c5a5d01165a26fc258e5d2c96d4e1bb");
+  <% else %>
+mixpanel.init("7aa3b0b757c3c11b3ffd69125dde1ede");  
+  <% end %>
+</script><!-- end Mixpanel -->
+</head>
+<body class="inner" style="<%= 'padding-top: 0px;' if params[:action] == 'wizard' %>">
+    <!-- Google Tag Manager -->
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-MZRQDN"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MZRQDN');</script>
+    <!-- End Google Tag Manager -->
+  <%= render 'layouts/top' unless params[:action] == 'wizard' %>
+  <%= yield :secondary_nav %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <% if content_for? :title %>
+          <h1 class="pageContentTitle">
+            <%= yield :title %>
+          </h1>
+          <div style="clear:both"></div>
+        <% end %>
+      </div>
+    </div>
+  </div> <!-- .container -->
+  <% 
+  # Content
+  if params[:action]=='home' and !user_signed_in? %>
+    <%= yield %>
+  <% else %>
+    <% if user_signed_in? %>
+      <%= hidden_field_tag(:user, current_user.to_json(:only => [:id, :title, :email]) ) %>
+    <% end %>
+    <div class="container pageContent">
+      <% flash.each do |key, value| %>
+        <% if key == :tracker || key == 'tracker' %>
+          <script type="text/javascript">
+            $(window).load(function(){
+              tracker.emit('<%= value[:event] %>', <%= raw value[:data].to_json %>)
+            });
+          </script>
+        <% else %>
+          <% key = 'danger' if key == 'error' || key == :error  %>
+          <% key = 'warning' if key == 'notice' || key == :notice %>
+          <div class="alert alert-dismissable alert-<%= key %>">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <div class="alertInside">
+              <%= value %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+      <%= yield %>
+    </div>
+  <% end %>
+
+  <%= render 'layouts/footer' %>
+  <script>
+    // Include the UserVoice JavaScript SDK (only needed once on a page)
+    UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/neqkaTfaxQuKMq3MMFzQ.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
+    //
+    // UserVoice Javascript SDK developer documentation:
+    // https://www.uservoice.com/o/javascript-sdk
+    //
+    // Set colors
+    UserVoice.push(['set', { accent_color: '#6aba2e', trigger_color: 'white', trigger_background_color: '#6aba2e'}]);
+    
+    // Identify the user and pass traits
+    // To enable, replace sample data with actual user traits and uncomment the line
+    UserVoice.push(['identify', {
+      //email:      'john.doe@example.com', // User’s email address
+      //name:       'John Doe', // User’s real name
+      //created_at: 1364406966, // Unix timestamp for the date the user signed up
+      //id:         123, // Optional: Unique id of the user (if set, this should not change)
+      //type:       'Owner', // Optional: segment your users by type
+      //account: {
+      //  id:           123, // Optional: associate multiple users with a single account
+      //  name:         'Acme, Co.', // Account name
+      //  created_at:   1364406966, // Unix timestamp for the date the account was created
+      //  monthly_rate: 9.99, // Decimal; monthly rate of the account
+      //  ltv:          1495.00, // Decimal; lifetime value of the account
+      //  plan:         'Enhanced' // Plan name for the account
+      //}
+    }]);
+
+    // Set global widget options
+    UserVoice.push(['set', {
+      accent_color: '#448dd6'
+    }]);
+
+    // Add default trigger to the bottom-right corner of the window:
+    UserVoice.push(['addTrigger', {
+      mode: 'contact',
+      trigger_color: 'white',
+      trigger_background_color: 'rgba(46, 49, 51, 0.6)',
+      trigger_position: 'bottom-right'
+    }]);
+
+    // Or, use your own custom trigger:
+    //UserVoice.push(['addTrigger', '#id', { mode: 'satisfaction' }]);
+
+    // Autoprompt for Satisfaction and SmartVote (only displayed under certain conditions)
+    UserVoice.push(['autoprompt', {}]);
+  </script>
+  </body>  
+</html>

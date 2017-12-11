@@ -1,0 +1,132 @@
+<%
+meta :title => "Pad",
+     :description => "The Pad on StarterPad is used for members to post public messages to one another, similar to a message board.",
+     :keywords => "pad, starterpad"
+%>
+
+<%= content_for :title do %>
+  Pad
+<% end %>
+
+<div class="row">
+  <div class="col-md-8 col-sm-8 col-xs-12">
+    <div class="padPosts">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div id="addPostArea">
+            <%= form_for @post, :html => {:id => 'formAddPost'}, :remote => true do |f| %>
+              <div class="input textarea">
+                <%= f.text_area :text, :class => "makeHigherTextarea", :cols => "30", :id => "postText", :placeholder => "What's new?" %>
+              </div>
+              <div style="clear:both"></div>
+
+              <div class="formAddPostSubmit">
+                <div class="submit">
+                  <%= button_tag "Post", id: "new-comment-submit", class: "btn-sm btn btn-primary", 'data-disable-with' => "<i class='fa fa-spinner fa-spin'></i>".html_safe %>
+      
+                </div>
+              </div>
+
+              <div class="formAddPostBtns">
+                <div class="selectStyled" style="float:right;">
+                  <%= f.select :visibility, Post::VISIBILITY, {}, {:class => 'formAddPostVisibility'} %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div id="postsList" class="">
+            <%= render :partial => 'posts/post', :collection => @posts, :as => :post %>
+            <div class="row">
+              <div id="postsList" class="col-md-12 col-sm-12 col-xs-12">
+                <div id='more-posts' class="test">
+                  <div class="morePostsButton">
+
+                    <%= link_to 'MORE', {:controller => 'posts', :action => 'index', :page => 2}, :remote => true, :id => 'more-posts-link', :'data-no-turbolink' => true %>
+                    <div class="loadingIcon" style="display:none;" id="more-posts-laoder"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="clear:both"></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-4 col-xs-12">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Starters to follow</h3>
+      </div>
+      <div class="panel-body">
+        <% @starters.each do |starter| %>
+          <div class="col-md-12 col-sm-12 col-xs-12 padItemTab">
+            <div class="col-md-3 col-sm-4 col-xs-5 padItemTabPhoto">
+              <%= link_to profile_path(starter) do %>
+                <%= image_tag starter._photo(:thumb), :class => "img-responsive", :style => "margin: 0 auto;" %>
+              <% end %>
+            </div>
+
+            <div class="col-md-9 col-sm-8 col-xs-7 padItemTabText">
+              <div class="row padItemTabTitle">
+                <div class="padItemTabLeft">
+                  <%= link_to truncate(starter.title, :length => 15, :omission => '..'), profile_path(starter) %>
+                </div>
+                <div class="padItemTabRight">
+                  <%= render :partial => 'users/partials/follow_link', locals: {user_id: starter.id , btn_size: 'btn-xs'} %>                  
+                </div>
+              </div>
+              <div style="clear:both"></div>
+              <%= truncate starter.profile.summary, :length => 25, :omission => '...' %>
+              <div class="button"></div>
+            </div>
+          </div>
+        <% end %>
+        <div style="clear:both"></div>
+      </div>
+    </div>
+    <div style="clear:both"></div>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Groups to join</h3>
+      </div>
+      <div class="panel-body">
+        <% @groups.each do |group| %>
+          <div class="col-md-12 col-sm-12 col-xs-12 padItemTab">
+            <div class="col-md-3 col-sm-4 col-xs-5 padItemTabPhoto">
+              <%= link_to group_path(group) do %>
+                <%= image_tag group._photo(:thumb), :class => "img-responsive", :style => "margin: 0 auto;" %>
+              <% end %>
+            </div>
+
+            <div class="col-md-9 col-sm-8 col-xs-7 padItemTabText">
+              <div class="row padItemTabTitle">
+                <div class="padItemTabLeft">
+                  <%= link_to truncate(group.title, :length => 15, :omission => '..'), group_path(group) %>
+                </div>
+
+                <div class="padItemTabRight">
+                   <%= link_to 'Join', join_group_path(group, current_user.id), :method => :post, :remote => true, :class => 'padItemTabBtn btn btn-primary', :id => "join-link-#{group.id}", 
+                      :style => group.members.map(&:id).include?(current_user.id) ? 'display:none' : ''
+                    %>
+
+                    <%= link_to 'Joined', leave_group_path(group, current_user.id), :method => :delete, :remote => :true, :id => "joined-link-#{group.id}", :class => "padItemTabBtn btn btn-success",  
+                      :style => group.members.map(&:id).include?(current_user.id) ? '' : 'display:none'%>
+                </div>
+              </div>
+              <div style="clear:both"></div>
+              <%= truncate group.about, :length => 25, :omission => '...' %>
+            </div>
+          </div>
+        <% end %> 
+      </div>
+    </div>
+    <div style="clear:both"></div>
+
+  </div>
+</div> <!-- .row -->

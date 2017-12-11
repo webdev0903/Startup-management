@@ -1,0 +1,8 @@
+$('#like-post-<%= @like.post_id %>').hide();
+$('#unlike-post-<%= @like.post_id %>').show();
+$('#like-count-<%= @like.post_id %>').html(((parseInt($('#like-count-<%= @like.post_id %>').html())) || 0) + 1);
+link = $('#unlike-post-<%= @like.post_id %>').attr('href').split('/');
+link.pop();
+link.push('<%= @like.id %>');
+link = link.join('/');
+$('#unlike-post-<%= @like.post_id %>').attr('href', link);

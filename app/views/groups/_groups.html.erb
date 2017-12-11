@@ -1,0 +1,49 @@
+<div class="groupstartupsList">
+  <div class="col-md-12">
+    <%= sort_link @search, :title, "Sort by Name" %>
+  </div>
+<% groups.each do |group| %>
+  <div class="col-md-3 col-sm-4 col-xs-6">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <strong class="panel-title">
+          <div class="panel-title-1">
+            <% if group.title? %>
+              <%= link_to truncate(group.title, :length => 100), group_path(group.url), :title => group.title %>
+            <% end %>
+          </div>
+          <% if group.about.present? %>
+            <div class="panel-title-2" title="<%= group.about %>"><%= truncate(group.about, :length => 100) if group.about? %></div>
+          <% else %>
+            &nbsp;
+          <% end %> 
+        </strong>
+      </div>
+      <div class="panel-body">
+        <%= link_to group_path(group.url) do %>
+          <%= image_tag group._photo(:thumb), :size => '122', :class => "img-responsive", :onError => "this.onerror=null;this.src='/group.png';" %>
+        <% end %>
+        <% if user_signed_in? %>
+          <% if group.user_id == current_user.id %>
+            <div class="follow_btn_area">
+              <a class="userListFollowing btn btn-warning">Moderating</a>
+            </div>
+          <% else %>
+            <div class="follow_btn_area">                             
+              <%= link_to 'Join', join_group_path(group, current_user.id), :method => :post, :remote => true, :class => 'userListFollow btn btn-primary', :id => "join-link-#{group.id}", 
+                :style => group.members.map(&:id).include?(current_user.id) ? 'display:none' : ''
+              %>
+
+              <%= link_to 'Joined', leave_group_path(group, current_user.id), :method => :delete, :remote => :true, :id => "joined-link-#{group.id}", :class => "userListFollow btn btn-success",  
+                :style => group.members.map(&:id).include?(current_user.id) ? '' : 'display:none'%>                             
+            </div>
+          <% end %>
+        <% end %>
+        <div style="clear:both"></div>
+      </div>
+      <div style="clear:both"></div>  
+    </div>
+  </div>
+<% end %>
+</div>
+<div style="clear:both"></div>

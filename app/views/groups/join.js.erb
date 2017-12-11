@@ -1,0 +1,9 @@
+$("#join-link-<%= @group.id %>").hide();
+$("#joined-link-<%= @group.id %>").show()
+$("body").triggerHandler('groupJoined');
+<% if params[:show] %>
+  $('.titleButton').last().addClass('active');
+  $('.title').last().removeClass('join');
+<% end %>
+
+$('#group #addPostArea').show();

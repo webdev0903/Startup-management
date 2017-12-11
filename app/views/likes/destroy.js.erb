@@ -1,0 +1,4 @@
+$('#unlike-post-<%= @like.post_id %>').hide();
+$('#like-post-<%= @like.post_id %>').show();
+count = parseInt($('#like-count-<%= @like.post_id %>').html()) - 1
+$('#like-count-<%= @like.post_id %>').html(( count == 0 ? '' : count));

@@ -1,0 +1,26 @@
+<div class="pageTopUser">
+	<%= link_to my_profile_path do %>
+		<% if current_user.photo.present? %>
+			<div class="pageTopUserPhoto">
+				<%= image_tag current_user.photo.url(:small) %>
+			</div>
+		<% end %>
+		<div class="pageTopUserTitle">
+			<% if current_user.title? %>
+			  <%= current_user.title %>
+			<% end %>
+		</div>
+	<% end %>
+	<div class="pageTopIcons">
+
+		<%= link_to notifications_path do %>
+			<div class="newNotificationsIcon<%= session[:new_notifications].present? && session[:new_notifications] > 0 ? 'active' : '' %>" title="Notifications">
+				<% if session[:new_notifications].present? and session[:new_notifications] > 0 %>
+					<div class="newNotifications"><%= session[:new_notifications] %></div>
+				<% end %>
+			</div>
+		<% end %>
+
+	</div>
+</div>
+

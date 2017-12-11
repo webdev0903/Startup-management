@@ -1,0 +1,2 @@
+class UserOptionsController < ApplicationController
+end

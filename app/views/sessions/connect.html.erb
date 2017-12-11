@@ -1,0 +1,31 @@
+<%
+@content_title = 'Another profile has been found' 
+%>
+<div class="defaultLayoutLeft" style="margin-top:28px;">
+  <div class="infoBlok" style="background:white; line-height:140%;">
+
+	<h2>
+		There is another profile 
+		<b>"<%= @user.title %>"</b> 
+		which is using this <%= @auth.provider %> account
+	</h2>
+	<br/>
+	<b>
+		If you still want to connect with <%= @auth.provider %>
+	</b>
+	<br/>
+	You have to deactivate the old one <b>"<%= @user.title %>"</b> 
+	profile(Logout and sign in again using <%= @auth.provider %> login). After 
+	deactivation, come back to this profile and click on 
+	"Connect with <%= @auth.provider %>" again.
+	<br/>
+	<br/>
+	<b>
+		To use old "<%= @user.title %>" profile
+	</b>
+	<br/>
+	Logout from this one and sign in using <%= @auth.provider %> login. 
+	If this is your fresh profile, we recommend to deactivate it and use 
+	one you have used before.
+</div>
+</div>

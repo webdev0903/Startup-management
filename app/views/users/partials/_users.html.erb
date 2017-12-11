@@ -1,0 +1,48 @@
+<div class="starterList col-md-3 col-sm-4 col-xs-6">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <strong class="panel-title">
+        <div class="panel-title-1">
+          <%= link_to user.title, profile_path(user) %>
+        </div>
+        <% if user.profile.summary.present? %>
+          <div class="panel-title-2" title="<%= user.profile.summary %>"><%= truncate(user.profile.summary, :length => 75) %></div>
+        <% else %>
+          <div class="panel-title-2">&nbsp;</div>
+        <% end %>
+        <% if user.profile.country %>
+          <div class="panel-title-3"><em><%= user.profile.country.title %></em></div>
+        <% else %>
+          <div class="panel-title-3">&nbsp;</div>
+        <% end %>
+      </strong>
+    </div>
+    <div class="panel-body">
+      <%= link_to profile_path(user) do %>
+        <%= '<div class="userListTabOnline" title="Online!"></div>'.html_safe if user.online? %>
+        <%= image_tag user._photo(:thumb), :class => "img-responsive", :onError => "this.onerror=null;this.src='/images/user_thumb.png';" %>
+      <% end %>
+      <% if user_signed_in? %>        
+        <div class="follow_btn_area">            
+          <% if current_user != user %>
+            <% if current_user.followings.map(&:id).include?(user.id) || current_user.friends.map(&:id).include?(user.id) %>
+              <%= render :partial => 'users/partials/following_link', locals: {user_id: user.id , btn_size: ''} %>
+            <% else %>
+              <%= render :partial => 'users/partials/follow_link', locals: {user_id: user.id , btn_size: ''} %>
+            <% end %>
+            <% if user.profile.ask_me %>
+              <%= link_to 'Lets talk!', conversation_path(user.id), :class => 'askMeSomething btn btn-warning' %>
+            <% else %>
+              <a href="" style="visibility: hidden" class="askMeSomething btn btn-warning">Lets talk!</a>
+            <% end %>
+          <% else %>
+            <a href="" style="visibility: hidden" class="userFollowBtn btn btn-primary">Follow</a>
+            <a href="" style="visibility: hidden" class="askMeSomething btn btn-warning">Lets talk!</a>
+          <% end %>      
+        </div>        
+      <% end %>
+      <div style="clear:both"></div>
+    </div>
+    <div style="clear:both"></div>  
+  </div>
+</div>

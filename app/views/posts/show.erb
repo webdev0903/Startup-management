@@ -1,0 +1,23 @@
+<%
+meta :title => "#{truncate( strip_tags(@post.text), :length => 50, :omission => '...')}",
+     :description =>  "#{strip_tags @post.text}"     
+%>
+
+<%= content_for :title do %>
+  <%= simple_format truncate(@post.text, :length => 50, :omission => '...') %>
+<% end %>
+
+<div class="row">
+  <div class="col-md-8 col-sm-8 col-xs-12">
+    <div class="padPosts">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div id="postsList" class="">
+            <%= render 'posts/post', :post => @post %>           
+          </div>
+        </div>
+        <div style="clear:both"></div>
+      </div>
+    </div>
+  </div>
+</div> <!-- .row -->

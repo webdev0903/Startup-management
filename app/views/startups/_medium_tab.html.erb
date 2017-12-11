@@ -1,0 +1,23 @@
+<div class="col-md-6 col-sm-6 col-xs-12 ">
+  <div class="userTwoInLineTab">
+  	<div class="photo">
+  		<%= link_to startup_path(startup) do %>
+  			<%= image_tag startup._photo(:thumb) %>
+  		<% end %>
+  	</div>
+    <div class="text">
+    	<% if startup.title? %>
+    		<%= link_to startup_path(startup) do %>
+    			<%= startup.title %>
+    		<% end %>
+    	<% end %>
+    	<div class="summary">
+      	<% if startup.summary? %>
+	    	<span>
+	    		<%= truncate(startup.summary, :lenght => 29) %>
+	    	</span>
+    	<% end %>
+   		</div>
+    </div>
+  </div>
+</div>

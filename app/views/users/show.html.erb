@@ -1,0 +1,184 @@
+<% keywords = "Starterpad" %>
+<% @skills.each do |ss| %>
+<% keywords = keywords + "," + ss.title %>
+<% end %>
+<%#= raise @user.inspect %>
+<%
+meta :title => "#{@user.title}",
+     :description => "#{@user.title}, #{@user.profile.current_position if @user.profile.current_position.present?} (a member of StarterPad)",
+     :keywords => "#{keywords}"
+%>
+
+<div class="row userProfileTitle">
+	<div class="col-md-4 pageContentTitle">
+		<h1 class="text-center">
+		  <%= (@user.title + '&nbsp;&nbsp;' + image_tag('old/gem_18.png') ).html_safe %> <%#= @gem.likes_count.present? ? @gem.likes_count : ''   %>
+		</h1>
+	</div>
+	<div class="col-md-8">
+		<% if user_signed_in? and (current_user.id != @user.id) #&& current_user.status %>		
+			<div class="row">
+				<div class="col-md-4 col-sm-4 userProfileButton">
+					<%= link_to "Send Message", conversation_url(@user.id), :class => 'user-message btn btn-primary' %>
+				</div>
+				<div class="col-md-4 col-sm-4 userProfileButton">
+					<% if @friend.present? %>
+						<%= link_to "Connected", user_friend_path(current_user.id, @user.id), :method => :delete, :remote => true, :'data-confirm' => 'Do you want to unfriend?', :id => "friends-link-#{@user.id}", :class => 'user-connect btn btn-success'%>
+						<%= link_to "Connect", user_friends_path(@user.id), :method => :post, :remote => true, :style => 'display:none;', :id => "add-friend-link-next", :class => 'user-primary btn btn-primary'%>
+						<%= link_to "Connecting", cancel_user_friend_path(current_user.id, 0), :method => :delete, :remote => true, :style => 'display:none;', :id => "waiting-response-link", :class => 'user-connect btn btn-default' %>
+
+					<% elsif @friend_request_sent.present? %>
+						<%= link_to "Connecting", cancel_user_friend_path(current_user.id, 0), :method => :delete, :remote => true, :id => "waiting-response-link", :class => 'user-connect btn btn-default' %>
+						<%= link_to "Connect", user_friends_path(@user.id), :method => :post, :remote => true, :style => 'display:none;', :id => "add-friend-link-next", :class => 'user-connect btn btn-primary' %>
+
+					<% elsif @friend_request_received.present?  %>
+						<%= link_to "Accept Friend Request", accept_user_friend_path(@user.id, @friend_request_received.id), :method => :put, :remote => true, :id => 'accept-request-link', :class => 'user-connect btn btn-warning' %>
+						<%= link_to "Connected", user_friend_path(current_user.id, @user.id), :method => :delete, :remote => true, :style => 'display:none;', :'data-confirm' => 'Do you want to unfriend?', :id => "friends-link-#{@user.id}", :class => 'user-connect btn btn-success' %>
+						<%= link_to "Connect", user_friends_path(@user.id), :method => :post, :remote => true, :style => 'display:none;', :id => "add-friend-link-next", :class => 'user-connect btn btn-primary' %>
+						<%= link_to "Connecting", cancel_user_friend_path(current_user.id, 0), :method => :delete, :remote => true, :style => 'display:none;', :id => "waiting-response-link", :class => 'user-connect btn btn-default' %>
+
+					<% else %>
+						<%= link_to "Connect", user_friends_path(@user.id), :method => :post, :remote => true, :id => "add-friend-link-next", :class => 'user-connect btn btn-primary' %>
+						<%= link_to "Connecting", cancel_user_friend_path(current_user.id, 0), :method => :delete, :remote => true, :style => 'display:none;', :id => "waiting-response-link", :class => 'user-connect btn btn-default' %>
+
+					<% end %>
+				</div>
+				<div class="col-md-4 col-sm-4 userProfileButton">
+					<%= link_to "Following", user_followerships_path(@user.id), :method => :delete, :remote => true, :style => @following.present? ? '' : 'display:none;', :id => "following-link-#{@user.id}", class: 'user-subscribe btn btn-success' %>
+					<%= link_to "Follow", user_followerships_path(@user.id), :id => "follow-link-#{@user.id}",  :style => @following.blank? ? '' : 'display:none;', :method => :post, :remote => true, class: 'user-subscribe btn btn-primary' %>
+				</div>			
+			</div>		
+		<% end %>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<%= render 'users/partials/profile_left', :user => @user, :friendship => @friendship, :friend => @friend, :friend_request_sent => @friend_request_sent,
+		:friend_request_received => @friend_request_received, :following => @following %>
+		<div class="col-md-8 col-sm-8">
+			<% if @user.profile.present? %>
+				<% if @user.profile.role.present? %>
+					<div class="aboutTab">
+						<div class="aboutTabTitle">
+							Role
+						</div>
+						<h4>
+							<strong>
+								<%= @user.profile.role.title %>
+							</strong>
+						</h4>
+					</div>
+				<% end %>
+				<!--
+				<% if @user.profile.summary.present? %>
+					<div class="aboutTab">
+						<div class="aboutTabTitle">
+							Profession
+						</div>
+							<%= @user.profile.summary %>
+					</div>
+				<% end %>
+				-->
+				<% if @skills.present? %>
+					<div class="aboutTab">
+						<div class="aboutTabTitle">
+							<%#= image_tag('old/iconProfession.png') %>
+							Skills
+						</div>
+						<div class="aboutSkills">
+							<%= render :partial => 'keywords/echo', :collection => @skills, :as => :keyword, :locals => { :skill => true } %>
+						</div>
+						<div style="clear:both"></div>
+					</div>
+				<% end %>
+				<% if @user.profile.current_position.present? %>
+					<div class="aboutTab">
+						<div class="aboutTabTitle">
+							<%#= image_tag('old/iconCompany.png') %>
+							Current position
+						</div>
+						<%= @user.profile.current_position %>
+					</div>
+				<% end %>
+				<% if @user.profile.experience.present? %>
+					<div class="aboutTab">
+						<div class="aboutTabTitle">
+							Experience
+						</div>						
+						<%= @user.profile.experience.gsub("\n", '<br/>').gsub("\r", '' ).html_safe %>
+					</div>
+				<% end %>
+				
+				<% if @user.profile.looking_for.present? %>
+					<div class="aboutTab">
+						<div class="aboutTabTitle">
+							Looking for
+						</div>
+						<%= @user.profile.looking_for %>
+					</div>
+				<% end %>
+				<% if @user.profile.interesting_markets.present? %>
+					<div class="aboutTab userInterests" >
+						<div class="aboutTabTitle">
+							Interested in
+						</div>
+						<% @user.profile.interesting_markets.each do |m| %>
+							<span class="label label-info"><%= m.title %></span>
+						<% end %>						
+					</div>
+				<% end %>
+				<% if @user.profile.startup_join == true && @user.profile.startup_conditions.present? %>
+					<div class="aboutTab">
+						<div class="aboutTabTitle">
+							I want to join a new Startup
+						</div>
+						<%= @user.profile.startup_conditions %>
+					</div>
+				<% end %>
+				<% if @user.profile.startup_join == true && @user.profile.startup_add_value.present? %>
+					<div class="aboutTab">
+						<div class="aboutTabTitle">
+							Value I can add
+						</div>
+						<%= @user.profile.startup_add_value %>
+					</div>
+				<% end %>
+				
+				<% if @user.last_action_at.present? %>
+					<div class="aboutTab">
+						<div class="aboutTabTitle">
+							Last action on StarterPad
+						</div>
+						<i class="fa fa-clock-o"></i>
+						<% if @user.last_action_at > Time.now - 2.months.to_i %>
+							<%= time_ago_in_words(@user.last_action_at) %> ago
+						<% else %>
+							more than 2 month ago 
+						<% end %>
+					</div>
+				<% end %>
+
+				<% if defined? @user.startups and @user.startups.count > 0 %>
+					<div class="aboutTabTitle" style="margin-bottom:4px;">
+						Startups
+					</div>
+					<div class="groupItems row" style="margin-left:0px;">
+						<div class="groupItemsInside col-md-12">
+							<%= render :partial => 'startups/medium_tab', :collection =>@user.startups, :as => :startup %>
+						</div>
+					</div>			
+				<% end %>
+				<% if defined? @user.groups and @user.groups.size > 0 %>
+					<div class="aboutTabTitle" style="margin-bottom:4px;">
+						Groups Joined
+					</div>
+					<div class="groupItems row" style="margin-left:0px;">
+						<div class="groupItemsInside col-md-12">
+							<%= render :partial => 'groups/medium_tab', :collection =>@user.groups, :as => :group %>
+						</div>
+					</div>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+</div>

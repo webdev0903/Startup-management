@@ -1,0 +1,88 @@
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="postTab" id="post<%= post.id %>">
+      <div class="postTabPost">
+        <div class="col-md-2 col-sm-2 postPhoto">
+          <%= link_to profile_path(post.user) do %>
+            <%= image_tag post.user._photo(:thumb), :class => "img-responsive", :onError => "this.onerror=null;this.src='images/user.png';" %>
+          <% end %>
+        </div>
+        <div class="col-md-10 col-sm-10 postText">
+          <div class="padPostTitle">
+            <%= link_to post.user.title, profile_path(post.user) %>
+            <div style="float:right; padding-left:15px; margin-right:1px; margin-top:0px;">
+              <div style="float:right">
+                <% if !defined?(group) %>
+                    <% if post.comments.blank? %>
+                        <a class="addCommentLink postTool" href="#" data-post-id="<%= post.id %>" data-no-turbolink>Comment</a>
+                    <% end %>
+                    <% my_like = post.likes.select { |l| l.user_id == current_user.id } %>
+                    <% unless post.user_id == current_user.id %>
+                        <a class="like postTool" id="like-post-<%= post.id %>" href="#" style="<%= my_like.blank? ? '' : 'display:none;' %>">
+                          <%= image_tag 'old/gem_gray_18.png', :class => 'give-a-gem', :title => "Give a Gem" %>
+                          <%= form_for [post, post.likes.build], :remote => true do |f| %>
+                              <%= f.hidden_field :post_id %>
+                              <%= f.hidden_field :recipient_id, :value => post.user_id %>
+                          <% end %>
+                        </a>
+                    <% end %>
+                    <%= link_to post_like_path(post, my_like), :method => :delete, :remote => true, :style => "float:left; #{my_like.blank? ? 'display:none;' : ''}", :id => "unlike-post-#{post.id}" do %>
+                        <%= image_tag 'old/gem_18.png', :class => 'remove-the-gem', :title => "Remove Gem" %>
+                    <% end %>
+                <% elsif user_signed_in? && (group.members.include?(current_user) || group.user_id == current_user.id) %>
+                    <% if post.comments.blank? %>
+                        <a class="addCommentLink postTool" href="#" data-post-id="<%= post.id %>" data-no-turbolink>Comment</a>
+                    <% end %>
+                    <% my_like = post.likes.select { |l| l.user_id == current_user.id } %>
+                    <% unless post.user_id == current_user.id %>
+                      <a class="like postTool" id="like-post-<%= post.id %>" href="#" style="<%= my_like.blank? ? '' : 'display:none;' %>">
+                        <%= image_tag 'old/gem_gray_18.png', :class => 'give-a-gem', :title => "Give a Gem" %>
+                        <%= form_for [post, post.likes.build], :remote => true do |f| %>
+                            <%= f.hidden_field :post_id %>
+                            <%= f.hidden_field :recipient_id, :value => post.user_id %>
+                        <% end %>
+                      </a>
+                      <% end %>
+                    <%= link_to post_like_path(post, my_like), :method => :delete, :remote => true, :style => "float:left; #{my_like.blank? ? 'display:none;' : ''}", :id => "unlike-post-#{post.id}" do %>
+                        <%= image_tag 'old/gem_18.png', :class => 'remove-the-gem', :title => "Remove Gem" %>
+                    <% end %>
+                <% end %>
+                <div style="float:left; font-size:12px; margin-left:1px;">
+                  (<a id="like-count-<%= post.id %>" href="#" style="font-weight:bolder;">
+                  <%= post.likes_count && post.likes_count > 0 ? post.likes_count : "0" %>
+                </a>)
+                <div style="float:right;font-size:14px; font-weight:normal; margin-left:5px; ">
+                  <%= link_to('Delete', post_path(post), method: :delete, remote: true, :class => "btn btn-danger btn-xs", :data => {:confirm => "Are you sure?"}) if is_admin? %>
+                </div>   
+                </div>
+              </div>
+            </div>
+          </div>
+          <%= auto_link(simple_format(post.text), :html => { :target => '_blank' }) %>
+          <i class="fa fa-clock-o time_ago"></i>
+          <%= "#{time_ago_in_words(post.created_at)} ago" %>
+        </div>
+      </div>
+      <div class="row postTabComments">
+        <% post.comments.each do |comment| %>
+            <%= render 'comments/comment', comment: comment %>
+        <% end %>
+        <% if user_signed_in? %>
+        <div class="col-md-12 col-sm-12 addComment comment-on-<%= post.id %>" id="addComment_post<%= post.id %>">
+          <%= form_for post.comments.build, url: post_comments_path(post), remote: true do |f| %>
+              <div class="col-md-12 col-sm-12">
+                <%= f.text_area :text, class: 'postCommentTextarea pull-left', placeholder: "Write a comment...", cols: "30", rows: "6" %>
+                <div class="submit">
+                  <%= button_tag "Post", class: "commentPostBtn", style: "height: 35px; float:left; margin: 0;", 'data-disable-with' => "<i class='fa fa-spinner fa-spin'></i>".html_safe %>
+
+                </div>
+              </div>
+              <!-- <div class="submit"><input type="submit" value="Post" class="commentPostBtn"></div> -->
+              <div class="clearfix"></div>
+          <% end %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

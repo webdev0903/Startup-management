@@ -1,0 +1,326 @@
+@font-face {
+  font-family: Vegur;
+  src: url(<%= asset_path('Vegur-Regular.otf')%>);
+}
+
+@font-face {
+  font-family: SourceSansPro_Light;
+  src: local("SourceSansPro Light"),
+       local("SourceSansPro-Light"),
+       url(<%= asset_path('SourceSansPro-Light.ttf')%>);
+}
+@font-face {
+  font-family: SourceSansPro_Regular;
+  src: local("SourceSansPro Regular"),
+       local("SourceSansPro-Regular"),
+       url(<%= asset_path('SourceSansPro-Regular.ttf')%>);
+}
+
+.clear {clear:both;}
+
+html, body {
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	overflow-x: hidden;
+}
+
+body {
+margin:0px;
+font-family: SourceSansPro_Regular;
+overflow: hidden;
+}
+a {
+text-decoration:none;
+}
+#firstLineBg {
+position:absolute;
+width:100%;
+min-height:656px;
+z-index:-1;
+}
+.firstLine {
+width:100%;
+overflow: hidden;
+background:url(<%= asset_path("firstLineBg.jpg")%>) no-repeat scroll center top / 100% 100% rgba(0, 0, 0, 0);
+background-size: cover;
+padding-bottom: 125px;
+}
+	.firstLineInside {
+	vertical-align: middle;
+	}
+		.onFirstLine {
+		width: 100%;
+		margin-left:auto;
+		margin-right:auto;
+		text-align: center;
+		position: relative;
+		margin-top: 30px;
+		}
+			.firstLineInside .navbar-default {
+				background: #2aaac4;
+				opacity: 0.8;
+				border: none;
+			}
+			.onFirstLine .container {
+			}
+			.firstLine .navbar-right a {
+				text-align:right;
+				color: #ffffff !important;
+				font-size:20px !important;
+				font-family: SourceSansPro_Light !important;
+			}
+			.firstLine .navbar-right a:hover {
+				background: #ffffff !important;
+				color: #3399f3 !important;
+			}
+			.firstLineLogin {
+			text-align:right;
+			color:white;
+			font-size:20px;
+			padding-top: 30px;
+			font-family: SourceSansPro_Light;
+			}
+				.firstLineLogin a {
+				color:white;
+				}
+				.firstLineLogin a:hover {
+				color:#62f6f4;
+				}
+			.firstLineDescription {
+			padding-top:10px;
+			text-align:center;
+			font-size:24px;
+			color:white;
+			font-family: SourceSansPro_Light;
+			}
+				.firstLineDescription span {
+				color:#62f6f4;
+				font-family: SourceSansPro_Regular;
+				}
+			.firstLineImageDescription {}
+				/*
+				.firstLineImageDescription span {
+					position: absolute;
+					color: #ffffff;
+					font-size: 26px;
+				}
+				.firstLineImageDescription .flid-1 {
+					top: 230px;
+					right: 525px;
+				}
+				.firstLineImageDescription .flid-2 {
+					top: 355px;
+					right: 525px;
+				}
+				.firstLineImageDescription .flid-3 {
+					top: 475px;
+					right: 525px;
+				}
+				.firstLineImageDescription .flid-4 {
+					top: 300px;
+					left: 525px;
+					width: 300px;
+				}
+				.firstLineImageDescription .flid-5 {
+					top: 415px;
+					left: 525px;
+				}
+				*/
+		.firstLineInsideSocial {
+			margin-top: 20px;
+			margin-bottom: 20px;
+			text-align: center;
+			font-size: 22px;
+			color: #ffffff;
+		}
+			.firstLineInsideSocial p {
+				/*float: left;*/
+				width: 375px;
+				margin: 0 auto;
+			}
+				.firstLineInsideSocial span {
+					/*float: left;*/
+					padding: 7px 0;
+				}
+				.firstLineInsideSocial a {
+					/*float: left;*/
+					display: inline-block;
+					width: 38px;
+					height: 38px;
+					margin-left: 10px;
+				}
+
+/* Second Line */
+.secondLine {
+width:100%;
+/*height:423px;*/
+margin-top: -75px;
+}
+	.secondLineInside {
+	background: #ffffff;
+	padding: 20px 0;
+	margin-right:auto;
+	}
+		.secondLineInside h4 {
+			color: #000000;
+			font-size: 32px;
+			text-align: center;
+		}
+		.secondLineInside h5 {
+			color: #a8a8a8;
+			font-size: 24px;
+			text-align: center;
+			margin-bottom: 25px;
+		}
+		.secondLineInsideButtons a {
+			float: left;
+			display: block;
+			width: 100%;
+			margin: 0 0 15px;
+			padding: 15px 10px;
+			-webkit-border-radius: 7px;
+			-moz-border-radius: 7px;
+			border-radius: 7px;
+			text-align: center;
+			color: #ffffff;
+		}
+		.secondLineInsideButtons .btn-light-blue {
+			background: #57d5f0;
+		}
+		.secondLineInsideButtons .btn-medium-blue {
+			background: #3bbad4;
+		}
+		.secondLineInsideButtons .btn-dark-blue {
+			background: #2aaac4;
+		}
+
+/* Third Line */
+.thirdLine {
+width:100%;
+background:#f3fbfd;
+}
+	.thirdLineInside {
+	margin-right:auto;
+	padding-top: 20px;
+	}
+		.thirdLineTitle {
+			padding: 0 0 20px;
+		}
+		.thirdLineTitle h4 {
+			color: #000000;
+			font-size: 32px;
+			text-align: center;
+		}
+		.thirdLineTitle h5 {
+			color: #a8a8a8;
+			font-size: 24px;
+			text-align: center;
+		}
+		.thirdLineUsers {
+		padding-bottom:50px;
+		}
+			.userTab {
+			float:left;
+			padding-right:10px;
+			padding-bottom:12px;
+			}
+				.userPhoto {
+				float:left; 
+				padding-right:8px;
+				width: 48px;
+				overflow: hidden;
+				}
+				.userText {
+				padding-top:5px;
+				float:left;
+				width:130px;
+				font-size:17px;
+				line-height:18px;
+				}
+					.userText {
+					color:#095b6f;
+					}
+
+.bottomLine-main {
+width:100%;
+background:#2aaac4;
+}
+	.bottomLineInside {
+	}
+		.bottomLineInside, .bottomLineInside a {
+		color:white;
+		}
+		.bottomLineInside a:hover {
+		color:#62f6f4;
+		}
+		.bottomLineInside ul {
+		display:table;
+		padding:20px 0px 20px 0px;
+		margin:0px;
+		margin-left:auto;
+		margin-right:auto;
+		}
+		.bottomLineInside ul li {
+		padding:0px 10px 0px 10px;
+		float:left;
+		list-style:none;
+		}
+
+.bottomLine-main i.fa {
+	color: #ffffff;
+}
+
+.bottomLine-main i.fa:hover {
+	color: #62F6F4;
+}
+
+/* MEDIA QUERY FOR SMALLER DEVICE SCREEN RESOLUTION */
+@media (max-width: 767px) {
+	.secondLineInsideButtons a {
+		font-size: 10px;
+	}
+}
+
+@media (max-width: 599px) {
+	.secondLine {
+		height: auto;
+	}
+	.secondLineInside {
+		padding: 10px 0;
+		margin-top: 0;
+	}
+}
+
+@media (max-width: 320px){
+	body {
+		font-size: 12px;
+	}
+	.firstLineDescription, 
+	.firstLineLogin, 
+	.firstLineInsideSocial,
+	.thirdLineTitle h5 {
+		font-size: 16px;
+	}
+	.thirdLineTitle {
+		padding-bottom: 5px;
+	}
+		.thirdLineTitle h4 {
+			font-size: 20px;
+		}
+		.userText {
+			font-size: 14px;
+		}
+}
+
+/* SIGN UP PAGE STYLING */
+#error_explanation {
+	background: #d9534f;
+	color: #ffffff;
+	padding: 5px 10px;
+	margin-bottom: 10px;
+}
+#error_explanation h2 {
+	color: #ffffff;
+	margin: 0 0 10px;
+}

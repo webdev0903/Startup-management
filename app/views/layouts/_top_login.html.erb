@@ -1,0 +1,10 @@
+<div class="topLogin">
+  <% if params[:controller] == 'devise/registrations' || params[:controller] == 'devise/sessions' %>
+  	<div style="width:150px"></div>
+  <% else %>
+    <%= link_to raw('<div class="topFacebook"></div>'), '/auth/facebook' %>
+    <%= link_to raw('<div class="topTwitter"></div>'), '/auth/twitter' %>
+    <%= link_to raw('<div class="topLink">Sign Up</div>'), '/users/sign_up' %>
+    <%= link_to raw('<div class="topLink">Login</div>'), '/users/sign_in' %>
+  <% end %>
+</div>

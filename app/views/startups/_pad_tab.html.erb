@@ -1,0 +1,20 @@
+<div class="padMediumTab">
+	<div class="photo">
+		<%= link_to startup_path(startup.slug) do %>
+			<%= image_tag startup._photo(:thumb) %>
+		<% end %>
+    </div>
+    <div class="text">
+    	<div class="follow_btn_area_pad" data-id="<%= startup.id %>"></div>
+    	<%= link_to_if defined?(startup.title), startup_path(startup.slug) do %>
+  			<%= startup.title %>
+    	<% end %>
+    	<div class="summary">
+	    	<% if defined? startup.summary %>
+		    	<span>
+		    		<%= truncate(startup.summary, :lenght => 15) %>
+		    	</span>
+	    	<% end %>
+   		</div>
+    </div>
+</div>

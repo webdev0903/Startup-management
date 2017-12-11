@@ -1,0 +1,18 @@
+// Place all the styles related to the items controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#discuss-nav{
+	margin-bottom: 20px;
+}
+
+.nav-pills>li.current>a, .nav-pills>li.current>a:hover, .nav-pills>li.current>a:focus {
+  color: #FFF;
+  background-color: #446E9B;
+}
+
+.score strong{
+	color:#777;
+	font-size:14px;  
+	font-family: cursive;
+}

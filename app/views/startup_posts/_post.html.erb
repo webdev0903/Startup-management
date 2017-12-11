@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="postTab" id="post<%= post.id %>">
+      <div class="postTabPost">
+        <div class="col-md-2 col-sm-2 postPhoto">
+          <%= link_to startup_path(post.startup) do %>
+              <% if post.startup.photo_file_name.present? %>
+                  <%= image_tag(post.startup._photo(:large), :class => "img-responsive") %>
+              <% else %>
+                  <%= image_tag(post.startup._photo(:large), :class => "img-responsive") %>
+              <% end %>
+          <% end %>
+        </div>
+        <div class="col-md-10 col-sm-10 postText">
+          <div class="padPostTitle">
+            <%= link_to post.startup.title, startup_path(post.startup) %>
+            <div style="float:right; padding-left:15px; margin-right:1px; margin-top:0px;">
+              <div style="float:right;font-size:14px; font-weight:normal; margin-top:2px; ">
+                <%= link_to('Delete', startup_post_path(post.startup, post), method: :delete, remote: true, :class => "btn btn-danger btn-xs") if  post.startup.founder?(current_user) || is_admin? %>
+              </div>
+            </div>
+          </div>
+          <%= auto_link(simple_format(post.text), :html => { :target => '_blank' }) %>
+          <i class="fa fa-clock-o time_ago"></i>
+          <%= "#{time_ago_in_words(post.created_at)} ago" %>
+        </div>
+      </div>
+      <div class="row postTabComments">
+        <% post.comments.each do |comment| %>
+            <%= render 'comments/comment', comment: comment %>
+        <% end %>
+        <% if user_signed_in? %>
+        <div class="col-md-12 col-sm-12 addComment comment-on-<%= post.id %>" id="addComment_post<%= post.id %>">
+          <%= form_for post.comments.build, url: post_comments_path(post), remote: true do |f| %>
+              <div class="col-md-12 col-sm-12">
+                <%= f.text_area :text, class: 'postCommentTextarea pull-left', placeholder: "Write a comment...", cols: "30", rows: "6" %>
+                <div class="submit">
+                  <%= button_tag "Post", class: "commentPostBtn", style: "height: 35px; float:left; margin: 0;", 'data-disable-with' => "<i class='fa fa-spinner fa-spin'></i>".html_safe %>
+
+                </div>
+              </div>
+              <!-- <div class="submit"><input type="submit" value="Post" class="commentPostBtn"></div> -->
+              <div class="clearfix"></div>
+          <% end %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+<%
+meta :title => "Email Settings",
+     :description => "The email settings are used to specify which mailing lists you want to subscribe/unsubscribe to.",
+     :keywords => "email, newsletter, mailing lists, starterpad"
+%>
+
+<%= content_for :title do %> 
+  Email Settings
+<% end %>
+<div class="row">
+  <div class="col-md-8 col-sm-8 col-xs-12">
+    <%= form_for current_user, :url => user_path(current_user) do |f| %>
+    <%= f.fields_for :setting do |p| %>
+    <div class="infoBlok">
+      <div class="infoBlokInside">
+        <div class="formRow"> 
+          <div style="float:left">
+            <%= p.check_box :morning_mail, :id=>'user_morning_mail' %>
+            <%= f.label :morning_mail, '<span></span>'.html_safe %>
+          </div>
+          <div style="float:left; padding-left:10px; padding-top:1px;">
+            <label><b>Morning Mail</b></label>
+            <br/>
+            Daily Email with all important notifications list            
+          </div>
+        </div>  
+        <div style="clear:both; height:10px;"></div>
+        <div class="formRow"> 
+          <div style="float:left">
+            <%= p.check_box :private_messages, :id=>'user_private_messages' %>
+            <%= f.label :private_messages, '<span></span>'.html_safe %>
+          </div>
+          <div style="float:left; padding-left:10px; padding-top:1px;">
+            <label><b>Private Messages</b></label>
+            <br/>
+            Receive private messages to email when I'm offline
+          </div>
+        </div>  
+        <div style="clear:both; height:10px;"></div>
+        <div class="formRow"> 
+          <div style="float:left">
+            <%= p.check_box :subscription, :id=>'user_subscription' %>
+            <%= f.label :subscription, '<span></span>'.html_safe %>
+          </div>
+          <div style="float:left; padding-left:10px; padding-top:1px;">
+            <label><b>Newsletter</b></label>
+            <br/>
+            StarterPad Newsletter subscription
+          </div>
+        </div>  
+        <div style="clear:both; height:10px;"></div>
+        <div class="formRow"> 
+          <div style="float:left">
+            <%= p.check_box :discuss_trending, :id=>'discuss_trending' %>
+            <%= f.label :discuss_trending, '<span></span>'.html_safe %>
+          </div>
+          <div style="float:left; padding-left:10px; padding-top:1px;">
+            <label><b>Discuss - Trending Items</b></label>
+            <br/>
+            Receive updates about trending items from the Discuss module
+          </div>
+        </div>  
+        <div style="clear:both; height:10px;"></div>
+        <div class="formRow"> 
+          <div style="float:left">
+            <%= p.check_box :startup_update_reminder, :id=>'startup_update_reminder' %>
+            <%= f.label :startup_update_reminder, '<span></span>'.html_safe %>
+          </div>
+          <div style="float:left; padding-left:10px; padding-top:1px;">
+            <label><b>Startup Update Reminders</b></label>
+            <br/>
+            Receive reminders to update your Startup status
+          </div>
+        </div> 
+        <div style="clear:both;"></div>
+      </div>
+    </div>
+    <div class="infoBlokInside" style="padding-left:12px;">
+     <%= f.submit "Update", class: "btn btn-primary", style: "width:100px; float:left" %>
+    </div>
+    <% end %>
+    <% end %>
+  </div>
+  <div class="col-md-4 col-sm-4 col-xs-12 ">
+    <%= render 'users/partials/menu' %>
+  </div>
+</div>

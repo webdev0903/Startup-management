@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+  <body>
+    <h3>You have a new message from <%= link_to "#{@message.sender.try(:title)}", profile_url(@message.sender), :target => '_blank'  %>!</h3>
+    <p>
+      <%= @message.text %>
+    </p>    
+    <p>Visit <%= link_to "#{conversation_url(@message.sender.id)}", conversation_url(@message.sender.id), :target => "_blank" %> to respond.</p>
+    <p><br/><p>
+    <p><br/><p>
+    <p><hr></p>
+    <p><a href="#{root_url}">StarterPad</a><br/>
+    1765 Garnet Ave #432<br/>
+    San Diego, CA, 92109</p>
+    <p><em>To unsubscribe from these notifications, click <%= link_to "here", email_settings_url, :target => '_blank' %> and uncheck "Private Messages".</em></p>
+  </body>
+</html>

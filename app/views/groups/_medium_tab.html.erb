@@ -1,0 +1,23 @@
+<div class="col-md-6 col-sm-6 col-xs-12 ">
+  <div class="userTwoInLineTab">
+  	<div class="photo">
+  		<%= link_to group_path(group) do %>
+  			<%= image_tag group._photo(:thumb) %>
+  		<% end %>
+  	</div>
+    <div class="text">
+    	<% if group.title? %>
+    		<%= link_to group_path(group) do %>
+    			<%= group.title %>
+    		<% end %>
+    	<% end %>
+    	<div class="summary">
+      	<% if group.about? %>
+  	    	<span>
+  	    		<%= truncate(group.about, :lenght => 29) %>
+  	    	</span>
+      	<% end %>
+   		</div>
+    </div>
+  </div>
+</div>

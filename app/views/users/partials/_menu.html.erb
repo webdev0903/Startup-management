@@ -1,0 +1,72 @@
+<div class="col-md-12 sidebar-menu">
+	<div class="panel panel-primary">
+	  <div class="panel-heading">	    
+	        <h3 class="panel-title"><%= current_user[:title] %>
+	        	<span class="pull-right label label-<%= current_user.status ? 'success' : 'danger' %>">
+					<%= current_user.status ? 'Active' : 'Not Active' %>
+				</span>
+	        </h3>
+	                     
+	  </div>
+	  <div class="panel-body">
+	  	<ul>		    
+				<li class="<%= request.original_fullpath == '/profile' ? 'active' : '' %>">
+					<%= link_to my_profile_path do %><i class="fa fa-fw fa-user"></i><% end %>&nbsp;
+                    <%= link_to my_profile_path do %>Edit Profile<% end %>&nbsp;
+                    <% if current_user.status %>
+                    (<%= link_to 'View Profile', profile_path(current_user) %>)
+                    <% end %>
+				</li>
+                <li class="<%= request.original_fullpath == '/profile/details' ? 'active' : '' %>">
+					<%= link_to my_profile_details_path do %><i class="fa fa-fw fa-pencil-square-o"></i><% end %>&nbsp;
+                    <%= link_to my_profile_details_path do %>Additional Details<% end %>
+				</li>
+				<li>
+					<%= link_to change_password_path do %><i class="fa fa-fw fa-key"></i><% end %>&nbsp;
+                    <%= link_to change_password_path do %>Change Password<% end %>
+				</li>
+                <li>
+                    <hr>
+                </li>
+                <li class="<%= request.original_fullpath == '/contacts' ? 'active' : '' %>">
+                    <%= link_to my_friends_path do %><i class="fa fa-fw fa-users"></i><% end %>&nbsp;
+                    <%= link_to my_friends_path do %>Contacts 
+                        <% if session[:new_friendships].present? and session[:new_friendships] > 0 %>
+                            <span><%= session[:new_friendships] %></span>
+                        <% end %>
+                    <% end %>
+                </li>
+                <li>
+                    <hr>
+                </li>
+				<li class="<%= request.original_fullpath == '/profile/email_settings' ? 'active' : '' %>">
+					<%= link_to email_settings_path do %><i class="fa fa-fw fa-envelope"></i><% end %>&nbsp;
+                    <%= link_to email_settings_path do %>Email Settings<% end %>
+				</li>
+				<li class="<%= request.original_fullpath == '/profile/social_network_settings' ? 'active' : '' %>">
+					<%= link_to social_network_settings_path do %><i class="fa fa-fw fa-exchange"></i><% end %>&nbsp;
+                    <%= link_to social_network_settings_path do %>Social Networks<% end %>
+				</li>
+				<li class="<%= request.original_fullpath == '/profile/twitter_update_settings' ? 'active' : '' %>">
+					<%= link_to twitter_update_settings_path do %><i class="fa fa-fw fa-twitter-square"></i><% end %>&nbsp;
+                    <%= link_to twitter_update_settings_path do %>Connect with Twitter<% end %>
+				</li>
+                <li>
+                    <hr>
+                </li>   
+                <% if !current_user.status && current_user.confirmed_at.nil? %>
+                	<li>
+                		<%= link_to 'resend_confirmation', :method => :post do %><i class="fa fa-fw fa-reply"></i><% end %>&nbsp;
+                    	<%= link_to 'resend_confirmation', :method => :post do %>Resend Confirmation Email<% end %>
+                	</li>
+                <% end %>
+				<li>
+					<%= link_to destroy_user_session_path, :method => :delete, :prompt => 'Do you want to sign out?' do %><i class="fa fa-fw fa-sign-out"></i><% end %>&nbsp;
+                    <%= link_to destroy_user_session_path, :method => :delete, :prompt => 'Do you want to sign out?' do %>Logout<% end %>
+                </li>
+				<div style="clear:both;"></div>
+			</ul>
+			<div style="clear:both;"></div>
+	  </div>
+	</div>
+</div>

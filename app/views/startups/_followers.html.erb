@@ -1,0 +1,24 @@
+
+<div class="col-md-6 col-sm-6 col-xs-12 ">
+  <div class="userTwoInLineTab">
+  	<div class="photo">
+  		<%= link_to profile_path(follower) do %>
+  			<%= image_tag follower._photo(:thumb) %>
+  		<% end %>
+  	</div>
+    <div class="text">
+    	<% if follower.title? %>
+    		<%= link_to profile_path(follower) do %>
+    			<%= follower.title %>
+    		<% end %>
+    	<% end %>
+    	<div class="summary">
+      	<% if follower.profile.summary? %>
+  	    	<span>
+  	    		<%= truncate(follower.profile.summary, :lenght => 29) %>
+  	    	</span>
+      	<% end %>
+   		</div>
+    </div>
+  </div>
+</div>

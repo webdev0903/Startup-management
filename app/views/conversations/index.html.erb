@@ -1,0 +1,58 @@
+<%
+meta :title => "Private Messages",
+     :description => "The history of all messages you've sent to other StarterPad members.",
+     :keywords => "messages, starterpad"
+%>
+<% content_for :title do %>
+	Private Messages
+<% end %>
+<div class="row">
+	<div class="col-md-8 col-sm-8 col-xs-12">
+		<ul class="privateMessagesUl">
+			<% @conversations.each do |c|
+				opponent = c.user_id == current_user.id ? c.receiver : c.sender
+			%>
+
+				<% if defined? opponent.title %>
+					<li class="<%= 'new' if c.last_message && c.last_message.receiver == current_user && c.last_message.new %>">
+						<%= link_to conversation_path(opponent.id) do %>
+							<div class="pmPhoto col-md-2 col-sm-3 col-xs-4">
+								<%= image_tag opponent._photo(:thumb), :class => "img-responsive img-thumbnail" %>
+							</div>
+							<div class="pmText col-md-9 col-sm-7 col-xs-7">
+									<%= opponent.title %>
+									<br/>
+									<% if !c.last_message.nil? %>
+									<span class="pull-left text-muted"><small><%= c.last_message.created_at.strftime("%b %d, %Y")%></small></span>
+									<br/>
+									<% end %>
+								<span class="" style="color:#000000; line-height:120%;">
+									<% if !c.last_message.nil? %>
+										<%= truncate(c.last_message.text.tr("'",'"').tr("\n", " ").tr("\r", " "), :length =>150) %>
+									<% end %>
+								</span>	
+							</div>
+						<% end %>
+						<div class="col-md-1 col-sm-2 col-xs-1"> 
+							<%= link_to 'hide', hide_conversation_path(c), data: { confirm: "Are you sure want to hide this conversation?" }, style: "font-size:13px; ", class: "hide_link" 
+							%>
+						</div>
+						<div style="clear:both;"></div>
+					</li>
+				
+				<% end %>
+
+			<% end %>
+		</ul>
+		<% if @conversations.blank? %>
+			<span>You don't have any messages</span>
+		<% end %>
+		<div style="margin-right:25px; margin-top:10px;">
+			<%= paginate @conversations, :previous_label => 'Previous', :next_label => 'Next', :inner_window => 2, :outer_window => 0 %>
+		</div>
+	</div>
+
+	<div class="col-md-4 col-sm-4 col-xs-12 ">
+	    <%= render 'users/partials/menu' %>
+	</div>
+</div>

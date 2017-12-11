@@ -1,0 +1,85 @@
+<%
+meta :title => "Contact Us",
+     :description => "Send a message to the StarterPad staff and someone will gladly help you out with any questions, comments, or concerns you may have.",
+     :keywords => "contact, contact us, starterpad"
+%>
+<% content_for :title do %>
+  Contact
+<% end %>
+<div class="row">
+  <div class="col-md-12 col-sm-12">
+    <p style="padding-left:20px;padding-bottom:20px;">Send a message to the StarterPad staff and someone will gladly help you out with any questions, comments, or concerns you may have.
+    </p>  
+    <div class="infoBlok">
+      <div style="padding-left:20px; padding-top:20px; padding-bottom:20px;">
+        <%= form_for @contact, :url => '/contact', :method => :post, :remote => true, :id  => 'ContactContactForm' do |f| %>
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+          <div class="formRow"> 
+            <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+              <span>Name</span>           
+            </div>
+            <div class="col-md-8 col-sm-8 col-xs-12 frRight"> 
+              <div class="input text required">
+                <%= f.text_field :name, :id => "ContactName", :required => true, :value => "#{user_signed_in? ? current_user.title : '' }" %>
+              </div> 
+            </div>
+            <div style="clear:both"></div>
+          </div>  
+          <div class="formRow"> 
+            <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+              <span>Email</span>
+            </div>
+            <div class="col-md-8 col-sm-8 col-xs-12 frRight"> 
+              <div class="input email required">
+                <%= f.email_field :email, :id => "ContactEmail", :style => "width: 100%;", :required => true, :value => "#{user_signed_in? ? current_user.email : '' }" %>
+              </div> 
+            </div>
+            <div style="clear:both"></div>
+          </div>  
+          <div class="formRow">
+            <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+              <span>Subject</span>
+            </div>
+            <div class="col-md-8 col-sm-8 col-xs-12 frRight" id="fieldLinks">
+              <div class="input text">
+                <%= f.text_field :subject, :id => "ContactSubject", :required => true %>
+              </div>         
+            </div>
+            <div style="clear:both"></div>
+          </div>
+          <div class="formRow">
+            <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+              <span>Message</span>
+            </div>
+            <div class="col-md-8 col-sm-8 col-xs-12 frRight" id="fieldLinks">
+              <%= f.text_area :message, :rows => 10, :id => "ContactMessage", :required => true %>
+            </div>
+            <div style="clear:both"></div>
+          </div>
+          <% unless user_signed_in? %>
+            <div class="formRow">
+              <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+                <span><%= f.label :humanizer_answer, @contact.humanizer_question %></span>
+              </div>
+              <div class="col-md-8 col-sm-8 col-xs-12 frRight" id="fieldLinks">
+                <%= f.text_field :humanizer_answer, :id => "ContactCaptcha", :required => true %>
+                <%= f.hidden_field :humanizer_question_id %>
+              </div>
+              <div style="clear:both"></div>
+            </div>
+          <% end %>
+           
+        <div class="formRow last">
+          <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+            &nbsp;
+          </div>
+          <div class="col-md-8 col-sm-8 col-xs-12 frRight">
+            <%= f.submit 'Submit', :class => "btn btn-primary", :style => "width:100px;" %>
+          </div>
+          <div style="clear:both"></div>
+        </div>
+        
+        <% end %></div>
+    </div>
+  </div>
+</div>

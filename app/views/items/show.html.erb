@@ -1,0 +1,111 @@
+<% 
+title =  @item.title
+description = "#{@item.title.html_safe}. #{ truncate(@item.content, :length => 100, :escape=> false, :omission => '...') }"
+keywords = ['discuss','conversations','startups','entrepreneurs','starterpad','details']
+%>
+
+<%
+   meta :title => title.html_safe,
+        :description => description.html_safe,
+        :keywords => "#{keywords.join(', ')}"
+%>
+
+<div class="row" id="discuuss">
+  <div class="col-md-8 col-sm-8 col-xs-12">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div>   
+            <h2>
+              <%= link_to @item.title, @item, title: @item.url %>
+              <small> <%== @item.url.blank? ?  '' : '(' + link_to( @item.url, @item.url, {:title => @item.url, :target => '_blank'} ) + ')' %></small> 
+              <% if @item && current_user && @item.persisted? && @item.user_id == current_user.id %>
+                <small>[<%= link_to "edit", edit_item_path(@item) %>]</small>
+              <% end %>
+            </h2>            
+            
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6 text-left">
+                    <small><i class="fa fa-user"></i> <%= link_to profile_path(@item.user) do %><%= @item.user.title %><% end %></small>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+                    <%= render_votes_for_item(@item) %>&nbsp; &nbsp;
+                    <strong><%= @item.score %></strong> <%= 'point'.pluralize(@item.score) %>                    
+                    &nbsp; &nbsp;<i class="fa fa-comment" title="Comments"></i> <%= @item.comments_count %>
+                </div>
+            </div>
+            
+            <hr>
+            <div class="row">
+                <div class="col-md-12">
+                    <%= @item.content.blank? ?  '' :  auto_link(simple_format(@item.content), :html => { :target => '_blank' })  %>
+                </div>
+            </div>
+           
+          <br>
+          <ul>
+            <% if current_user %>
+              <li>
+                <div class="infoBlok">
+                  <%= form_for [@item, current_user.item_comments.build] do |f| %>
+                    <div class="formRow"> 
+                      <div class="col-md-12"> 
+                        <p style="color:#777"><strong>Post a Comment</strong></p>
+                        <%= f.text_area :content,  required: true, :rows => '5', :style => 'width:100%' %>
+                      </div>
+                      <div style="clear:both"></div>
+                    </div>  
+
+                    <div class="formRow last">
+                      <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+                        &nbsp;
+                      </div>
+                      <div class="col-md-8 col-sm-8 col-xs-12 frRight">
+                        <%= f.submit 'Create', :class => "btn btn-primary pull-right", :style => "width:100px;" %>                      
+                      </div>
+                      <div style="clear:both"></div>
+                    </div>
+                  <% end %>
+                </div>                
+              </li>            
+            <% end %>
+          </ul>
+          <% if !@comments.blank? %>
+            <div class="postTab">
+              <% @comments.each do |comment| %>
+                <div class="wallPostComment">
+                  <div class="col-md-1 col-sm-2 col-xs-4 commentPhoto">
+                    <%= link_to profile_path(comment.user) do %>
+                      <%= image_tag comment.user._photo(:thumb), :class => "img-responsive", :onError => "this.onerror=null;this.src='images/user.png';" %>
+                    <% end %>
+                  </div>
+                  <div class="col-md-9 col-sm-9 col-xs-7 commentText well">
+                    <div class="commentTextInside">
+                      <%= link_to profile_path(comment.user) do %>
+                        <strong><%= comment.user.title %></strong>
+                      <% end %>
+                      <span><%= auto_link(comment.content, :html => { :target => '_blank' }) %></span>
+                      <div class="commentTextLinks">
+                        <div style="float:left">
+                          <i class="fa fa-clock-o time_ago"></i>
+                        <%= "#{time_ago_in_words(comment.created_at)} ago" %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div style="clear:both"></div>
+              <% end %>                   
+            </div>        
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-4 col-xs-12">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">       
+      </div>
+    </div>
+  </div>
+</div>
+

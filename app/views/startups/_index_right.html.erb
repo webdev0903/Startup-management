@@ -1,0 +1,83 @@
+<% if current_user.present? %>
+	<% if current_user.status? %>
+		<div class="row">
+			<div class="col-md-12">
+        <%= link_to new_startup_path do %>
+			<i class="fa fa-plus-square fa-2x" style="color:#3cb521; vertical-align:middle;"></i>
+		<% end %>
+			&nbsp;&nbsp;
+		<%= link_to new_startup_path do %>
+			Add Your Startup
+        <% end %>
+			<br><br>
+			</div>
+		</div>
+	<% end %>
+<% end %>
+		
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Show</h3>
+  </div>
+  <div class="panel-body">
+  	<ul>
+	    <li class="col-md-12 <%= params[:action] == 'index' ? 'active' : '' %>">
+			<%= link_to 'All Startups', startups_path %>
+		</li>      
+		<% if user_signed_in? && current_user.owned_startups.present? %>
+			<li class="col-md-12 <%= params[:action] == 'my_startups' ? 'active' : '' %>"><%= link_to 'My Startups', my_startups_startups_path %></li>
+		<% end %>
+	</ul>
+	<div style="clear:both"></div>
+  </div>
+</div>
+<div class="panel panel-primary" id="startup-search">
+  <div class="panel-heading">
+    <h3 class="panel-title">Search Startups</h3>
+  </div>
+  <div class="panel-body startup_search">
+    <ul>
+      <li class="col-md-12">
+        <div>
+          <form method="get" action="" remote="true">
+              <input id="startup_search_autocomplete" data-remote="true" value="<%= params[:query] %>" name="qs", style="width:100%;" placeholder="By Name" required>
+              <%= submit_tag "Search", :class => "btn btn-primary", :name => nil %>
+            </form>
+          <div style="clear:both"></div>
+        </div>
+      </li>
+      <div style="clear:both"></div>
+
+      <li class="col-md-12">
+        <%= form_tag get_by_country_startups_path, :method => :post do %>
+            <p>
+              <%= text_field_tag :startup_country_title, nil, data: {autocomplete_source: country_auto_complete_startups_path}, placeholder: 'By Country' %>
+              <%= submit_tag "Search", :class => "btn btn-primary", :name => nil %>
+            </p>
+        <% end %>
+      </li>
+      <li class="col-md-12">
+        <%= form_tag get_by_city_startups_path, :method => :post do %>
+            <p>
+              <%= text_field_tag :startup_city_name, nil, data: {autocomplete_source: city_auto_complete_startups_path}, placeholder: 'By City' %>
+              <%= submit_tag "Search", :class => "btn btn-primary", :name => nil %>
+            </p>
+        <% end %>
+      </li>
+      <li class="col-md-12">
+        <div id="keyword_field">
+          <%= select_tag 'name', options_for_select(Keyword.markets.where("startups_count > 0").order(:title).map{ |c| [
+              c.title, 
+              c.url, 
+              {'data-followers-count'=>c.followers_count}, 
+              {'data-startups-count' => c.startups_count}
+            ]} , selected_key = params[:market_id] ? params[:market_id].split(',') : [] ),{:include_blank => true,:id => 'startup_markets_search', :style => "width:100%", 'data-placeholder' =>'By Market'} %> 
+        </div>
+          <input type="submit" value="Search" id="search_for_startups" class="btn btn-primary" >
+          <div style="clear:both"></div>
+      </li>
+      <div style="clear:both"></div>
+    </ul>
+    <div style="clear:both"></div>
+  </div>
+</div>

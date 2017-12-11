@@ -1,0 +1,3056 @@
+/*
+
+	Html tags style
+
+*/
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+input, button, select, textarea, label {
+    /*color: rgb(70,70,70);*/
+}
+
+body {
+    /*
+    font-size:14px;
+    color: #ffffff;
+    font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    */
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+}
+
+a:link img, a:visited img {
+    border: 0px;
+    text-decoration: none;
+}
+
+h1 {
+    /*font-size:180%; font-weight:normal; color:#ffffff;*/
+}
+
+h2 {
+    /*font-size:150%;*/
+}
+
+ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+ul li {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+}
+
+textarea {
+    /*font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
+    font-size: 14px;
+    color: #777;
+}
+
+textarea {
+    resize: none;
+}
+
+textarea.form-control {
+    height: 100px;
+    resize: vertical;
+}
+
+input, textarea {
+    padding: 5px;
+    border: 2px solid rgb(230, 230, 230);
+    font-size: 15px;
+    color: #2b3e50;
+}
+
+select {
+    padding: 4px;
+    border: none;
+    color: #000000;
+}
+
+input[type=checkbox] {
+    padding: 3px;
+    border: none;
+    border-radius: none;
+    -webkit-border-radius: none;
+    -moz-border-radius: none;
+}
+
+/* for privacy & terms */
+ol li {
+    margin-left: 40px;
+    margin-top: 10px;
+}
+
+/*
+
+	Form tags
+
+*/
+.btnMiddle {
+    border: none;
+    cursor: pointer;
+    padding: 6px 14px 3px 14px;
+    margin: 0px;
+    color: white;
+    font-size: 12px;
+    font-weight: bolder;
+    display: table;
+}
+
+.btnMiddle.green, .btnMiddle.green:hover {
+    background: #27b120;
+    border-top: none;
+    border-left: 1px solid #259b1e;
+    border-right: 1px solid #259b1e;
+    border-bottom: 1px solid #259b1e;
+    box-shadow: 0px 1px #20901a;
+    color: white;
+}
+
+.btnMiddle.btnGray {
+    border: none;
+    cursor: pointer;
+    background: rgb(225, 225, 225);
+    font-weight: bolder;
+    color: rgb(110, 110, 110);
+    margin: 0px;
+    border: none;
+    border-right: 1px solid rgb(200, 200, 200);
+    border-bottom: 1px solid rgb(200, 200, 200);
+}
+
+.btnMiddle.btnGray:hover {
+    background: rgb(215, 215, 215);
+    color: rgb(50, 50, 50);
+}
+
+.btnMiddle.btnGreen {
+    background: #26b120;
+    border-right: 1px solid #239c1d;
+    border-bottom: 1px solid #239c1d;
+}
+
+.btnMiddle.btnGreen:hover {
+    color: white;
+    background: #1eaa18;
+    border-right: 1px solid #168e10;
+    border-bottom: 1px solid #168e10;
+}
+
+/*
+	Round
+*/
+.btnMiddle.btnRound {
+    padding: 0px 10px 0px 10px;
+}
+
+/*
+
+	Link Colors
+
+*/
+.linkRed {
+    color: #bf3f3b;
+}
+
+/*
+
+	Alert notices
+
+*/
+.alert {
+}
+
+.alert.alert-error {
+}
+
+.alert.alert-success {
+}
+
+/*
+
+	Top line
+
+*/
+
+.pageTopLine {
+    width: 100%;
+    min-height: 100%;
+    background: white;
+    text-align: -moz-center;
+    border-bottom: 2px solid #dedede;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.icon-bar {
+    background-color: #ffffff;
+}
+
+.pageTop {
+}
+
+.navbar-brand.pageTopLogoImg {
+    background: url(<%= asset_path('topLogo.png')%>) no-repeat 0 0;
+    width: 50px;
+}
+
+.topLogo {
+    display: block;
+    height: 38px;
+    width: 38px;
+    margin: 5px 0;
+    background: url(<%= asset_path('mainLogo.png')%>) no-repeat 0 0;
+}
+
+.pageTopLogo {
+    float: left;
+    margin-top: 2px;
+    width: 100px;
+    height: 36px;
+    cursor: pointer;
+    background: url(<%= asset_path('topLogo.png')%>) no-repeat 0 0;
+}
+
+.pageTopLogo div:hover {
+    background: url(<%= asset_path('topLogo.png')%>) no-repeat 0 0;
+}
+
+.pageTopMenu {
+}
+
+.pageTopMenu li {
+    max-height: 40px;
+}
+
+.pageTopMenu li a {
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.pageTopMenu li a:hover, .pageTopMenu li a.active {
+    color: #555;
+    background: transparent;
+}
+
+.pageTopMenu li:first-child a {
+    border-left: none;
+}
+
+.pageTopMenu li:last-child a {
+    border-right: none;
+}
+
+.ptmPad {
+    background: url(<%= asset_path('old/top_icons.png')%>) 0 0;
+    background: red;
+}
+
+.pageTopMenu li div {
+    float: left;
+    /*height: 15px;*/
+}
+
+.pageTopMenuIcon {
+    margin-top: 3px;
+    margin-right: 4px;
+    height: 16px;
+    width: 15px;
+}
+
+.pageTopMenu li .ptmiPad {
+    height: 15px;
+    width: 0px;
+}
+
+.pageTopUser {
+    float: right;
+    display: table;
+    background: #2d5b7c;
+    color: #ffffff;
+    font-weight: bolder;
+    margin: 10px 0 0;
+    font-size: 14px;
+
+}
+
+.pageTopUserPhoto {
+    float: left;
+    height: 28px;
+}
+
+.pageTopUserPhoto img {
+    height: 28px;
+    width: 28px;
+}
+
+.pageTopUserTitle {
+    float: left;
+    padding: 6px 4px 6px 18px;
+}
+
+.pageTopUserBtn {
+    float: left;
+    margin: 8px 18px 0px 0px;
+    background: url(<%= asset_path('old/icons_15.png')%>) -68px 0px;
+    width: 5px;
+    height: 15px;
+}
+
+.pageTopUserBtn {
+    background: url(<%= asset_path('old/icons_15.png')%>) -68px 17px;
+}
+
+.pageTopUser a {
+    color: #ffffff;
+    float: left;
+    display: table;
+}
+
+.pageTopUser a:hover {
+    color: #555;
+    background: rgb(225, 225, 225);
+}
+
+.pageTopUser .pageTopIcons a:hover {
+}
+
+.pageTopUser a:first-child {
+}
+
+.pageTopUser a:last-child {
+}
+
+/*
+messages, notifications
+*/
+.pageTopIcons {
+    float: left;
+}
+
+.pageTopIcons a {
+    padding: 5px 0px 4px 0px;
+}
+
+.pageTopIcons a:last-child {
+    border-right: none;
+}
+
+.newNotificationsIcon, .newMessagesIcon {
+    background: url(<%= asset_path('old/icons_15.png')%>) -85px 0px;
+    width: 17px;
+    margin: 2px 7px 0px 9px;
+    height: 17px;
+}
+
+.newNotificationsIcon {
+    background: url(<%= asset_path('old/wheel.png')%>) no-repeat;
+}
+
+.newMessagesIcon {
+    background: url(<%= asset_path('old/icons_15.png')%>) -102px 0px;
+}
+
+.pageTopIcons a:hover .newNotificationsIcon {
+    background: url(<%= asset_path('old/wheel.png')%>) no-repeat;
+}
+
+.pageTopIcons a:hover .newMessagesIcon {
+    background: url(<%= asset_path('old/icons_15.png')%>) -102px 17px;
+}
+
+.newMessagesIcon {
+}
+
+/* pings */
+.newNotifications, .newMessages {
+    position: absolute;
+    background: #ef0700;
+    margin-top: -14px;
+    margin-left: 6px;
+    color: white;
+    padding: 0px 4px 0px 4px;
+    font-size: 11px;
+    font-weight: normal;
+    text-shadow: none;
+}
+
+.newMessages {
+}
+
+.topLogin {
+    float: right;
+    margin-top: 4px;
+}
+
+.topLink {
+    float: right;
+    margin-top: 2px;
+    margin-right: 10px;
+    color: #707070;
+    font-weight: bolder;
+    font-size: 14px;
+}
+
+.topLink:hover {
+    color: #555;
+}
+
+.topFacebook {
+    float: right;
+    width: 23px;
+    height: 23px;
+    background: url(<%= asset_path('old/top_social.png')%>) 23px 0px;
+}
+
+.topFacebook:hover {
+    background: url(<%= asset_path('old/top_social.png')%>) 23px 23px;
+}
+
+.topTwitter {
+    float: right;
+    margin-right: 4px;
+    width: 23px;
+    height: 23px;
+
+    background: url(<%= asset_path('old/top_social.png')%>) 0px 0px;
+}
+
+.topTwitter:hover {
+    background: url(<%= asset_path('old/top_social.png')%>) 0px 23px;
+}
+
+/* comment post btn */
+.commentPostBtn {
+    background: rgb(237, 237, 237);
+    color: rgb(100, 100, 100);
+    cursor: pointer;
+    padding: 9px 14px 8px 14px;
+    font-size: 12px;
+    font-weight: bolder;
+    font-weight: normal;
+}
+
+.commentPostBtn:hover {
+    background: rgb(232, 232, 232);
+    color: rgb(70, 70, 70);
+}
+
+/*
+
+	Content
+
+*/
+.pageContentTitle {
+    /*margin-top:30px;
+    margin-bottom:15px;
+    font-size:20px;
+    font-weight:700;*/
+}
+.pageContentTitle h1{
+    margin-top: 0;
+    }
+
+.pageContent {
+    clear: both;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    position: relative;
+}
+
+/*
+
+	Bottom Line
+
+*/
+.bottomLine {
+    margin-top: 20px;
+    margin-bottom: 40px;
+    font-size: 14px;
+    color: rgb(180, 180, 180);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.bottomLine a {
+}
+
+.bottomLine a:hover {
+}
+
+.bottomRight {
+}
+
+.bottomRight a {
+}
+
+.bottomTwitter div {
+    float: left;
+    width: 21px;
+    height: 16px;
+    margin-top: 4px;
+    margin-left: 8px;
+    margin-bottom: 1px;
+    background: url(<%= asset_path('old/icons_15.png')%>) -133px 0px;
+}
+
+.bottomTwitter div:hover {
+    background: url(<%= asset_path('old/icons_15.png')%>) -133px 17px;
+}
+
+.bottomFacebook div {
+    float: left;
+    width: 15px;
+    height: 16px;
+    margin-top: 4px;
+    background: url(<%= asset_path('old/icons_15.png')%>) -119px 0px;
+}
+
+.bottomFacebook div:hover {
+    background: url(<%= asset_path('old/icons_15.png')%>) -119px 17px;
+}
+
+/*
+
+	Content Right
+
+*/
+.contentRight {
+    float: right;
+    width: 200px;
+}
+
+/*
+
+	Default Layout 
+
+*/
+.defaultLayoutLeft {
+}
+
+.defaultLayoutLeft.gray {
+    background: rgb(242, 242, 242);
+}
+
+.defaultLayoutRight {
+}
+
+.infoBlok {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    color: #ffffff;
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+}
+
+.infoBlokInside {
+    padding: 20px;
+    color: #777777;
+}
+
+.infoBlokName {
+    font-size: 16px;
+    font-weight: bolder;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+/*
+
+	Posts
+
+*/
+.pad {
+    width: 660px;
+}
+
+.padPosts {
+    padding-bottom: 14px;
+    width: 100%;
+}
+
+/*
+
+    Add new
+
+*/
+#formAddPost {
+    width: 100%;
+}
+
+#formAddPost textarea {
+    width: 100%;
+    padding: 7px;
+    margin: 0px;
+    /*border:none;*/
+    color: rgb(70, 70, 70);
+}
+
+.makeHigherTextarea {
+    height: 35px;
+}
+
+.makeHigherTextarea.active {
+    height: 150px;
+}
+
+.formAddPostBtns {
+    float: right;
+    margin-top: 5px;
+    margin-right: 00px;
+    display: table;
+}
+
+.formAddPostSubmit {
+    float: right;
+    margin-top: 5px;
+    margin-right: 3px;
+}
+
+.selectStyled {
+    overflow: hidden;
+    -webkit-box-shadow: 2px 2px 5px 0px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow: 2px 2px 5px 0px rgba(50, 50, 50, 0.75);
+    box-shadow: 2px 2px 5px 0px rgba(50, 50, 50, 0.75);
+    /*margin-right: 15px;*/
+    padding-left: 25px;
+    background: url(old/grey-arrow.png) no-repeat 12px #ececec;
+}
+
+.formAddPostVisibility {
+    color: #6e6e6e;
+    background: transparent;
+    width: 75px;
+    height: 25px;
+    padding: 5px;
+    font-size: 12px;
+    line-height: 1;
+    border: 0;
+    border-radius: 0;
+    -webkit-appearance: none;
+    float: right;
+}
+
+/*
+
+    Post
+
+*/
+.postTool {
+    float: left;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.postTab {
+    /*margin-top: 13px;*/
+    margin-bottom: 13px;
+    background-color: #f5f5f5;
+    font-size: 14px;
+    line-height: 18px;
+    border: 1px solid #ccc;
+}
+
+.postTabPost {
+    padding: 10px 0 0;
+}
+
+.postTab.second {
+
+}
+
+.postTab:first-child {
+    /*border-top:none;*/
+}
+
+.postTab:last-child {
+}
+
+.postTab .postPhoto {
+    float: left;
+    padding-left: 16px;
+    padding-bottom: 15px;
+}
+
+.postTab .postPhoto img {
+}
+
+.postTab .postText {
+}
+
+.postText a {
+}
+
+.postText a:hover {
+}
+
+.showMore {
+    display: none;
+}
+
+.postTab .postText .padPostTitle {
+    font-weight: bolder;
+    font-size: 13px;
+    margin-bottom: 2px;
+}
+
+.padPostTitle .rightVisability {
+    float: right;
+    font-weight: normal;
+}
+
+.postTab .addCommentLink {
+    font-size: 13px;
+    font-weight: bolder;
+    margin: 0px 10px 0px 6px;
+
+}
+
+/*
+
+    Comments
+
+*/
+.formAddNewComment {
+    margin-top: 10px;
+    padding-bottom: 6px;
+}
+
+.showCommentsBar {
+    font-size: 13px;
+    margin-left: 14px;
+    padding: 0px 0px 0px 0px;
+
+}
+
+.showCommentsBar a {
+    color: rgb(160, 160, 160);
+}
+
+.postTabComments {
+    padding-bottom: 10px;
+}
+
+.wallPostComment:first-child {
+    padding-top: 14px;
+}
+
+.wallPostComment {
+    clear: both;
+    font-size: 13px;
+}
+
+.wallPostComment .commentPhoto {
+}
+
+.wallPostComment .commentPhoto img {
+}
+
+.wallPostComment .commentText {
+    background-color: #ffffff;
+}
+
+.wallPostComment .commentText a {
+    font-weight: normal;
+    word-break: break-all;
+}
+
+.wallPostComment .commentTextInside {
+    padding: 0px;
+}
+
+.wallPostComment .commentText .commentTextLinks {
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.wallPostComment .commentText .commentTextLinks a {
+    font-weight: normal;
+}
+
+/*
+
+    Add Comment
+
+*/
+.addComment {
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.addComment img {
+    margin: 0px;
+}
+
+.addComment form {
+    padding: 0px;
+    margin: 0px;
+}
+
+.addComment textarea {
+    width: 100%;
+    font-size: 13px;
+    color: rgb(90, 90, 90);
+    padding: 7px;
+    margin-bottom: 0px;
+    height: 35px;
+    background: white;
+    background: rgb(255, 255, 255);
+    border: none;
+    /*background:rgb(245,245,245);*/
+}
+
+.addComment input[type=submit], .addComment button  {
+    margin: 8px 0px 0px 0px;
+    float: left;
+    border: none;
+    /*background:rgb(245,245,245);*/
+    font-weight: bolder;
+}
+
+.postCommentTextarea.active {
+
+    height: 150px;
+}
+
+.addNew {
+    clear: both;
+}
+
+.padPosts .addNew textarea {
+    border: 2px solid rgb(240, 240, 240);
+    width: 650px;
+}
+
+.addNew.postCommentTextarea {
+    height: 40px;
+}
+
+.addNew.postCommentTextarea.active {
+    height: 150px;
+}
+
+.morePostsButton {
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0px 10px 0px;
+    background: #f5f5f5;
+    font-weight: bolder;
+}
+
+.morePostsButton:hover {
+}
+
+.loadingIcon {
+    height: 20px;
+    background: url(<%= asset_path('old/loading.gif')%>) top center no-repeat;
+}
+
+/*
+
+    Pad. Items
+
+*/
+.padItemsName {
+    font-weight: bolder;
+    padding-bottom: 4px;
+}
+
+.padItems {
+    float: left;
+    width: 100%;
+    background: #f5f5f5;
+}
+
+.padItemTab {
+    float: left;
+    padding: 10px 0px 10px 0px;
+    display: table;
+}
+
+.padItemTab:last-child {
+    border-bottom: none;
+}
+
+.padItemTabPhoto {
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+}
+
+.padItemTabPhoto img {
+}
+
+.padItemTabText {
+    font-size: 12px;
+    line-height: 110%;
+    padding-left: 0;
+}
+
+.padItemTabTitle {
+    margin: 0px;
+}
+
+.padItemTabLeft {
+    padding-left: 0px;
+    float: left;
+}
+
+.padItemTabRight {
+    float: right;
+}
+
+.padItemTabLeft a {
+    font-size: 14px;
+    font-weight: bolder;
+}
+
+.padItems .padItemTab .text .button {
+}
+
+.padItemTabBtn, .padItemTabBtnActive {
+    text-shadow: none;
+    cursor: pointer;
+    padding: 3px 8px 1px 8px;
+    color: white;
+    font-size: 11px;
+}
+
+.padItemTabBtn:hover, .padItemTabBtnActive, .padItemTabBtnActive:hover {
+}
+
+/*
+
+	Users list
+
+*/
+.userList {
+    padding-bottom: 15px;
+}
+
+.userList > div,
+.startupList > div,
+.groupstartupsList > div {
+    margin-bottom: 15px;
+}
+
+/* .userList > div .panel,
+.startupList > div .panel,
+.groupstartupsList > div  .panel {
+    min-height: 270px;
+}
+
+.groupstartupsList > div  .panel {
+    min-height: 250px;
+} */
+
+.userList .panel-body img {
+    margin: 0 auto;
+}
+
+.userListTab {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 14px;
+    line-height: 18px;
+    background-color: #f5f5f5;
+}
+
+.userListTabPhoto {
+}
+
+.userListTabPhoto img {
+}
+
+.userListTabOnline {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #50c745;
+    opacity: 1;
+}
+
+.userListTabText {
+}
+
+.userListTabLeft {
+}
+
+.userListTabTitle a {
+    font-weight: bolder;
+}
+
+.userListTabTitle a:hover {
+}
+
+.userListTabSummary {
+    margin-top: 1px;
+    font-size: 14px;
+}
+
+.userListTabLocation {
+    color: rgb(200, 200, 200);
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.askMeSomething {
+    /*text-shadow:none;
+    display:table;
+    float:right;
+    margin:0px 0px 0px 0px;
+    padding:1px 6px 1px 6px;
+    font-size:11px;
+    font-weight:bolder;*/
+}
+
+.askMeSomething a, .askMeSomething a:hover, .askMeSomething:hover {
+    color: rgb(170, 170, 170);
+}
+
+.askMeSomething:hover {
+    background: #3caf2f;
+    color: white;
+}
+
+.follow_btn_area {
+    width: 100%;
+    padding: 10px 0 0;
+    text-align: center;
+}
+
+.follow_btn_area a {
+    padding: 1px 6px 1px 6px;
+    margin-bottom: 5px;
+}
+
+.follow_btn_area .btn {
+    font-size: 0.9em;
+}
+
+.userListFollow, .userListFollowing {
+    /*text-shadow:none;
+    display:table;
+    float:right;
+    cursor:pointer;
+    margin:0px 0px 0px 6px;
+    padding:1px 6px 1px 6px;
+    font-size:11px;
+    font-weight:bolder;*/
+}
+
+.userListFollow:hover {
+}
+
+.userListFollowing {
+    cursor: default;
+}
+
+.userListFollowing:hover {
+}
+
+/*
+
+	Group List
+
+*/
+.groupList {
+    float: left;
+    width: 630px;
+    background: rgb(242, 242, 242);
+    margin-left: 10px;
+    padding: 20px 0px 15px 0px;
+    margin-top: 25px;
+}
+
+.groupListTab {
+    margin: 0px 0px 10px 20px;
+    width: 590px;
+    background: white;
+    display: table;
+    font-size: 14px;
+    line-height: 18px;
+    padding: 10px 0px 10px 0px;
+}
+
+.groupListTabPhoto {
+    float: left;
+    width: 62px;
+    margin-left: 15px;
+    margin-top: 4px;
+}
+
+.groupListTabPhoto img {
+    height: 50px;
+}
+
+.groupListTabText {
+    float: left;
+    color: rgb(150, 150, 150);
+}
+
+.groupListTabLeft {
+    float: left;
+    width: 496px;
+}
+
+.groupListTabTitle a {
+    color: rgb(110, 110, 110);
+    font-weight: bolder;
+}
+
+.groupListTabTitle a:hover {
+    color: rgb(30, 30, 30);
+}
+
+.groupListTabJoin {
+    text-shadow: none;
+    display: table;
+    float: right;
+    cursor: pointer;
+    margin: 0px 0px 0px 6px;
+    padding: 1px 6px 1px 6px;
+    color: rgb(170, 170, 170);
+    font-size: 11px;
+    font-weight: bolder;
+    background: rgb(242, 242, 242);
+}
+
+.groupListTabJoin a, .groupListTabJoin a:hover, .groupListTabJoin:hover {
+    color: rgb(170, 170, 170);
+}
+
+.groupListTabJoin:hover {
+    background: rgb(232, 232, 232);
+    color: rgb(100, 100, 100);
+}
+
+.groupListTabSummary {
+    margin-top: 1px;
+    font-size: 14px;
+    color: rgb(140, 140, 140);
+}
+
+/*
+
+	Startups List
+
+*/
+.startupList {
+    background-color: transparent;
+    padding-bottom: 15px;
+}
+
+.startupListTab {
+    background-color: #f5f5f5;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.startupListTabPhoto {
+}
+
+.startupListTabPhoto img {
+}
+
+.startupListTabText {
+}
+
+.startupListTabLeft {
+}
+
+.startupListTabTitle a {
+    font-weight: bolder;
+}
+
+.startupListTabTitle a:hover {
+}
+
+.startupListTabLocation {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.startupListTabFollow {
+    text-shadow: none;
+    display: table;
+    float: right;
+    cursor: pointer;
+    margin: 0px 0px 0px 6px;
+    padding: 1px 6px 1px 6px;
+    color: rgb(170, 170, 170);
+    font-size: 11px;
+    font-weight: bolder;
+    background: rgb(242, 242, 242);
+}
+
+.startupListTabFollow a, .startupListTabFollow a:hover, .startupListTabFollow:hover {
+    color: rgb(170, 170, 170);
+}
+
+.startupListTabFollow:hover {
+    background: rgb(232, 232, 232);
+    color: rgb(100, 100, 100);
+}
+
+.startupListTabSummary {
+    margin-top: 1px;
+    font-size: 14px;
+}
+
+
+#startup-search .twitter-typeahead, #startup-search #keyword_field, #starter_country_title, #starter_city_name{
+    width: 68%;
+    min-width: 155px;
+    float: left;
+    margin-right: 5px;
+}
+/*
+
+	Questions list
+
+*/
+.questionList {
+    float: left;
+    width: 630px;
+    background: rgb(242, 242, 242);
+    margin-left: 10px;
+    padding: 20px 0px 15px 0px;
+    margin-top: 25px;
+}
+
+.questionListTab {
+    margin: 0px 0px 10px 20px;
+    width: 590px;
+    background: white;
+    display: table;
+    font-size: 14px;
+    line-height: 18px;
+    padding: 10px 0px 10px 0px;
+}
+
+.questionListTabPhoto {
+    float: left;
+    width: 62px;
+    margin-left: 15px;
+    margin-top: 4px;
+}
+
+.questionListTabPhoto img {
+    border-radius: 3px;
+    height: 50px;
+}
+
+.questionListTabPhoto img:hover {
+    opacity: 0.85;
+}
+
+.questionListTabText {
+    float: left;
+    color: rgb(150, 150, 150);
+    float: left;
+    width: 496px;
+}
+
+.questionListTabText a {
+    color: rgb(110, 110, 110);
+    font-weight: bolder;
+}
+
+/*
+
+	Right menu 
+
+*/
+.rightMenu {
+    margin-bottom: 15px;
+    background: #f5f5f5;
+    padding: 10px 0;
+}
+
+.rightMenuName {
+    font-weight: bolder;
+}
+
+.rightMenuName a {
+    font-weight: bolder;
+    color: rgb(120, 120, 120);
+}
+
+.rightMenuName a:hover {
+    color: rgb(70, 70, 70);
+}
+
+.rightMenu {
+}
+
+.rightMenu li {
+    font-size: 14px;
+    font-weight: bolder;
+}
+
+.rightMenu a li {
+    color: rgb(120, 120, 120);
+    font-weight: normal;
+}
+
+.rightMenu a li:hover {
+    color: rgb(40, 40, 40);
+}
+
+.rightMenu li.active {
+    background: #ffffff;
+    color: rgb(70, 70, 70);
+    text-shadow: none;
+}
+
+.rightMenu a li.active {
+    color: rgb(70, 70, 70);
+}
+
+.rightMenu li span.notices {
+    font-size: 11px;
+    margin-left: 2px;
+    background: rgb(70, 70, 70);
+    padding: 0px 5px 0px 5px;
+    color: rgb(249, 249, 249);
+    -moz-box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.5);
+}
+
+.rightMenu li.active span {
+    margin-left: 0px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background: none;
+    color: rgb(249, 249, 249);
+}
+
+/*
+
+	Pagination
+
+*/
+/*.pagination {
+margin-top:20px;
+margin-right:20px;
+float:right;
+}
+.pagination span, .pagination em {
+float:left;
+cursor:pointer;
+display:table;
+padding:8px 10px 8px 10px;
+font-weight:normal;
+font-size:14px;
+color: #ebebeb;
+background: #4e5d6c;
+}
+.pagination span.gap {
+display:none;
+}
+.pagination a:hover, .pagination em, .pagination span:hover {
+background: #f5f5f5;
+}
+.pagination span.active {
+	background: #3399f3;
+}
+
+	.pagination em {
+	font-weight:bolder;
+	}*/
+
+/*
+
+	User Profile
+
+*/
+/* user profile */
+.userProfile {
+}
+.userProfileTitle{
+    margin: 35px 0;
+}
+
+.userProfileInside {
+}
+
+.userProfileLeft {
+    background: #f6f6f6;
+}
+
+.userProfileInformation {
+    text-align: center;
+}
+
+.userProfileLeftPhoto {
+    margin-bottom: 15px;
+}
+
+.userProfileLeftPhoto .img-circle {
+    overflow: hidden;
+    padding: 0;
+    margin: 0 auto;
+    display: block;
+    border: 4px solid #eee;
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .userProfileLeftPhoto .img-circle{
+        width: 250px;
+        height: 250px;          
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .userProfileLeftPhoto .img-circle{
+        width: 150px;
+        height: 150px;          
+    }
+}
+
+
+@media (min-width: 300px) and (max-width: 450px) {
+    .userProfileLeftPhoto .img-circle{
+        width: 250px;
+        height: 250px;          
+    }
+}
+
+@media (max-width: 299px){
+    .userProfileLeftPhoto .img-circle{
+        width: 100%;
+        height: auto;          
+    }
+    
+}
+
+.userProfileLeftTitle {
+    margin-top: 4px;
+    font-size: 21px;
+    font-weight: bolder;
+    line-height: 100%;
+}
+
+.userProfileLeftText {
+    font-size: 15px;
+}
+
+.userProfileLeftText span {
+    /*color: #ffffff;*/
+}
+
+.userProfileCountry {
+    /*color: #ffffff;*/
+}
+
+.userProfileCity {
+    /*color: #ffffff;*/
+}
+
+.profileLeftButtons {
+    display: table;
+}
+
+.userProfileLeftStats {
+}
+
+.userProfileLeftStat {
+    padding: 4px 0px 0px 0px;
+    height: auto;
+}
+
+a .userProfileLeftStat {
+    font-size: 14px;
+}
+
+.userProfileLeftStat.disable {
+    padding: 12px 0px 0px 0px;
+    line-height: 120%;
+    display: table;
+    font-weight: bolder;
+    font-size: 22px;
+}
+
+.userProfileLeftStat.disable span {
+    font-size: 46px;
+    font-weight: 700;
+}
+
+.userProfileLeftStat.disable:hover {
+    text-decoration: none;
+    cursor: default;
+}
+
+.userProfileButtons {
+}
+
+.userProfileButton {
+    margin-bottom: 5px;
+}
+
+.userProfileButton a {
+    width: 100%;
+    font-size: 17px;
+}
+
+.userProfileButton a.user-message {
+}
+
+.userProfileButton a.user-connect {
+}
+
+.userProfileButton a.user-subscribe {
+}
+
+.userProfileLeftLinks {
+    margin-top: 10px;
+    padding: 0 40px 0;
+    text-align: center;
+}
+
+.userProfileLeftLink {
+    margin: 2px;
+    font-size: 13px;
+    float: none;
+    display: inline-block;
+}
+
+.userProfileLeftLink a {
+    color: rgb(140, 140, 140);
+    background: url(<%= asset_path('old/user-social.png')%>) no-repeat;
+    height: 20px;
+    width: 20px;
+    display: block;
+}
+
+.userProfileLeftLink a.website {
+    background-position: -90px 0px;
+}
+
+.userProfileLeftLink a.angellist {
+    background-position: -20px 0px;
+}
+
+.userProfileLeftLink a.linkedin {
+    background-position: -66px 0px;
+}
+
+.userProfileLeftLink a.twitter {
+    background-position: -44px 0px;
+}
+
+.userProfileLeftLink a.facebook {
+    background-position: 0px 0px;
+}
+
+.userProfileLeftLink a:hover {
+    color: rgb(80, 80, 80);
+}
+
+.userProfileConnections {
+    padding: 10px 20px 20px;
+    text-align: left;
+}
+
+.userProfileConnections ul li {
+    text-align: left;
+}
+
+.userProfile .right {
+}
+
+.userProfile .right .title {
+    font-size: 28px;
+    font-weight: bolder;
+    margin-bottom: 15px;
+}
+
+.userProfile .aboutArea {
+}
+
+.userProfile .right .aboutTab, .aboutTabRight {
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+.userInterests .label {
+    font-size: 14px;
+    padding: 7px 13px;
+    margin: 2px;
+    display: inline-block;
+}
+
+.aboutTab{
+    margin-bottom: 30px;
+}
+.aboutTabRight {
+    float: right;
+}
+
+.aboutTabTitle {
+    color: #717171;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+.aboutTabTitle .fa{
+    color: #9F9F9F;
+}
+
+.aboutTab .aboutSkills div {
+    margin-bottom: 3px;
+}
+
+/* profile left butons */
+.profileLeftButtons {
+    margin-top: 15px;
+}
+
+.profileLeftButtons .button {
+    width: 200px;
+    font-size: 15px;
+    display: table;
+    padding-top: 1px;
+    padding-bottom: 7px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    background-image: linear-gradient(bottom, rgb(238, 238, 238) 0%, rgb(247, 247, 247) 100%);
+    background-image: -o-linear-gradient(bottom, rgb(238, 238, 238) 0%, rgb(247, 247, 247) 100%);
+    background-image: -moz-linear-gradient(bottom, rgb(238, 238, 238) 0%, rgb(247, 247, 247) 100%);
+    background-image: -webkit-linear-gradient(bottom, rgb(238, 238, 238) 0%, rgb(247, 247, 247) 100%);
+    background-image: -ms-linear-gradient(bottom, rgb(238, 238, 238) 0%, rgb(247, 247, 247) 100%);
+
+    background-image: -webkit-gradient(
+            linear,
+            left bottom,
+            left top,
+            color-stop(0, rgb(238, 238, 238)),
+            color-stop(1, rgb(247, 247, 247))
+    );
+}
+
+.profileLeftButtons .button:hover {
+    background: rgb(238, 238, 238);
+}
+
+.profileLeftButtons .button.active {
+    cursor: default;
+    -moz-box-shadow: inset 4px 4px 4px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: inset 4px 4px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 4px 4px 4px rgba(0, 0, 0, 0.1);
+    background-image: linear-gradient(bottom, rgb(80, 185, 0) 100%, rgb(68, 163, 5) 0%);
+    background-image: -o-linear-gradient(bottom, rgb(80, 185, 0) 100%, rgb(68, 163, 5) 0%);
+    background-image: -moz-linear-gradient(bottom, rgb(80, 185, 0) 100%, rgb(68, 163, 5) 0%);
+    background-image: -webkit-linear-gradient(bottom, rgb(80, 185, 0) 100%, rgb(68, 163, 5) 0%);
+    background-image: -ms-linear-gradient(bottom, rgb(80, 185, 0) 100%, rgb(68, 163, 5) 0%);
+
+    background-image: -webkit-gradient(
+            linear,
+            left bottom,
+            left top,
+            color-stop(1, rgb(80, 185, 0)),
+            color-stop(0, rgb(68, 163, 5))
+    );
+}
+
+.profileLeftButtons .button.active.undo, .profileLeftButtons .button.active.accept {
+    cursor: pointer;
+}
+
+.profileLeftButtons .button.active:hover {
+    background-image: linear-gradient(bottom, rgb(65, 176, 0) 100%, rgb(41, 143, 4) 0%);
+    background-image: -o-linear-gradient(bottom, rgb(65, 176, 0) 100%, rgb(41, 143, 4) 0%);
+    background-image: -moz-linear-gradient(bottom, rgb(65, 176, 0) 100%, rgb(41, 143, 4) 0%);
+    background-image: -webkit-linear-gradient(bottom, rgb(65, 176, 0) 100%, rgb(41, 143, 4) 0%);
+    background-image: -ms-linear-gradient(bottom, rgb(65, 176, 0) 100%, rgb(41, 143, 4) 0%);
+
+    background-image: -webkit-gradient(
+            linear,
+            left bottom,
+            left top,
+            color-stop(1, rgb(65, 176, 0)),
+            color-stop(0, rgb(41, 143, 4))
+    );
+}
+
+.profileLeftButtons .button.active .title {
+    color: white;
+    float: left;
+}
+
+.profileLeftButtons .button .title {
+    font-size: 13px;
+    padding-top: 5px;
+    font-weight: bolder;
+    color: rgb(130, 130, 130);
+    padding-left: 23px;
+    margin-left: 20px;
+}
+
+.profileLeftButtons .button .title.message {
+    background: url(<%= asset_path('old/iconProfileMessage.png')%>) center left no-repeat;
+}
+
+.profileLeftButtons .button .title.connect {
+    background: url(<%= asset_path('old/iconProfileConnect.png')%>) center left no-repeat;
+}
+
+.profileLeftButtons .button .title.follow {
+    background: url(<%= asset_path('old/iconProfileFollow.png')%>) center left no-repeat;
+}
+
+.profileLeftButtons .button .title.recommend {
+    background: url(<%= asset_path('old/iconProfileRecommend.png')%>) center left no-repeat;
+}
+
+.profileLeftButtons .button.active .title {
+    background: url(<%= asset_path('old/bgButtonOk.png')%>) center left no-repeat;
+}
+
+.profileLeftButtons .button.active.waiting.undo .title {
+    background: url(<%= asset_path('old/bgButtonWaiting.png')%>) center left no-repeat;
+}
+
+.profileLeftButtons .button.active.undo:hover .title {
+    background: url(<%= asset_path('old/bgButtonUndo.png')%>) center left no-repeat;
+}
+
+/* accept connection */
+.profileLeftButtons .button.active.accept .title.connect {
+    background: url(<%= asset_path('old/iconProfileConnectHover.png')%>) center left no-repeat;
+}
+
+.profileLeftButtons .button:hover .title {
+    color: rgb(60, 60, 60);
+}
+
+.profileLeftButtons .button.active:hover .title {
+    color: white;
+}
+
+/* this button goes on top of any profile */
+.titleButton {
+    float: left;
+    margin-left: 15px;
+    display: table;
+    padding: 2px 0px 3px 0px;
+    /*
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    border-radius:4px;
+    */
+    margin-bottom: 5px;
+    cursor: pointer;
+    background: rgb(225, 225, 225);
+    text-shadow: none;
+}
+
+.titleButton.active, .titleButton:hover {
+    background: #27b120;
+    border-left: 1px solid #259b1e;
+    border-top: 1px solid #259b1e;
+    box-shadow: 0px -1px #20901a;
+    text-shadow: none;
+}
+
+.titleButton.active.undo {
+    cursor: pointer;
+}
+
+.titleButton.active:hover {
+    background: #27b120;
+}
+
+.titleButton.active .title, .titleButton:hover .title {
+    color: white;
+    float: left;
+}
+
+.titleButton.active .title {
+    background: url(<%= asset_path('old/bgButtonOk.png')%>) center left no-repeat;
+}
+
+.titleButton.active:hover .title {
+    background: url(<%= asset_path('old/bgButtonUndo.png')%>) center left no-repeat;
+}
+
+.titleButton .title {
+    font-size: 15px;
+    font-weight: bolder;
+    padding-left: 22px;
+    padding-right: 18px;
+    margin-left: 17px;
+}
+
+.titleButton .title.join {
+    background: url(<%= asset_path('old/iconProfileFollow.png')%>) center left no-repeat;
+}
+
+.titleButton:hover .title.join {
+    background: url(<%= asset_path('old/iconProfileFollowHover.png')%>) center left no-repeat;
+}
+
+.button:hover .title {
+    color: rgb(60, 60, 60);
+}
+
+.button.active:hover .title {
+    color: white;
+}
+
+/* edit */
+.titleButtonEdit {
+    float: left;
+    margin-left: 15px;
+    display: table;
+    padding: 2px 0px 3px 0px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    background: rgb(225, 225, 225);
+    text-shadow: none;
+    font-size: 16px;
+    font-weight: bolder;
+    padding: 3px 15px 3px 15px;
+}
+
+.titleButtonEdit:hover {
+    background: rgb(210, 210, 210);
+    border: none;
+    box-shadow: none;
+    color: rgb(70, 70, 70);
+}
+
+/* 
+
+	Group Profile
+
+*/
+.groupProfileTop {
+    padding-top: 20px;
+}
+
+.groupTitle {
+    float: left;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.groupProfile {
+    width: 950px;
+}
+
+.groupProfileLeft {
+    float: left;
+    margin-top: 4px;
+    margin-left: 0px;
+    width: 660px;
+}
+
+.groupProfileLeft .title {
+    font-size: 28px;
+    font-weight: bolder;
+    color: rgb(40, 40, 40);
+    margin-bottom: 15px;
+}
+
+.groupProfileRight {
+    float: right;
+    width: 230px;
+    margin-right: 23px;
+    margin-top: 5px;
+}
+
+.groupProfileText {
+    font-size: 14px;
+}
+
+.groupProfilePhoto {
+}
+
+.groupProfilePhoto .glass {
+    position: absolute;
+    width: 200px;
+    height: 85px;
+    background: url(<%= asset_path('old/groupProfileLight.png')%>) top left no-repeat;
+}
+
+.groupProfilePhoto img {
+    height: 230px;
+    width: 230px;
+}
+
+.moderatorTab {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 13px;
+}
+
+.moderatorTitle {
+}
+
+.moderatorTab .moderatorPhoto {
+}
+
+.moderatorTab .moderatorPhoto img {
+}
+
+.moderatorTab .moderatorText {
+    line-height: 16px;
+}
+
+.groupItems {
+    margin-bottom: 5px;
+    padding-top: 20px;
+    padding-bottom: 15px;
+    background: rgb(242, 242, 242);
+    border: 1px solid #CCC;
+}
+
+.groupItemsInside {
+    padding-left: 20px;
+    /*display: table;*/
+}
+
+.groupItemsTitle {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: 700;
+    color: rgb(100, 100, 100);
+    margin-bottom: 5px;
+}
+
+/*
+
+	Startup Profile
+
+*/
+.startupItemsTitle {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: 700;
+    color: rgb(100, 100, 100);
+    margin-bottom: 5px;
+}
+
+/*
+
+	Two Users in line
+
+*/
+
+.userTwoInLineTab {
+    background: #ffffff;
+    display: table;
+    padding: 8px 0px 10px 0px;
+    margin-bottom: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+}
+
+.userTwoInLineTab .photo {
+    float: left;
+    padding-left: 15px;
+    padding-top: 2px;
+}
+
+.userTwoInLineTab .photo img {
+    width: 40px;
+}
+
+.userTwoInLineTab .photo img:hover {
+    opacity: 0.85;
+}
+
+.userTwoInLineTab .text {
+    float: left;
+    padding-left: 10px;
+    line-height: 120%;
+    padding-right: 5px;
+    font-size: 13px;
+}
+
+.userTwoInLineTab .text a {
+    font-size: 14px;
+    font-weight: bolder;
+}
+
+.userTwoInLineTab .text a:hover {
+}
+
+/*
+
+	User Menu
+
+*/
+.userMenu {
+    background: #f5f5f5;
+    text-shadow: 0px 1px white;
+    text-shadow: none;
+}
+
+.userMenu ul {
+}
+
+.userMenu ul li {
+}
+
+.userMenu ul a li {
+    color: rgb(120, 120, 120);
+}
+
+.userMenu ul a:hover li {
+    color: rgb(70, 70, 70);
+}
+
+.userMenu ul li.active {
+}
+
+.userMenuName {
+    font-weight: bolder;
+}
+
+.userMenuName a {
+    font-weight: bolder;
+}
+
+.userMenuName a:hover {
+}
+
+/*
+
+	Form edit
+
+*/
+.formRow {
+    margin-bottom: 10px;
+}
+
+.frLeft {
+    color: #777777;
+    font-size: 13px;
+}
+
+.frLeft span {
+    color: #777777;
+    font-size: 15px;
+}
+
+.frLeft span.keyword {
+    background: #ffffff;
+    padding: 0px 6px 1px 6px;
+    color: #777777;
+    font-weight: normal;
+    font-size: 90%;
+    margin: 0px 2px 0px 2px;
+    white-space: nowrap;
+}
+
+.frRight {
+}
+
+.frRight button {
+}
+
+.frRight ul input {
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.frRight input[type=text], .frRight textarea {
+    width: 100%;
+}
+
+.tagsUl {
+    width: 340px;
+    border: 2px solid rgb(240, 240, 240);
+}
+
+.frRight.keywordBlok input {
+    width: 200px;
+    float: left;
+    margin: 0px 5px 0px 0px;
+}
+
+.frRight.keywordBlok div.btnMiddle {
+    margin-bottom: 2px;
+}
+
+.frRight #keywords_list {
+    margin-top: 8px;
+}
+
+/*
+
+	Keywords Content Area
+
+*/
+.keywordsContentArea {
+    margin: 20px;
+}
+
+.keywordsContentArea li {
+    background: white;
+    float: left;
+    margin: 0px 15px 20px 0px;
+    padding: 3px 12px 3px 12px;
+}
+
+.keywordsContentArea a {
+    font-weight: bolder;
+    color: rgb(120, 120, 120);
+}
+
+.keywordsContentArea a:hover {
+    color: rgb(60, 60, 60)
+}
+
+.keywordsContentArea li:hover {
+    background: rgb(250, 250, 250);
+}
+
+/*
+
+	Notifications
+
+*/
+
+.notificationTab {
+    clear: both;
+    width: 100%;
+    background: #f5f5f5;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    clear: both;
+    border: 1px solid #ccc;
+    overflow: auto;
+}
+
+.notificationTabPhoto {
+    float: left;
+    margin: 7px 5px 5px 7px;
+}
+
+.notificationTabPhoto img {
+    width: 35px;
+}
+
+.notificationTabText {
+    font-size: 14px;
+}
+
+.notificationTabText a {
+}
+
+.notificationTabText a:hover {
+}
+
+/*
+
+	Private Messages
+
+*/
+.privateMessagesUl li {
+    clear: both;
+    padding: 13px 0px 15px 0px;
+    cursor: pointer;
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+    margin-bottom: 5px;
+}
+.privateMessagesUl li.new{
+    background: #F0F8FC;
+}
+
+.privateMessagesUl li:hover {
+}
+
+.privateMessagesUl li .pmPhoto {
+}
+
+.privateMessagesUl li div.pmPhoto img {
+}
+
+.privateMessagesUl li .pmText {
+}
+
+/*
+
+	Conversations
+
+*/
+/* private conversation ul */
+.conversationUl {
+    width: auto;
+}
+
+.conversationUl li {
+    display: table;
+    padding: 10px 0px 10px 0px;
+    width: 90%;
+    margin-left: 20px;
+    border-bottom: 2px solid rgb(244, 244, 244);
+}
+
+.conversationUl li div.photo {
+    float: left;
+    width: 40px;
+    margin-top: 4px;
+}
+
+.conversationUl li div.photo img {
+    width: 40px;
+}
+
+.conversationUl li div.text {
+    float: left;
+    width: 85%;
+    margin-left: 12px;
+    line-height: 22px;
+    font-size: 14px;
+
+}
+
+.conversationUl li:last-child {
+    border: none;
+}
+
+.conversationUl .date {
+    float: right;
+    padding-top: 5px;
+    color: rgb(200, 200, 200);
+    font-size: 13px;
+}
+
+.conversationReply {
+    /*padding-top:20px; margin-left:20px;*/
+}
+
+.conversationReply textarea {
+    width: 100%;
+    border: 2px solid rgb(248, 248, 248);
+    margin-bottom: 9px;
+}
+
+/*
+	Social Login Buttons 
+
+*/
+.socialLoginBtn {
+    width: 100%;
+    padding: 5px 0px 3px 5px;
+    background: rgb(242, 242, 242);
+    display: table;
+}
+
+.socialLoginBtn:hover {
+    background: rgb(236, 236, 236);
+}
+
+.slbFirst {
+    float: left;
+}
+
+.slbSecond {
+    float: left;
+    padding: 6px 10px 0px 10px;
+    color: rgb(100, 100, 100);
+    font-size: 14px;
+    font-weight: bolder;
+}
+
+/*
+
+	Twitter Blok
+
+*/
+.twitterBlok {
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+    width: 950px;
+    font-size: 15px;
+    background: rgba(0, 0, 0, 0.78);
+    margin-bottom: 25px;
+}
+
+/*
+
+	Keyword inputs
+
+*/
+#keyword_suggestions {
+    display: none;
+    position: absolute;
+    padding: 0px;
+    width: 210px;
+    height: auto;
+    background: white;
+    border: 1px solid rgb(230, 230, 230);
+}
+
+.keyword_field {
+    padding: 5px 8px 5px 8px;
+    cursor: pointer;
+    color: rgb(90, 90, 90);
+    line-height: 100%;
+}
+
+.keyword_field:first-child {
+    border-top: none;
+}
+
+.keyword_field_inside {
+    color: rgb(200, 200, 200);
+}
+
+.keyword_field:hover {
+    background: rgb(245, 245, 245);
+}
+
+.added_keyword {
+    float: left;
+    margin: 2px;
+    padding: 4px 7px 4px 7px;
+    display: table;
+    white-space: nowrap;
+    background: #e5ecf2;
+    color: #000000;
+    border: 1px solid #d6e4f0;
+    font-weight: normal;
+}
+
+.added_keyword.inProfile {
+    margin: 3px 4px 3px 2px;
+}
+
+.added_keyword.inProfile:hover {
+    color: #256b96;
+    background: #dfeef5;
+    border: 1px solid #c9e0ef;
+}
+
+/* links */
+.remove_keyword div {
+    width: 40px;
+    display: inline;
+}
+
+.remove_keyword {
+    color: #77aaca;
+}
+
+.remove_keyword:hover {
+    color: #3e80aa;
+}
+
+.remove_keyword:hover {
+    font-weight: bolder;
+}
+
+/* color versions */
+.added_keyword.green {
+    background: #ebf9ee;
+    border: 1px solid #d7f5d4;
+    color: #3eaa46;
+}
+
+.added_keyword.orange {
+    background: #fef8ed;
+    border: 1px solid #f5ebd4;
+    color: #cd9112;
+}
+
+.added_keyword.orange a {
+    color: #cd9112;
+}
+
+.added_keyword .params {
+    clear: both;
+    font-weight: normal;
+    color: rgb(160, 160, 160);
+}
+
+.remove_keyword {
+    cursor: pointer;
+}
+
+/* Keywords in Right menu */
+.keywordsRightMenu {
+    margin-left: 22px;
+    width: 218px;
+}
+
+.keywordsRightMenu input[type=text] {
+    width: 119px;
+    float: left;
+    margin-right: 10px;
+}
+
+.keywordsRightMenu input[type=submit] {
+    margin-bottom: 2px;
+    padding: 7px 7px 6px 7px;
+    float: left;
+}
+
+.keywordsRightMenu div#keywords_list {
+    padding: 8px 0px 5px 0px;
+}
+
+/*
+
+	Friend inputs
+
+*/
+#friend_suggestions {
+    display: none;
+    position: absolute;
+    padding: 0px;
+    width: 240px;
+    height: auto;
+    background: white;
+    border: 1px solid rgb(230, 230, 230);
+}
+
+.friend_field {
+    padding: 5px 8px 5px 8px;
+    cursor: pointer;
+    color: rgb(90, 90, 90);
+    line-height: 100%;
+}
+
+#friends_list {
+    margin-top: 4px;
+}
+
+.friend_field_inside {
+    display: table;
+    width: 200px;
+}
+
+.friend_field:first-child {
+    border-top: none;
+}
+
+.friend_field:hover {
+    background: rgb(245, 245, 245);
+}
+
+.friend_field_photo {
+    float: left;
+}
+
+.friend_field_photo img {
+    float: left;
+    width: 30px;
+    border-radius: 3px;
+}
+
+.friend_field_title {
+    float: left;
+    margin-left: 7px;
+    font-weight: bolder;
+}
+
+.added_friend {
+    float: left;
+    margin: 2px;
+    padding: 4px 7px 4px 7px;
+    border: 1px solid rgb(230, 230, 230);
+    display: table;
+    font-weight: bolder;
+    white-space: nowrap;
+    color: rgb(90, 90, 90);
+    background: rgb(255, 255, 255);
+}
+
+.added_friend_photo {
+    float: left;
+}
+
+.added_friend_photo img {
+    width: 30px;
+}
+
+.added_friend_title {
+    margin-left: 6px;
+    float: left;
+
+}
+
+/* links */
+.remove_friend div {
+    width: 40px;
+    display: inline;
+}
+
+.remove_friend {
+    color: #77aaca;
+}
+
+.remove_friend:hover {
+    color: #3e80aa;
+}
+
+.remove_friend:hover {
+    font-weight: bolder;
+}
+
+.remove_friend {
+    cursor: pointer;
+}
+
+/*
+
+	Badges
+
+*/
+.badges .row {
+    margin-bottom: 5px;
+}
+
+.badgeDiv {
+    padding: 4px 10px 4px 10px;
+    background: #ebf9ee;
+    font-size: 14px;
+    font-weight: bolder;
+    border: 1px solid #cfefcb;
+    display: table;
+    color: #07b710;
+}
+
+/*
+
+	Question Tab 
+*/
+.questionTab {
+    width: 600px;
+    display: table;
+}
+
+.questionTabPhoto {
+    float: left;
+    width: 50px;
+}
+
+.questionTabPhoto img {
+    width: 50px;
+}
+
+.questionTabText {
+    float: left;
+    width: 538px;
+    margin-left: 12px;
+}
+
+.questionTabTitle {
+    font-size: 15px;
+    font-weight: bolder;
+    color: rgb(90, 90, 90);
+    margin-bottom: 3px;
+}
+
+.questionTabLinks {
+    margin-top: 10px;
+    color: rgb(160, 160, 160);
+}
+
+.questionTabLinks a {
+    color: rgb(140, 140, 140);
+}
+
+.answersAreaTitle {
+    margin-top: 15px;
+    margin-bottom: 12px;
+    font-size: 20px;
+    font-weight: 700;
+    color: rgb(100, 100, 100);
+    text-shadow: 0px 1px white;
+}
+
+.answerTab {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    display: table;
+    width: 600px;
+}
+
+.answerTabPhoto {
+    float: left;
+    width: 50px;
+}
+
+.answerTabPhoto img {
+    width: 50px;
+}
+
+.answerTabText {
+    float: left;
+    margin-left: 12px;
+    width: 538px;
+}
+
+.answerTabVotes {
+    font-size: 15px;
+    margin-bottom: 3px;
+    font-weight: bolder;
+    color: rgb(90, 90, 90);
+}
+
+.answerTabUp {
+    float: right;
+    margin-left: 1px;
+    margin-bottom: 10px;
+}
+
+.answerTabDown {
+    float: right;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.answerTabUp.voted, .answerTabDown.voted {
+    opacity: 0.4;
+}
+
+#answerGiveGemEl {
+    height: 18px;
+    width: 24px;
+    float: right;
+    padding: 0px 0px 10px 10px;
+}
+
+#answerGiveGem {
+    cursor: pointer;
+}
+
+/* CUSTOM STYLING */
+
+body .pageTopLine {
+    background: #1d4766;
+}
+
+body .pageTopLine .container,
+body .footer.container {
+    padding-top: 0;
+}
+
+.pageTopLogo {
+    float: left;
+    width: 50px;
+}
+
+.pageTopMenuOutside {
+    float: left;
+    margin-top: 10px;
+}
+
+.select2-container-multi .select2-choices {
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+}
+
+.btnShadow {
+    -webkit-box-shadow: 2px 2px 5px 0px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow: 2px 2px 5px 0px rgba(50, 50, 50, 0.75);
+    box-shadow: 2px 2px 5px 0px rgba(50, 50, 50, 0.75);
+}
+
+.alert-notice {
+    background-color: #5cb85c;
+    border-color: transparent;
+    color: #ebebeb;
+}
+
+.alert-notice hr, .alert-alert hr {
+    border-top-color: rgba(0, 0, 0, 0);
+}
+
+.alert-notice .alert-link, .alert-alert {
+    color: #d2d2d2;
+}
+
+.alert-alert {
+    background-color: #d9534f;
+    border-color: transparent;
+    color: #ebebeb;
+}
+
+.login-form {
+}
+
+.login-form input {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.login-form input[type="text"],
+.login-form input[type="email"],
+.login-form input[type="password"] {
+    color: #000000;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice{
+    color:#000;
+}
+/* 
+.select2-search input, .select2-search-choice-close, .select2-container .select2-choice abbr, .select2-container .select2-choice .select2-arrow b {
+    background-image: url(<%= asset_path("select2.png")%>) !important;
+}
+ */
+/*i.fa {
+    color: #777777;
+}
+
+i.fa:hover {
+    color: #3399f3;
+}*/
+
+.tooltip-inner {
+    /*margin-top: 10px;*/
+    font-size: 10px;
+    line-height: 10px;
+}
+
+.navbar-default .navbar-nav > li > a {
+    min-height: 40px;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > li > a:hover i.fa, .navbar-default .navbar-nav > li > a:focus i.fa {
+    color: #3399f3;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover i.fa, .navbar-inverse .navbar-nav > li > a:focus i.fa {
+    color: #ffffff;
+}
+
+.navbar-inverse .navbar-nav > li > a i.fa {
+    color: #dddddd;
+}
+
+.navbar-nav {
+    margin-left: 15px;
+}
+
+.pageTopMenu .navbar-nav > li.current > a, 
+.pageTopMenu .navbar-nav > li.current > a:hover, 
+.pageTopMenu .navbar-nav > li > a:hover {
+    background: #446e9b;
+    padding-bottom: 12px;
+}
+
+#discuss-navbar .navbar-nav > li.current > a, 
+#discuss-navbar .navbar-nav > li.current > a:hover, 
+#discuss-navbar .navbar-nav > li > a:hover {
+    color: #3399F3;
+}
+
+ul.navbar-right li a {
+    min-height: 49px;
+}
+
+.bottomLine-inner .bottomLineInside,
+.bottomLine-inner .bottomLineInside a {
+    color: #666666;
+}
+
+.bottomLine-inner .bottomLineInside a:hover {
+    color: #3399f3;
+}
+
+.btn a {
+    color: #ffffff;
+}
+
+.btn a:hover {
+    text-decoration: none;
+}
+
+.my-contacts .my-contact {
+    margin-bottom: 30px;
+}
+
+.remember-check {
+    width: 10px;
+}
+
+.remember-check, .remember-text {
+    float: left;
+    margin-right: 5px;
+}
+
+.footer-social {
+    text-align: center;
+}
+
+.footer-social a:hover {
+    text-decoration: none;
+}
+
+.panel-title-1, .panel-title-2 {
+    
+    line-height: 16px;
+    /*
+    width: 95%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; */
+}
+
+.panel-title-1 {
+    font-weight: bold;
+}
+
+.panel-title-2 {
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.panel-title-3 {
+    font-size: 0.6em;
+}
+
+.panel-body a .img-responsive {
+    /*width: 100%;*/
+}
+
+/* Typeahead*/
+.twitter-typeahead{width: 100%;}
+.typeahead,
+.tt-query,
+.tt-hint {
+ /* height: 30px;
+  padding: 8px 12px;
+  font-size: 24px;
+  line-height: 30px;
+  border: 2px solid #ccc;*/
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+  outline: none;
+}
+
+.typeahead {
+  background-color: #fff;
+}
+
+.typeahead:focus {
+  border: 2px solid #0097cf;
+}
+
+.tt-query {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.tt-hint {
+  color: #999
+}
+
+.tt-dropdown-menu { 
+  width: 100%;
+  margin-top: 12px;
+  padding: 8px 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+          box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.tt-suggestion {
+  width: 100%;
+  padding: 3px 20px;
+  font-size: 16px;
+  line-height: 24px;
+}
+.tt-suggestion a{
+    text-decoration: none;
+}
+.typeahead_footer{
+    margin: 5px 20px 5px 20px;
+    padding: 3px 0;
+    font-size: 16px;
+}
+
+.startup_search .twitter-typeahead input{
+  width: 100%;  
+    margin-bottom: 5px;
+
+}
+/*.tt-suggestion.tt-cursor {
+  color: #fff;
+  background-color: #0097cf;
+}*/
+
+.tt-suggestion p {
+  margin: 0;
+}
+.startup_search>ul>li{
+    margin-bottom: 5px;
+        margin-top: 5px;
+    }
+.startup_search .select2-container--default .select2-selection--multiple{
+    min-height: 37px;
+    border: 2px solid #E6E6E6;
+    border-radius: 0;
+}
+.startup_search .select2-container .select2-search--inline .select2-search__field{
+    margin-top: 0;
+}
+/* MEDIA QUERY */
+@media (min-width: 801px) {
+    .addComment textarea {
+        width: 90%;
+    }
+
+    .commentPostBtn {
+        width: 10%;
+    }
+}
+
+@media (max-width: 800px) {
+    .addComment textarea {
+        width: 85%;
+    }
+
+    .commentPostBtn {
+        width: 15%;
+    }
+}
+
+@media (max-width: 567px) {
+    .addComment textarea {
+        width: 80%;
+    }
+
+    .commentPostBtn {
+        width: 20%;
+    }
+}
+
+.firstLineLogin, .firstLineLogin a {
+    color: #62f6f4;
+}
+
+span.notifier {
+    background: red;
+    border-radius: 10px;
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    text-align: center;
+    font-size: 8px;
+    line-height: 15px;
+    position: absolute;
+}
+
+.bottomLine-inner i.fa {
+    color: #446e9b;
+}
+
+.bottomLine-inner i.fa:hover {
+    color: #aaaaaa;
+}
+
+.follow_btn_area {
+    max-height: 40px;
+}
+
+.userList .panel-body,
+.startupList .panel-body,
+.groupstartupsList .panel-body {
+/*     min-height: 170px;
+        max-height: 220px;*/ 
+}
+.groupstartupsList .panel-body{
+   /*  min-height: 190px; */
+}
+.groupstartupsList .panel-body img{
+    margin: 0 auto;
+}
+.groupstartupsList .panel-heading, .startupList .panel-heading, .userList  .panel-heading{
+    height: 83px;
+    overflow: hidden;
+}
+.groupstartupsList .panel-title, .startupList .panel-title, .starterList .panel-title {
+    font-size:14px;
+}
+
+.suggestfriend .modal-dialog {
+    width: 400px;
+}
+
+.postTab .startupPostPhoto {
+    width: 10%;
+}
+
+.postTab .startupPostText {
+    float: right;
+    width: 90%;
+}
+
+@media (min-width: 768px ) and (max-width: 1024px) {
+    .postTab .startupPostText {
+        float: right;
+        width: 85%;
+    }
+}
+
+@media (min-width: 321px ) and (max-width: 767px) {
+    .postTab .startupPostText {
+        float: right;
+        width: 80%;
+    }
+}
+
+@media (min-width: 0px ) and (max-width: 320px) {
+
+    .postTab .startupPostText {
+        float: right;
+        width: 70%;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+

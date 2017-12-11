@@ -1,0 +1,137 @@
+<%= content_for :title do %>
+  Profile
+  <%= link_to 'Skip >>', wizard_users_path(:step => params[:step].to_i + 1), :class => 'btn btn-default pull-right'  %>    
+<% end %>
+<div class="alert alert-dismissable alert-warning">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  <div class="alertInside">
+	Please complete all fields, and upload your REAL photo (this encourages more open and honest communication between members), in order for your account to be approved by an administrator.
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 col-sm-8 col-xs-12">
+    <div class="infoBlok">
+      <%= form_for current_user, :url => user_path(current_user), :html => { :multipart => true } do |f| %>
+        <%= render 'shared/error_messages', :user => current_user %>
+        <%= hidden_field_tag 'next', wizard_users_path(:step => params[:step].to_i + 1) %>
+        <div class="formRow"> 
+          <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+            <span>Photo</span>
+          </div>
+          <div class="col-md-8 col-sm-8 col-xs-12 frRight"> 
+            <%= image_tag current_user._photo(:middle) %>
+            <br/>
+            <%= f.file_field :photo, :style => "border:0px; color:#464646;", :required => true %>
+          </div>
+          <div style="clear:both"></div>
+        </div>  
+        <div class="formRow"> 
+          <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+            <span>Email</span>
+            <br/>
+            to login & receive notifications
+          </div>
+          <div class="col-md-8 col-sm-8 col-xs-12 frRight">
+            <%= f.text_field :email, :required => true %>
+          </div>
+          <div style="clear:both"></div>
+        </div>  
+        <div class="formRow"> 
+          <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+            <span>Full Name or Username</span>
+          </div>
+          <div class="col-md-8 col-sm-8 col-xs-12 frRight">
+            <%= f.text_field :title, :required => true %>
+          </div>
+          <div style="clear:both"></div>
+        </div>  
+
+        <%= f.fields_for :profile do |p| %>
+          <% if params[:action] == 'wizard' %>
+            <%= p.hidden_field :step, :value => params[:step].to_i + 1 %>
+          <% end %>
+          <div class="formRow"> 
+            <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+              <span>Country</span>
+            </div>
+            <div class="col-md-8 col-sm-8 col-xs-12 frRight">
+              <%= p.collection_select(:country_id, Country.all, :id, :title, {:include_blank => 'Please select'}, {:required => true}) %>
+            </div>
+            <div style="clear:both"></div>
+          </div>
+          <div class="formRow"> 
+            <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+              <span>City</span>
+            </div>
+            <div class="col-md-8 col-sm-8 col-xs-12 frRight"> 
+              <%= p.text_field :city, :required => true %> 
+            </div>
+            <div style="clear:both"></div>
+          </div>  
+          <div class="formRow"> 
+            <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+              <span>Role</span>
+            </div>
+            <div class="col-md-8 col-sm-8 col-xs-12 frRight">
+              <%= p.collection_select(:user_role_id, User::Role.all, :id, :title, {:include_blank => 'Please select'}, {:required => true}) %>
+            </div>
+            <div style="clear:both"></div>
+          </div>
+          <div class="formRow"> 
+            <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+              <span>Profession</span>
+              <br/>
+              Example: Web Designer
+            </div>
+            <div class="col-md-8 col-sm-8 col-xs-12 frRight"> 
+              <%= p.text_field :summary %> 
+            </div>
+            <div style="clear:both"></div>
+          </div>
+          <div class="formRow"> 
+            <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+              <span>Current position</span>
+              <br/>
+              Example: CEO at "Startup"
+            </div>
+            <div class="col-md-8 col-sm-8 col-xs-12 frRight"> 
+              <%= p.text_field :current_position %> 
+            </div>
+            <div style="clear:both"></div>
+          </div>
+          <div class="formRow"> 
+            <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+              <span>Skills</span>
+              <br/>
+              Example: Marketing
+            </div>
+            <div class="col-md-8 col-sm-8 col-xs-12 frRight">
+              <div class="input text">
+                <%= p.select :skills, options_for_select(Keyword.skills.order(:title).map{ |c| [c.title, c.url, {'data-users-count'=>c.users_count}] }, selected_key = p.object.skills),{}, {:multiple => true, :id => 'user_profile_attributes_skills', :style => "width:100%"} %>
+              </div>
+            </div>
+            <div style="clear:both"></div>
+          </div>
+          <div class="formRow"> 
+            <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+              <span>Timezone</span>
+            </div>
+            <div class="col-md-8 col-sm-8 col-xs-12 frRight">
+              <%= f.time_zone_select(:timezone,  ActiveSupport::TimeZone.all.sort, :include_blank=>'Please select') %>
+            </div>
+            <div style="clear:both"></div>
+          </div>
+        <% end %>
+        <div class="formRow last">
+          <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+            &nbsp;
+          </div>
+          <div class="col-md-8 col-sm-8 col-xs-12 frRight">
+              <%= f.submit "Save", class: "btnMiddle btn btn-success", style: "width:100px;" %>
+          </div>
+          <div style="clear:both"></div>
+        </div>
+    <% end %>
+    </div>
+  </div>
+</div>

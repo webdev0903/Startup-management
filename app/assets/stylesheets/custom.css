@@ -1,0 +1,96 @@
+.padPosts {
+  float:left; 
+  /*width:630px;
+  background:rgb(240,240,240);
+  padding-top:10px;
+  */
+  border-radius:6px;
+  -moz-border-radius:6px;
+  -webkit-border-radius:6px;
+  padding-bottom:14px;
+}
+#addPostArea {
+  background:rgb(240,240,240);
+  padding: 10px 10px 0;
+  border: 1px solid #ccc;
+  margin-bottom: 13px;
+}
+#formAddPost {
+  /*width:700px;*/
+  /*margin-bottom:30px;*/
+  margin-bottom: 20px;
+  padding-left:20px;
+  padding-top:10px;
+  display:table;
+}
+#formAddPost textarea {
+  /*width:575px;*/
+  width: 100%;
+  padding:7px;
+  border-radius:5px;
+  -moz-border-radius:5px;
+  -webkit-border-radius:5px;
+  margin:0px;
+  border:none;
+}
+.makeHigherTextarea {
+  height:20px;
+}
+.makeHigherTextarea.active {
+  height:150px;
+}
+.formAddPostBtns {
+  float:right;
+  margin-top:7px;
+  margin-right:00px;
+  display:table;
+}
+.formAddPostSubmit {
+  float:left;
+  margin-top:5px;
+  margin-right:3px;
+}
+.formAddPostVisibility {
+  margin-right:15px;
+  /*background:rgb(251,251,251);*/
+  float:right; 
+  padding:3px; 
+  color:rgb(110,110,110); 
+  border-radius:4px;
+  -moz-border-radius:4px;
+  -webkit-border-radius:4px;
+  border:none;
+}
+.userTwoInLineTab {
+  background: #ffffff;
+  display:table;
+  padding:8px 0px 10px 0px;
+  margin-bottom: 10px;
+  /*width: 299px;*/
+  float: left;
+}
+
+.secondLineInsideButtons span {
+  float: left;
+  display: block;
+  width: 100%;
+  margin: 0 0 15px;
+  padding: 15px 10px;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  border-radius: 7px;
+  text-align: center;
+  color: #ffffff;
+}
+
+/*
+i.fa {
+  color: #ffffff;
+}
+*/
+.sidebar-menu a i.fa {
+  color: #3399f3;
+}
+.sidebar-menu a i.fa:hover {
+  color: #446e9b;
+}

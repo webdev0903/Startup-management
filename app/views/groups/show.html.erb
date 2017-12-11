@@ -1,0 +1,201 @@
+<% if @group.title.present? %>
+	<% keyword_full = @group.title %>
+	<% keyword = keyword_full.gsub(/[^A-Z0-9a-z ]/i, '') %>
+	<% keywords = keyword.split().join(",") %>
+<% else %>
+	<% keywords = "2014" %>
+<% end %>
+
+<%
+meta :title => "#{@group.title}",
+     :description => "#{@group.title} - #{@group.about} (a StarterPad group, for startup entrepreneurs to share ideas and help one another)",
+     :keywords => "#{keywords},starterpad,startups,entrepreneurs,group"
+%>
+<% content_for :title do %>
+	<div style="float:left;">
+		<%= @group.title %>
+	</div>
+	<% if user_signed_in? %>
+		<% if @group.user_id == current_user.id %>
+			<div style="margin: 0 0 0 10px; float:left;">
+				<%= link_to 'Edit', edit_group_path(@group), :class => "btn btn-warning btn-xs" %>
+			</div>
+		<% elsif @group.members.map(&:id).include?(current_user.id) %>
+			<div style="margin: 0 0 0 10px; float:left;">
+				<%= link_to 'Joined', leave_group_path(@group, current_user.id), :method => :delete, :remote => :true, :id => "joined-link-#{@group.id}", :class => "btn btn-success btn-xs" %>
+				<%= link_to 'Join', join_group_path(@group, current_user.id, :show => true), :method => :post, :remote => true, :id => "join-link-#{@group.id}", :style => 'display:none;', :class => "btn btn-primary btn-xs" %>
+			</div>
+		<% else %>
+		  <div style="margin: 0 0 0 10px; float:left;">
+				<%= link_to 'Join', join_group_path(@group, current_user.id, :show => true), :method => :post, :remote => true, :id => "join-link-#{@group.id}", :class => "btn btn-primary btn-xs" %>
+				<%= link_to 'Joined', leave_group_path(@group, current_user.id), :method => :delete, :remote => :true, :id => "joined-link-#{@group.id}", :style => 'display:none;', :class => "btn btn-success btn-xs" %>
+			</div>
+  	<% end %>
+	<% end %>
+<% end %>
+<div class="row">
+	<div class="col-md-8 col-sm-8 col-xs-12">
+	  <div id="group" class="padPosts">
+	  	<div class="row">
+		  	<div class="col-md-12 col-sm-12 col-xs-12">
+					<% @display = user_signed_in? && (@group.members.include?(current_user) || @group.user_id == current_user.id) %>
+				<% if @post && @display %>
+			      <div id="addPostArea">
+						<%= form_for @post, url: group_posts_path(params[:id]), remote: true, html: { id: 'formAddPost' } do |f| %>
+							<div class="input textarea">
+								<%= f.text_area :text, placeholder: "What's New... ?", class: 'makeHigherTextarea'  %>
+							</div>
+							<div class="clearfix"></div>
+							<div class="formAddPostSubmit">
+								<div class="submit">
+									<%= button_tag "Post", class: "btn btn-primary", 'data-disable-with' => "<i class='fa fa-spinner fa-spin'></i>".html_safe %>
+                  
+								</div>
+							</div>
+						<% end %>
+					</div>
+				<% end %>
+				</div>
+			</div>
+			<div class="row">
+		  	<div class="col-md-12 col-sm-12 col-xs-12">
+			    <div id="postsList">
+			      <%= render :partial => 'group_posts/post', :collection => @posts, :as => :post, :locals => {:group => @group} %>
+			      <% if @posts.blank? %>
+							<span>This group doesn't have any posts yet.</span>
+						<% else %>
+							<div id='more-posts'>
+				        <div class="morePostsButton">
+				          <%= link_to 'MORE', '', :remote => true, :'data-no-turbolink' => true %>
+				        </div>
+				      </div>
+						<% end %>
+			      <div style="clear:both"></div>
+			    </div>
+				</div>
+				<div style="clear:both"></div>
+			</div>
+	  </div>
+	</div>
+
+	<div class="col-md-4 col-sm-4 col-xs-12">
+		<div class="groupProfilePhoto">
+			<%= link_to group_path(@group.url) do %>
+				<%= image_tag @group._photo(:middle), :class => "img-responsive", :onError => "this.onerror=null;this.src='/group.png';", :style => "margin: 0 auto;" %>
+			<% end %>
+		</div>
+		<div class="groupProfileText">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-primary">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Description</h3>
+					  </div>
+					  <div class="panel-body">
+					  	<%= @group.about %>
+							<div style="clear:both"></div>
+					  </div>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="panel panel-primary">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">About</h3>
+					  </div>
+					  <div class="panel-body">
+					  	<%= @group.long_about %>
+							<div style="clear:both"></div>
+					  </div>
+					</div>
+				</div>
+			</div>
+			<div class="row moderatorTitle"> 
+				<div class="col-md-12">
+					<div class="panel panel-primary">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Moderator</h3>
+					  </div>
+					  <div class="panel-body">
+					  	<div class="col-md-4 col-sm-4 col-xs-12 moderatorPhoto"> 
+								<%= link_to profile_path(@group.owner) do %>
+					        <%= image_tag @group.owner.photo(:thumb), :class => "img-responsive", :style => "margin: 0 auto;" %>
+					      <% end %>
+							</div>
+							<div class="col-md-8 col-sm-8 col-xs-12 moderatorText">
+								<%= link_to @group.owner.title, profile_path(@group.owner) %>
+								<br><%= @group.owner.profile.summary %>
+							</div>
+							<div style="clear:both"></div>
+					  </div>
+					</div>
+				</div>
+			</div>
+			<div style="padding-top:10px; font-size:14px;">
+				<% if current_user.present? %>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#suggestFriend">Suggest to Friends</button><br><br>
+                <% end %>
+                <i class="fa fa-clock-o"></i> 
+				Last action in group 
+				<% if @group.last_action_at > Time.now - 2.months.to_i %>
+					<%= time_ago_in_words(@group.last_action_at) %> ago
+				<% else %>
+					more than 2 months ago 
+				<% end %>        
+			</div>
+      
+		</div>
+
+	</div>
+</div>
+
+
+
+<% if current_user.present? %>
+  <!-- Suggest to Friends Modal -->
+  <div class="modal fade suggestfriend" id="suggestFriend" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <%#= form_tag(controller: "groups#suggest_to_friend", action: "suggest_to_friend", method: "post") do %>
+      <%#= form_tag({controller: "groups", action: "suggest_to_friend"}, method: "post") do %>
+      <%= form_for @group, :url => suggest_to_friend_group_path(@group) , :html => { :method => "post" } do |f| %>
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Suggest to Friends</h4>
+        </div>
+        <div class="modal-body" style="height:300px; overflow-y: auto;">
+          
+            <% @already_members.each do |friend| %>
+              <div class="col-md-12 col-sm-12 col-xs-12 padItemTab">
+                <div class="col-md-3 col-sm-6 col-xs-6 padItemTabPhoto">
+                  <%= link_to profile_path(friend) do %>
+                    <%= image_tag friend._photo(:thumb), :class => "img-responsive", :style => "margin: 0 auto;" %>
+                  <% end %>
+                </div>
+
+                <div class="col-md-9 col-sm-6 col-xs-6 padItemTabText">
+                  <div class="row padItemTabTitle">
+                    <div class="padItemTabLeft">
+                      <%= link_to truncate(friend.title, :length => 15, :omission => '..'), profile_path(friend) %>
+                    </div>
+                    <div class="padItemTabRight">
+                      <%#= link_to "Suggest", suggest_to_friend_group_path(@group.id, friend.id), :method => 'post' ,:class => "btn btn-xs btn-primary" %>
+                       <%= check_box_tag "user_ids[]", friend.id %>
+                    </div>
+                  </div>
+                  <div style="clear:both"></div>
+                  <%#= truncate starter.profile.summary, :length => 25, :omission => '...' %>
+                </div>
+              </div>
+              <div style="clear:both"></div>
+            <% end %>
+        </div>
+        <div class="modal-footer">
+          <%= f.submit "Suggest", :class => "btn btn-primary" %>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

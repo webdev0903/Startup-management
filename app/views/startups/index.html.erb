@@ -1,0 +1,52 @@
+<% 
+title = 'Startups'
+description = ' '
+keywords = ['startups','starterpad']
+if @country
+  title = "#{title} - #{@country.title}"
+  description = "#{@country.title} "
+  keywords.push(@country.title)
+elsif @city_name
+  title = "#{title} - #{@city_name}"
+  description = "#{@city_name} "
+  keywords.push(@city_name)
+elsif @markets
+  title = "#{title} - #{@markets.map(&:title).join(', ')}"
+  description = "#{@markets.map(&:title).join(', ')} "
+  keywords.push(@markets.map(&:title).join(', '))
+elsif @query
+  title = "#{title} - #{@query}"
+  keywords.push(@query)
+end
+
+%>
+<%
+   meta :title => title,
+        :description => "#{description} Startups that members have added to StarterPad. Add yours for free and start getting the word out about your new business.",
+        :keywords => "#{keywords.join(', ')}"
+%>
+<%= content_for :title do %>
+  <% title == 'Startups' ? 'All Startups' : title %>
+<% end %>
+
+<div class="row">
+  <div class="col-md-8 col-sm-8 col-xs-12">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+          <%= render 'startups/startups', :startups => @startups %>
+          <%= paginate @startups, :previous_label => 'Previous', :next_label => 'Next', :inner_window => 2, :outer_window => 0 %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-4 col-xs-12">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <%= render 'startups/index_right' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+

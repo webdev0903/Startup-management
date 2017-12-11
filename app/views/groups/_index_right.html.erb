@@ -1,0 +1,64 @@
+<% if current_user.present? %>
+	<% if current_user.status? %>
+		<div class="row">
+			<div class="col-md-12">
+        <%= link_to new_group_path do %>
+  			<i class="fa fa-plus-square fa-2x" style="color:#3cb521; vertical-align:middle;"></i>
+		<% end %>
+		&nbsp;&nbsp;
+		<%= link_to new_group_path do %>
+          Create a Group
+		<% end %>
+			<br><br>        
+			</div>
+		</div>
+	<% end %>
+<% end %>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Show</h3>
+  </div>
+  <div class="panel-body">
+  	<ul>
+			<li class="col-md-12 <%= params[:action] == 'index' ? 'active' : '' %>">
+				<%= link_to 'All Groups', groups_path %>
+			</li>
+			<% if current_user.present? %>
+				<li class="col-md-12 <%= params[:action] == 'my_groups' ? 'active' : '' %>">
+					<%= link_to 'My Groups', my_groups_path %>
+				</li>			
+				<li class="col-md-12 <%= params[:action] == 'my_moderated_groups' ? 'active' : '' %>">
+					<%= link_to 'Moderator Rights', my_moderated_groups_path %>
+				</li>
+			<% end %>      
+			<% if params[:action] == 'edit' %>
+				<li class="col-md-12">
+					<%= link_to "Delete '#{@group.title}'", group_path(@group), :class => "btnMiddle btn btn-danger", :method => :delete, :remote => true, :confirm => "Are you sure?" %>
+				</li>
+			<% end %>
+			<div style="clear:both"></div>
+		</ul>
+		<div style="clear:both"></div>
+  </div>
+</div>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Search Groups</h3>
+  </div>
+  <div class="panel-body">
+  	<ul>
+	    <li class="col-md-12">
+				<div id="keyword_field">
+					<form method="get" action="">
+		    			<input id="group_search_autocomplete", value="<%= params[:query] %>" name="query", style="width:100%;">
+		    		</form>
+			    <div style="clear:both"></div>
+				</div>
+			</li>
+			<div style="clear:both"></div>
+		</ul>
+		<div style="clear:both"></div>
+  </div>
+</div>

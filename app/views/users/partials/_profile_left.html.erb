@@ -1,0 +1,76 @@
+<div class="col-md-4 col-sm-3">
+	<div class="userProfileLeftPhoto">		
+        <%= link_to profile_path(user) do %>			
+            <%= image_tag(user._photo(:middle), class: "img-responsive img-circle img-thumbnail") %>			
+        <% end %>
+	</div>
+	<div class="userProfileInformation">
+		<div class="userProfileLeftTitle">
+			<%= user.title %>
+		</div>
+		<div class="userProfileLeftText">
+			<% if user.profile.present? %>
+				<span>
+					<%= user.profile.summary %>
+				</span>
+				<br/>
+				<% if user.profile.city.present? %>
+					<i class="fa fa-map-marker"></i>
+					<% if user.profile.country.present? %>
+						<span class="userProfileCountry"><%= user.profile.country.title %></span>,
+					<% end %>
+					<span class="userProfileCity"><%= user.profile.city %></span>
+				<% elsif user.profile.country.present? %>
+					<%= image_tag('old/iconPlaceMin.png') %>
+					<%= user.profile.country.title %>
+				<% end %>
+			<% end %>
+		</div>
+		<div class="profileLeftButtons center-block">
+	    <%= websites(user.profile) %>
+		</div>
+		<div class="userProfileLeftLinks">
+			<%= social_links(user.profile) %>
+		</div>
+		<div class="userProfileConnections">
+			<% if user.statistic.present? %>
+				<hr>
+				<div class="userProfileLeftStats text-center">
+					<% if user.statistic.friends_count.present? and user.statistic.friends_count > 0 %>
+						<%= link_to friends_path(user) do %>
+							<div class="userProfileLeftStat">
+								<b><%= user.statistic.friends_count %></b>
+								Friends
+							</div>
+						<% end %>
+					<% end %>
+
+					<% if user.statistic.followers_count.present? and user.statistic.followers_count > 0 %>
+						<%= link_to followers_path(user) do %>
+							<div class="userProfileLeftStat">
+								<b><%= user.statistic.followers_count %></b>
+								Followers
+							</div>
+						<% end %>
+					<% end %>
+					<% if user.statistic.followings_count.present? and user.statistic.followings_count > 0 %>
+						<%= link_to followings_path(user) do %>
+							<div class="userProfileLeftStat">
+								<b><%= user.statistic.followings_count %></b>
+								Following
+							</div>
+						<% end %>
+					<% end %>
+				</div>
+			<% end %>
+			<!--
+			<ul>
+				<li><%= connection_numbers(user.profile, "followers") %> Followers</li>			
+				<li><%= connection_numbers(user.profile, "connections") %> Connections</li>
+				<li><%= connection_numbers(user.profile, "followers") %> Twitter followers</li>
+				<li><%= connection_numbers(user.profile, "following") %> Following</li>
+			</ul>
+			-->
+		</div>
+	</div>
+</div>

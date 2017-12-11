@@ -1,0 +1,18 @@
+<div style="width:660px; display:table; margin:auto; margin-top:40px;  color:#eaedf4; font-size:17px;">
+	<div>
+		<div style="font-size:37px; float:left; color:#657589; font-weight:bolder;">
+			final step!
+			
+		</div>
+		<div class="stepsSkipButton">
+			<%= link_to 'Skip &raquo;'.html_safe, about_you_step_path('skip'=>1), :method=>:post %>
+		</div>
+	</div>
+	<div style="clear:both"></div>
+	Please fill in all fields and upload your photo to receive full member rights of StarterPad Community!
+</div>
+<div style="width:660px; display:table; margin:auto; margin-top:20px;  color:#eaedf4; background:#2f3e4f; margin-bottom:60px; border-radius:10px;">
+	<div style="padding:30px; font-size:18px;">
+		<%= render 'users/partials/basic_info_form' %>
+	</div>
+</div>

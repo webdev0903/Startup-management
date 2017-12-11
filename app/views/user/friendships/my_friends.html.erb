@@ -1,0 +1,80 @@
+<%
+meta :title => "Contacts",
+     :description => "The contacts page lists your StarterPad friends, people you're following, and people who are following you.",
+     :keywords => "contacts, friends, followers, starterpad"
+%>
+
+<%= content_for :title do %>
+	Contacts 
+<% end %>
+<div class="row">
+	<div class="col-md-8 col-sm-8 col-xs-12 my-contacts">
+		<div class="my-contact">
+			<h4>Friends</h4>
+			<% if @received_friendships.present? %>
+				<div class="userRightTitle">
+					Received friend requests
+				</div>
+				<div class="row">
+					<% @received_friendships.each do |f| %>
+						<%= render 'users/partials/medium_tab', :user => f.user %>
+					<% end %>
+				</div>
+				<div style="clear:both"></div>
+			<% end %>
+
+			<% if @waiting_friendships.present? %>
+				<div class="userRightTitle">
+					Waiting for response
+				</div>
+				<div class="row">
+					<% @waiting_friendships.each do |f| %>
+						<%= render 'users/partials/medium_tab', :user => f.friend %>
+					<% end %>
+				</div>
+				<div style="clear:both"></div>
+			<% end %>
+
+			<% if @users.present? %>
+				<div class="userRightTitle">
+					Friends
+				</div>
+				<div class="row">
+					<% @users.each do |user| %>
+						<%= render 'users/partials/medium_tab', :user => user %>
+					<% end %>
+				</div>
+			<% end %>
+			<% if @users.blank? %>
+				<span>You don't have any friends yet.</span>
+			<% end %>
+		</div>
+		<div class="my-contact">
+			<h4>Followers</h4>
+			<% if @followers.blank? %>
+				<span>You don't have any followers yet.</span>
+			<% else %>
+				<div class="row">
+					<% @followers.each do |followers| %>
+						<%= render 'users/partials/medium_tab', :user => followers %>
+					<% end %>
+				</div>
+			<% end %>
+		</div>
+		<div class="my-contact">
+			<h4>Followings</h4>
+			<% if @followings.blank? %>
+				<span>You don't have any followings yet.</span>
+			<% else %>
+				<div class="row">
+					<% @followings.each do |followings| %>
+						<%= render 'users/partials/medium_tab', :user => followings %>
+					<% end %>
+				</div>
+			<% end %>
+		</div>
+	</div>
+	<div class="col-md-4 col-sm-4 col-xs-12 ">
+	    <%= render 'users/partials/menu' %>
+	</div>
+</div>

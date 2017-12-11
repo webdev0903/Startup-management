@@ -1,0 +1,134 @@
+<% 
+title = 'Starters'
+description = ' '
+keywords = ['starters','entrepreneur','starterpad']
+if @country
+  title = "#{title} - #{@country.title}"
+  description = " #{@country.title} "
+  keywords.push(@country.title)
+elsif @city_name
+  title = "#{title} - #{@city_name}"
+  description = " #{@city_name} "
+  keywords.push(@city_name)
+elsif @keyword
+  title = "#{title} - #{@keyword.title}"
+  description = " #{@keyword.title} "
+  keywords.push(@keyword.title)
+end
+
+%>
+<%
+   meta :title => title,
+        :description => "The#{description}members of StarterPad. We welcome every type of entrepreneur, whether you have technical skills, business skills, or something in between.",
+        :keywords => "#{keywords.join(', ')}"
+%>
+<%= content_for :title do %>
+  <% title == 'Starters' ? 'All Starters' : title %>
+<% end %>
+<div class="row">
+  <div class="col-md-8 col-sm-8 col-xs-12">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+          <div class="userList">
+            <%= render :partial => 'users/partials/users', :collection => @users, :as => :user %>
+            <div style="clear:both"></div>
+          </div>
+          <div style="clear:both"></div>
+          <%= paginate @users, :previous_label => 'previous', :next_label => 'next', :inner_window => 2, :outer_window => 0 %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-4 col-xs-12">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Search</h3>
+          </div>
+          <div class="panel-body">
+            <ul>
+              <li class="col-md-12">
+                <%= form_tag country_starters_path, :method => :post do %>
+                    <p>
+                      <%= text_field_tag :starter_country_title, nil, data: {autocomplete_source: country_auto_complete_starters_path}, placeholder: 'By Country' %>
+                      <%= submit_tag "Search", :class => "btn btn-primary", :name => nil %>
+                    </p>
+                <% end %>
+              </li>
+              <li class="col-md-12">
+                <%= form_tag city_starters_path, :method => :post do %>
+                    <p>
+                      <%= text_field_tag :starter_city_name, nil, data: {autocomplete_source: city_auto_complete_starters_path}, placeholder: 'By City' %>
+                      <%= submit_tag "Search", :class => "btn btn-primary", :name => nil %>
+                    </p>
+                <% end %>
+              </li>
+              <div style="clear:both"></div>
+            </ul>
+            <div style="clear:both"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Roles</h3>
+          </div>
+          <div class="panel-body">
+            <ul>
+              <li class="col-md-12 <%= params[:role_id] ? '' : 'active' %>">
+                <%= link_to starters_path do %>
+                    All
+                <% end %>
+              </li>
+              <% @user_roles.each do |r| %>
+                  <% if r.url.present? %>
+                      <li class="col-md-12 <%= params[:role_id] == r.url ? 'active' : '' %>">
+                        <%= link_to role_starters_path(r.url) do %>
+                            <%= r.title %>                           
+                        <% end %>
+                      </li>
+                  <% end %>
+              <% end %>
+              <div style="clear:both"></div>
+            </ul>
+            <div style="clear:both"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Skills</h3>
+          </div>
+          <div class="panel-body">
+            <ul>
+              <li class="col-md-12 <%= params[:role_id] ? '' : 'active' %>">
+                <%= link_to starters_path do %>
+                    All
+                <% end %>
+              </li>
+              <% @keywords.each do |k| %>
+                  <% if k.url.present? %>
+                      <li class="col-md-12 <%= params[:keyword_id] == k.url ? 'active' : '' %>">
+                        <%= link_to skill_starters_path(k.url) do %>
+                            <%= ucwords k.title  %>
+                        <% end %>
+                      </li>
+                  <% end %>
+              <% end %>
+              <div style="clear:both"></div>
+            </ul>
+            <div style="clear:both"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

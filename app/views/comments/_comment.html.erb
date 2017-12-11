@@ -1,0 +1,28 @@
+<div class="col-md-12 col-sm-12 col-xs-12" id='comment<%= comment.id %>'>
+  <div class="wallPostComment">
+    <div class="col-md-1 col-md-offset-1 col-sm-2 col-xs-4 commentPhoto">
+      <%= link_to profile_path(comment.user) do %>
+        <%= image_tag comment.user._photo(:thumb), :class => "img-responsive", :onError => "this.onerror=null;this.src='images/user.png';" %>
+      <% end %>
+    </div>
+    <div class="col-md-9 col-sm-9 col-xs-7 commentText well">
+      <div class="commentTextInside">
+        <%= link_to profile_path(comment.user) do %>
+          <strong><%= comment.user.title %></strong>
+        <% end %>
+        <span><%= auto_link(comment.text, :html => { :target => '_blank' }) %></span>
+        <div class="commentTextLinks">
+          <div style="float:left">
+            <i class="fa fa-clock-o time_ago"></i>
+          <%= "#{time_ago_in_words(comment.created_at)} ago" %>
+          </div>
+        </div>
+        <div class="commentTextLinks">
+          <div style="float:right">
+            <%= link_to("Delete", post_comment_path(comment.post, comment), :class => "btn btn-danger btn-xs" ,method: :delete , remote: true) if comment.owner?(current_user) || is_admin? %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

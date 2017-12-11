@@ -1,0 +1,54 @@
+== README
+
+=== Git Workflow
+
+* if you're working on something simple, you can commit directly to <tt>dev</tt> branch
+* If it's a new feature or something that may break other functionality, create a new branch (based on dev) called <tt>feature/some_feature</tt> where <tt>some_feature</tt> describe what it actually is
+* If it's a bug fix that's an emergency, create a new branch called <tt>hotfix/some_hotfix</tt> Where <tt>some_hotfix</tt> describe what it actually is
+
+=== Rake Tasks
+
+* Remove orphan records: 
+  
+  <tt>mina "run[cd current && RAILS_ENV=staging bundle exec rake database:remove_orphans ]"</tt>
+
+* Reset Friendship & Followers counter: 
+  
+  <tt>mina "run[cd current && RAILS_ENV=staging bundle exec rake database:reset_counters ]"</tt>
+  
+  
+* Update 'activable' column: 
+ 
+  <tt>mina "run[cd current && RAILS_ENV=staging bundle exec rake database:update_activable ]"</tt>
+
+* Refresh Startups followers counter:
+
+  <tt>mina "run[cd current && RAILS_ENV=staging bundle exec rake startups:refresh_followers ]"</tt>
+  
+
+
+=== Mina tasks
+
+    mina deploy #deploy to staging
+    mina deploy to=production # deploy to production
+    mina console # Rails Console on staging env
+    
+    # Puma server tasks
+    mina server:stop 
+    mina server:start
+    mina server:restart
+    mina server:phased_restart
+    mina server:status
+    
+    #clockwork tasks
+    mina clockwork:start
+    mina clockwork:stop
+    mina clockwork:restart
+    mina clockwork:status
+
+
+=== Sentry
+
+    sudo service redis start
+    sudo service supervisord start
+    sudo supervisorctl status

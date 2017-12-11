@@ -1,0 +1,19 @@
+<div class="row">
+  <h1 class="col-md-12 pageContentTitle">
+    Deactivate Account
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-8 col-sm-8 col-xs-12">
+    <div class="infoBlok">
+      <div class="infoBlokInside">
+        Do you really want to deactivate your account?
+        <%= link_to 'Yes', deactivate_account_path(:confirmed=>true), {:method=>:post, :style=>'font-size:18px; margin-top:10px;', :class=>'btnMiddle btn btn-danger'} %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-4 col-xs-12">
+    <%= render 'users/partials/menu' %>
+  </div>
+</div>

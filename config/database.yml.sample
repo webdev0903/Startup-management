@@ -1,0 +1,27 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: starterpad_development
+  host: localhost
+  pool: 5
+  username: zaidakram
+  password:
+
+staging:
+  adapter: postgresql
+  encoding: unicode
+  database: starterpad_staging
+  host: localhost
+  pool: 5
+  username: zaidakram
+  password:
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  database: starterpad_production
+  pool: 5
+  username: zaidakram
+  password: 
+  port: 5137

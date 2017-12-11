@@ -1,0 +1,12 @@
+<% if @post.errors.present? %>
+  <% 
+    errors = []
+    @post.errors.messages.values.each do |message|
+      errors += message
+    end
+  %>
+  $('.pageContent').prepend("<%= j render(partial: '/shared/js_error_messages', collection: errors, as: :error) %>");
+<% else %>
+  $('#postsList').prepend('<%= j(render("post", post: @post)) %>');
+  $("#addPostArea textarea").val('');
+<% end %>

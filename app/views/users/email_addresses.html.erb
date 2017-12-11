@@ -1,0 +1,29 @@
+<div style="margin-left:auto; margin-right:auto; width:480px; background:rgba(255,255,255,0.8); border-radius:15px; ">
+  <div style="padding:30px; width:400px;">
+    <span style="font-size:24px; font-weight:bolder">
+      Verify your email address
+    </span>
+    <%= form_tag user_email_addresses_path do %>
+      <div style="padding-top:5px; color:rgb(170,170,170); font-size:16px;">
+        You will receive important notifications. 
+        It will not be shown publicly.
+      </div>
+      <div style="padding:25px 0px 25px 0px;">
+        <div class="input email">
+          <%= text_field_tag :email, nil, placeholder: 'Your Email Address', style: "float:left; font-size:16px; width:404px; margin-right:10px;", maxlength: 250 %>
+        </div>
+        <div style="clear:both"></div>
+      </div>
+      <div style="display:table; width:416px;"> 
+        <span style="float:left; color:rgb(140,140,140); background:rgb(240,240,240); border-radius:4px; padding:4px 8px 4px 8px; font-size:17px;">
+            No SPAM!
+        </span>
+        <div class="submit">
+          <%= submit_tag :submit, class: "btnMiddle btnGreen", style: "float:right; font-size:18px;"  %>
+        </div>    
+          <%= link_to 'Cancel', destroy_user_session_path,  method: :delete, style: "float:right; font-size:16px; margin-top:5px; color:rgb(160,160,160); margin-right:14px;" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

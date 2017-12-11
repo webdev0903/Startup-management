@@ -1,0 +1,324 @@
+<div id="friend_field"></div>
+
+<!-- Friend Field template -->
+<script id='friendFieldTemplate' type='text/template'>
+	<input type="text" id="friend_input" name="<%= Time.now.to_formatted_s(:number) %>">
+    <div style="clear:both"></div>
+    <div id="friend_suggestions"></div>
+	<div id="friends_list"></div>
+</script>
+
+<!-- Added Friend template -->
+<script id='addedFriendTemplate' type='text/template'>
+   <div class="added_friend <@= sub_class @>">
+        <div class="added_friend_photo">
+            <@ if (photo !== null) { @>
+                <img src="<@= photo @>">
+            <@ } @>
+        </div>
+        <div class="added_friend_title">
+            <@= title @>
+            <@ if (id !== <%= current_user.id %>) { @>
+                <a class="remove_friend">
+                    <div>
+                        x
+                    </div>
+                </a>
+            <@ } @>
+            <input type="hidden" name="cofounders[][user_id]" value="<@= id @>">
+        </div>
+    </div>
+</script>
+
+<script type="text/javascript">
+$(window).load(function(){
+
+    /*
+        Friends Field Script
+    */
+
+    // Friends Collection
+    var FriendsList = Backbone.Collection.extend({
+        url: function() {
+            return '<%= url_for '/friends/'+current_user.id.to_s+'?myself=true' %>'
+        },
+        parse: function(resp, xhr) {
+            return resp.results;
+        }
+    });
+    
+    // Friends List View
+    var FriendsListView = Backbone.View.extend({
+        el: '#friendsList', 
+        initialize: function () {
+            var that = this;
+            this.collection.fetch({
+                success: function () {
+                    that.render();
+                }
+            });
+        }, 
+        render: function () {
+            var i = 0;
+            var friends_array=new Array(); 
+            _.each(this.collection.models, function (item) {
+                friends_array[i] = item.attributes.title;
+                i++;
+            }, this);
+
+            return friends_array;
+        }
+    });
+    
+    // Added Friend Div View
+    var FriendDivView = Backbone.View.extend({
+        events: { 
+          'click .remove_friend': 'remove',
+        },
+        initialize: function(){
+            _.bindAll(this, 'render');
+        },
+        template: $("#addedFriendTemplate").html(),
+        
+        // Render
+        render: function () {
+
+            // Added friends array
+            if (!window.added_friends) {
+                window.added_friends = new Array();
+                window.added_friends_count = 0;
+            }
+
+            // Render div
+            if (
+                window.added_friends.indexOf(this.model.title.toLowerCase()) == -1
+                &&
+                window.added_friends_count < 16
+            ) {
+
+                // Sub Class
+                if (!this.model.id) {
+
+                    // check for same friend in list
+                    var friend_value = this.model.title.toLowerCase();
+                    var friend_count = window.friends_slugs_array.indexOf(friend_value);
+
+                    if (friend_count==-1) {
+                        this.model.sub_class = 'orange';
+                    } else {
+                        this.model.sub_class = '';
+                    }
+                } else {
+                    this.model.sub_class = '';
+                }
+
+                // Render
+                var tmpl = _.template(this.template);
+                this.$el.html(tmpl(this.model));
+
+                // Add to added array
+                window.added_friends.push(this.model.title.toLowerCase());
+
+                window.added_friends_count++;
+            }
+
+            return this;
+        },
+
+        // Remove
+        remove: function () {
+
+            // Unset from added friends
+            var position = window.added_friends.indexOf(this.model.title.toLowerCase());
+            if ( ~position ) window.added_friends.splice(position, 1);
+
+            // Unrender
+            $(this.el).remove();
+
+            return false;
+        }
+    });
+
+    // Friend Field View
+    var FriendField = Backbone.View.extend({
+    	el:'#friend_field',
+        template: _.template($('#friendFieldTemplate').html()), 
+        initialize: function(){
+            _.bindAll(this, 'render', 'add', 'addFromSuggestions', 'keyup'); 
+        },
+        events: {
+         	'click #add_friend': 'add',
+            'click .friend_field': 'addFromSuggestions',
+         	'keyup #friend_input': 'keyup',
+        },
+
+        // Render field and friends list
+        render: function () {
+            
+            // Get friends
+            var friendsList = new FriendsList();
+            var that = this;
+            friendsList.fetch({
+                success: function (response) {
+
+                    var i = 0;
+
+                    var friends_array=new Array(); 
+                    var friends_full_array = new Array();
+                    var friends_slugs_array = new Array();
+                    _.each(response.models, function (item) {
+
+                        // Make Arrays for search
+                        friends_array[i] = item.attributes.id+'#'+item.attributes.title.toLowerCase();
+                        friends_full_array[item.attributes.id] = item.attributes;
+                        friends_slugs_array[i] = item.attributes.title.toLowerCase();
+
+                        i++;
+                    }, this);
+
+                    // Call function to save arrays
+                    that.saveFriends(
+                        friends_array, 
+                        friends_full_array, 
+                        friends_slugs_array
+                    );
+
+                     // Render start values
+                    that.render_start_results();
+                }
+            });
+
+            // Render
+            this.$el.html(this.template());
+
+           
+        },
+
+        // Show suggestions on keyup
+        keyup: function () {
+
+            // Get value
+            var friend_input = this.$('#friend_input').val();
+            if (friend_input!='') {
+                
+                // Show suggestions
+                this.$('#friend_suggestions').show();
+                friend_input = friend_input.toLowerCase();
+
+                // Search in array
+                var i = 0;
+                suggestion_array = jQuery.map(window.friends_array, function (value) {
+                    search = new RegExp(friend_input, 'g');
+                    if(value.match(search) && i<5) {
+                        i++;
+                        return value;
+                    }
+                    return null;
+                });
+
+                // Make html
+                var suggestions_line = '';
+                suggestion_array.forEach(function(entry) {
+                    var friend_id = entry.split("#", 1);
+                    var friend = friends_full_array[friend_id];
+
+                    if (!friend.filename) {
+                        friend.filename = '';
+                    }
+                    suggestions_line = suggestions_line + '<div class="friend_field" data-id="'+friend_id+'"><div class="friend_field_inside"><div class="friend_field_photo"><img src="'+friend.photo+'"></div><div class="friend_field_title">' + friend.title +'</div></div></div>';
+                });
+
+                // show/hide
+                if (!suggestions_line) {
+                    this.$('#friend_suggestions').hide();
+                } else {
+                    this.$('#friend_suggestions').html(suggestions_line);
+                }
+
+            // Hide
+            } else {
+                
+                // Hide suggestions
+                this.$('#friend_suggestions').hide();
+            }
+            return false;
+        },
+
+        // Add friend from suggestions list
+        addFromSuggestions: function (e) {
+
+            // Get friend id
+            e.preventDefault();
+            var friend_id = this.$(e.currentTarget).data("id");
+
+            // Add friend params
+            var friend = window.friends_full_array[friend_id];
+
+            // Render div
+            var friendDivView = new FriendDivView({
+                model: friend
+            });
+
+            this.$('#friends_list').prepend(friendDivView.render().el);
+            this.$('#friend_suggestions').hide();
+            this.$('#friend_input').val('');    
+
+            return false;  
+        },
+
+        // Adding selected friend
+        add: function () {
+            var friend = new Array();
+            friend.title = this.$('#friend_input').val();
+
+            // Render div
+            var friendDivView = new FriendDivView({
+                model: friend
+            });
+
+            this.$('#friends_list').prepend(friendDivView.render().el);
+            this.$('#friend_suggestions').hide();
+            this.$('#friend_input').val('');  
+
+            return false;
+        },
+
+        // Render friend blins at start
+        render_start_results: function() {
+            
+            // Receive values from php
+            <% 
+            if @cofounders.present?
+            %>
+                window.friends_start = <%= @cofounders %>; 
+            
+                // reverse order, to render in good order
+                window.friends_start.reverse();
+
+                // Render
+                window.friends_start.forEach(function(entry) {
+                    var friend = new Array();
+                    friend = window.friends_full_array[entry];
+                    console.log(friend);
+                    // Render div
+                    var friendDivView = new FriendDivView({
+                        model: friend
+                    });
+                    this.$('#friends_list').prepend(friendDivView.render().el);
+                });
+            <% end %>        
+        },
+        // Saving friends list
+        saveFriends: function (friends_array, friends_full_array, friends_slugs_array) {
+            window.friends_array = friends_array;
+            window.friends_full_array = friends_full_array;
+            window.friends_slugs_array = friends_slugs_array;
+        }
+    });
+
+    // Run
+    var friendField = new FriendField();
+    friendField.render();
+
+});
+</script>

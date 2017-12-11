@@ -1,0 +1,61 @@
+<div class="startupList">
+  <div class="col-md-12">
+    Sort by <%= sort_link @search, :title, "Name" %> | <%= sort_link @search, :country_id, "Country" %> | <%= sort_link @search, :statistic_followers_count, "Popularity", default_order: :desc %> | <%= sort_link @search, :created_at, "Newest", default_order: :desc %>
+  </div>
+  <% @startups.each do |startup| %>    
+      <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <strong class="panel-title">
+              <div class="panel-title-1">
+                <% if startup.title.present? %>
+                  <%= link_to truncate(startup.title, :length => 75), startup_path(startup.url), :title => startup.title %><% if startup.country && startup.country.title %>
+                <% end %>
+                <% end %>
+              </div>              
+              <% if startup.summary.present? %>
+                <div class="panel-title-2" title="<%= startup.summary %>"><%= truncate(startup.summary, :length => 75) %></div>
+              <% else %>
+                &nbsp;
+              <% end %>
+              <% if startup.country && startup.country.title %>
+                <div class="panel-title-3"><i>(<%= startup.country.title %>)</i></div>
+              <% else %>
+                <br />&nbsp;
+              <% end %>
+            </strong>
+          </div>
+          <div class="panel-body">
+            <%= link_to startup_path(startup.url) do %>
+              <%= image_tag startup._photo(:thumb), :style => "width: 100%;", :onError => "this.onerror=null;this.src='/startup.png';" %>
+            <% end %>
+            <% if startup.statistic.present? %>
+              <p style="width: 100%; text-align: center; margin: 0;">
+                <%= startup.statistic.followers_count %>
+                <% if startup.statistic.followers_count < 2 %>
+                   Follower<br />
+                   <% else %>
+                   Followers<br />
+                <% end %> 
+              </p>
+            <% end %>
+            <% if user_signed_in? && startup.user_id != current_user.id %>
+              <div class="follow_btn_area">
+
+                <% if startup.followers.map(&:id).include?(current_user.id) || startup.cofounders.map(&:id).include?(current_user.id) %>
+                  <%= link_to 'Following', unfollow_startup_path(startup), :method => :post, :remote => true, :class => 'userListFollow btn btn-success', :id => "following-link-#{startup.id}" %>                  
+                <% else %>
+                  <%= link_to 'Follow', follow_startup_path(startup), :method => :post, :remote => true, :class => 'userListFollow btn btn-primary', :id => "follow-link-#{startup.id}" %>                  
+                <% end %>
+                <div style="clear:both"></div>
+              </div>
+            <% end %>
+            <div style="clear:both"></div>
+          </div>
+          <div style="clear:both"></div>  
+        </div>
+      </div>
+    <!-- </div> -->
+  <% end %>
+  <div style="clear:both"></div>
+</div>

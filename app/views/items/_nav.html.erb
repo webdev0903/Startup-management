@@ -1,0 +1,12 @@
+<div id="discuss-nav">
+  <ul class="nav nav-pills">
+    <%= nav_link("TRENDING", "signal", items_path) %>
+    <%= nav_link("NEWEST", "star", newest_items_path) %>
+    <% if current_user %>
+      <%= nav_link("SUBMIT", "plus-circle", new_item_path) %> 
+      <% if @item && @item.persisted? && @item.user_id == current_user.id %>
+        <%= nav_link("EDIT", "", edit_item_path(@item)) %>                
+      <% end %>      
+    <% end %>
+  </ul>
+</div>

@@ -1,0 +1,8 @@
+$('#more-posts').before("<%= escape_javascript(render(:partial => 'posts/post', :collection => @posts, :as => :post)) %>");
+link = $('.morePostsButton a').attr('href').split('/');
+link.pop();
+link.push("<%= params[:page].to_i + 1 %>");
+link = link.join('/');
+$('.morePostsButton a').attr('href', link);
+$('#more-posts-laoder').hide();
+$('#more-posts-link').show();

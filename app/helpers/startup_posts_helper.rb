@@ -1,0 +1,2 @@
+module StartupPostsHelper
+end

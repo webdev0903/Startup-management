@@ -1,0 +1,40 @@
+<% content_for :title do %>
+<%= (params[:ask].present?) ?
+	('Ask something and make a connection with ' + link_to(@user[:title], profile_path(@user))).html_safe : 
+	('Conversation with ' + link_to(@user[:title], profile_path(@user))).html_safe %>
+<% end %>
+<div class="row">
+	<div class="col-md-8 col-sm-8 col-xs-12">
+		<ul class="conversationUl">
+		<% @messages.each do |m| %>
+			<li>
+				<div class="photo">		
+					<%= image_tag m.sender.photo.url(:small) %>
+				</div>
+				<div class="text">
+					<span><%= link_to m.sender.title, profile_path(m.sender.url), :class => "#{'text-warning' if m.sender != current_user}" %></span>
+					<span class="pull-right text-muted"><small><%= m.created_at.strftime("%b %d, %Y")%></small></span>
+					<br/>
+					<%=raw auto_link(simple_format(sanitize(m.text)), :html => { :target => '_blank' }) %>
+				</div>	
+			</li>
+		<% end %>
+		</ul>
+		<div class="conversationReply">
+			<%= form_for @conversation do |f| %>
+				<%= f.hidden_field :recipient_id %>
+				<%= f.hidden_field :user_id %>
+				<%= f.fields_for :messages, @message do |p| %>
+					<%= p.text_area :text, :class => 'form-control', placeholder: "Write a message..." %>
+					<%= p.hidden_field :recipient_id %>
+					<%= p.hidden_field :user_id %>
+					<%= p.hidden_field :new %>
+					<%= p.submit "Send »", class: "btn btn-primary" %>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+	<div class="col-md-4 col-sm-4 col-xs-12">
+	    <%= render 'users/partials/menu' %>
+	</div>
+</div>

@@ -1,0 +1,52 @@
+<%= form_for group, :html => { :multipart => true }, :remote => true do |f| %>
+  <div class="col-md-12 col-sm-12 formRow"> 
+    <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+      <span>Photo</span>
+    </div>
+    <div class="col-md-8 col-sm-8 col-xs-12 frRight"> 
+      <%= image_tag group._photo(:middle) %>
+      <br/>
+      <%= f.file_field :photo, :style => "border:0px; color:#464646;" %>
+    </div>
+    <div style="clear:both"></div>
+  </div>  
+  <div class="formRow"> 
+    <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+      <span>*Group Name</span>
+    </div>
+    <div class="col-md-8 col-sm-8 col-xs-12 frRight"> 
+      <%= f.text_field :title, :required => true %>
+    </div>
+    <div style="clear:both"></div>
+  </div>  
+  <div class="formRow"> 
+    <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+      <span>*Description</span>
+    </div>
+    <div class="col-md-8 col-sm-8 col-xs-12 frRight"> 
+      <%= f.text_field :about, :required => true %> 
+    </div>
+    <div style="clear:both"></div>
+  </div>
+  <div class="formRow"> 
+    <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+      <span>*About</span>
+      <br/>
+      Summary about what members should post in this group
+    </div>
+    <div class="col-md-8 col-sm-8 col-xs-12 frRight"> 
+      <%= f.text_area :long_about, :required => true %>
+    </div>
+    <div style="clear:both"></div>
+  </div>  
+
+  <div class="formRow last">
+    <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+      &nbsp;
+    </div>
+    <div class="col-md-8 col-sm-8 col-xs-12 frRight">
+      <%= f.submit group.new_record? ? 'Create' : 'Update', :class => "btn btn-primary", :style => "width:100px;" %>
+    </div>
+    <div style="clear:both"></div>
+  </div>
+<% end %>

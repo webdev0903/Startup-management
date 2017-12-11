@@ -1,0 +1,32 @@
+<% 
+title = 'Editing Item'
+description = 'Editing item for StarterPad discussions.'
+keywords = ['discuss','starterpad']
+%>
+
+<%
+   meta :title => title,
+        :description => "#{description}",
+        :keywords => "#{keywords.join(', ')}"
+%>
+<% content_for :title do %>
+  <%= title %>
+<% end %>
+
+<div class="row" id="discuuss">
+  <div class="col-md-8 col-sm-8 col-xs-12">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div>
+          <%= render 'form' %>        		        
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-4 col-xs-12">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">       
+      </div>
+    </div>
+  </div>
+</div>

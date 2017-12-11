@@ -1,0 +1,165 @@
+<%= content_for :title do %>
+  Additional details
+  <%= link_to 'Skip >>', my_profile_path, :class => 'btn btn-default pull-right'  %>
+  <p style="font-size:12px;">Please fill in as many fields as possible to use Starterpad with functionality.</p>
+<% end %>
+<div class="row">
+  <div class="col-md-12 col-sm-8 col-xs-12">
+    <%= form_for current_user, :url => user_path(current_user) do |f| %>
+    <%= f.fields_for :profile do |p| %>
+      <% if true %>
+      <%= hidden_field_tag 'next', my_profile_path %>
+
+      <div class="infoBlokName">
+        Looking for
+      </div>
+      <div class="infoBlok">
+        <div class="infoBlokInside">
+          <div class="formRow required">
+            <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+              <span>Interested in markets</span>
+              <br/>
+              Example: 
+              <span class="keyword">Social network</span><span class="keyword">Apps</span>
+            </div>
+            <div class="col-md-8 col-sm-8 col-xs-12 frRight">
+              <%= p.select :markets_interested_in, options_for_select(Keyword.markets.order(:title).map{ |c| [c.title, c.url, {'data-followers-count'=>c.followers_count}, {'data-startups-count' => c.startups_count}] }, selected_key = p.object.markets_interested_in),{}, {:multiple => true, :id => 'user_profile_attributes_markets_interested_in', :style => "width:100%"} %>
+            </div>
+            <div style="clear:both"></div>
+          </div>
+          <div class="formRow required">
+            <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+              <span>Looking for</span>
+              <br/>
+              Example: web developers
+            </div>
+            <div class="col-md-8 col-sm-8 col-xs-12 frRight">
+              <%= p.text_field :looking_for %>
+            </div>
+            <div style="clear:both"></div>
+          </div>
+          <div class="formRow required">
+            <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+              <span>Activate "Let's talk"</span>
+            </div>
+            <div class="col-md-8 col-sm-8 col-xs-12 frRight">
+               
+              <%= p.check_box :ask_me, :id=>'user_ask_me' %>
+              <%= f.label :ask_me, '<span></span> It encourages people to ask you something and make a connection with you.'.html_safe %>
+             
+             
+            </div>
+            <div style="clear:both"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="infoBlokName">
+        Join a new startup
+      </div>
+      <div class="infoBlok">
+        <div class="infoBlokInside">
+          <div class="formRow required">
+            <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+              <span>I want to join a new startup</span>
+            </div>
+            <div class="col-md-8 col-sm-8 col-xs-12 frRight">
+              <%= p.check_box :startup_join, style: "margin-right:7px; margin-top:3px;", id: "user_startup_join" %>
+               <%= f.label :startup_join, '<span></span>'.html_safe %>
+            </div>
+            <div style="clear:both"></div>
+          </div>
+          <div class="formRow required">
+            <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+              <span>Conditions to join</span>
+              <br/>
+              Example: I can join as Co-Founder and Web Designer  
+            </div>
+            <div class="col-md-8 col-sm-8 col-xs-12 frRight">
+              <%= p.text_field :startup_conditions %>
+            </div>
+            <div style="clear:both"></div>
+          </div>
+          <div class="formRow required">
+            <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+              <span>Value I can add</span>
+              <br/>
+              Example: I have marketing skills
+            </div>
+            <div class="col-md-8 col-sm-8 col-xs-12 frRight">
+              <%= p.text_field :startup_add_value %>
+            </div>
+            <div style="clear:both"></div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="infoBlokName">
+      Links
+    </div>
+    <div class="infoBlok">
+      <div class="infoBlokInside">
+        <div class="formRow">
+          <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+            <span>Your homepage/portfolio</span>
+          </div>
+          <div class="col-md-8 col-sm-8 col-xs-12 frRight" id="fieldLinks">
+            <%= p.select :website, current_user.profile.website ,{},{:multiple => true, :id => 'user_profile_attributes_website', :style => "width:100%"} %>
+          </div>
+          <div style="clear:both"></div>
+        </div>
+        <div class="formRow">
+          <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+            <span>AngelList profile link</span> 
+          </div>
+          <div class="col-md-8 col-sm-8 col-xs-12 frRight" id="fieldLinks">
+            <%= p.text_field :angellist %>
+          </div>
+          <div style="clear:both"></div>
+        </div>
+        <div class="formRow">
+          <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+            <span>Twitter profile link</span> 
+          </div>
+          <div class="col-md-8 col-sm-8 col-xs-12 frRight" id="fieldLinks">
+            <%= p.text_field :twitter %>
+          </div>
+          <div style="clear:both"></div>
+        </div>
+        <div class="formRow">
+          <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+            <span>Linkedin profile link</span>  
+          </div>
+          <div class="col-md-8 col-sm-8 col-xs-12 frRight" id="fieldLinks">
+            <%= p.text_field :linkedin %>
+          </div>
+          <div style="clear:both"></div>
+        </div>
+      </div>
+    </div>
+
+      <div class="infoBlokName">
+        Experience
+      </div>
+      <div class="infoBlok">
+        <div class="infoBlokInside">
+          <div class="formRow required">
+            <label>Tell us some about yourself, work & startup experience</label>
+            <%= p.text_area :experience, style: "width:100%; height:160px;" %>
+          </div>
+        </div>
+      </div>
+
+    <div class="infoBlokInside" style="padding-left:0px; padding-right:0px; padding-top:27px;">
+     <%= f.submit "Update", class: "btn btn-primary", style: "width:100px; margin-right:20px; float:right" %>
+     <% end %>
+     <% end %>
+      <div style="float:left;">
+        <%= link_to "Deactivate account", '/deactivate_account', style: "margin-left:10px;" %>
+      </div>
+    </div>
+
+
+  </div>
+</div>

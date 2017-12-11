@@ -1,0 +1,42 @@
+<% 
+title = 'Submit new Item'
+description = 'Submit a new discussion item to share with the StarterPad community. We talk about growth hacking, finance, management, technology, and even travel.'
+keywords = ['discuss','conversations','startups','entrepreneurs','starterpad','submit']
+%>
+
+<%
+   meta :title => title,
+        :description => "#{description}",
+        :keywords => "#{keywords.join(', ')}"
+%>
+<% content_for :title do %>
+  <%= title %>
+<% end %>
+<%= render 'items/nav' %>
+
+<div class="row">
+    <div class="col-md-8 col-sm-8 col-xs-12">
+        <h4>Share articles or start discussions on anything related to startups!</h4>
+        <h5><em>Try not to be too self-promotional, except if you're sharing an article you wrote that will benefit other members, or if you're asking for feedback on something.</em></h5>
+    </div>
+</div>
+<br>
+
+<div class="row" id="discuuss">
+  <div class="col-md-8 col-sm-8 col-xs-12">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div>
+          <%= render 'form' %>                   
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-4 col-xs-12">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">       
+      </div>
+    </div>
+  </div>
+</div>
+

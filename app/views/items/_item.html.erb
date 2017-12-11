@@ -1,0 +1,28 @@
+
+<li class="media">
+  <div class="media-left">
+    <a href="#">
+      <%= render_votes_for_item(item) %>
+    </a>
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading">
+      <% if item.url.present? %>
+        <%= link_to item.title, item.url, title: item.url, target: '_blank' %>
+        <small>(<%= URI.parse(item.url).host %>)</small>
+      <% else %>
+        <%= link_to item.title, item, title: truncate(item.content, length: 30) %>
+        <small><%= link_to '[discussion]', item %></small>
+      <% end %>
+    </h4>
+    <small style="color:#9C9C9F">
+      <span class="score"> <strong><%= item.score %></strong ></span> <%= 'point'.pluralize(item.score) %> &nbsp;
+      <span class="author"><i class="fa fa-user"></i> <%= link_to profile_path(item.user) do %>
+                <%= item.user.title %>
+              <% end %>
+      </span> 
+      &nbsp;<span class="time_ago"><i class="fa fa-clock-o"></i> <%= link_to "#{time_ago_in_words(item.created_at)} ago", item %> </span>
+      &nbsp;<i class="fa fa-comments"></i> <%= link_to "#{item.comments_count} #{'comment'.pluralize(item.comments_count)}", item %>
+    </small>
+  </div>
+</li>

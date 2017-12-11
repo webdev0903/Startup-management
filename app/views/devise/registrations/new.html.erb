@@ -1,0 +1,84 @@
+<%
+meta :title => "Sign Up",
+     :description => "Sign up for StarterPad. You can either use the old-school email method, or sign up with your Facebook or Twitter account.",
+     :keywords => "sign up, signup, starterpad"
+%>
+
+<%= content_for :title do %>
+	Sign Up
+<% end %>
+
+<div class="defaultLayoutLeft">	
+	<div style="padding-top:10px;">
+		<a href="<%= url_for '/auth/twitter' %>" class="btn btn-default">
+			<%= image_tag 'old/32_twitter.png'; %>	Sign up with Twitter
+		</a>
+		<a href="<%= url_for '/auth/facebook' %>" class="btn btn-default">
+			<%= image_tag 'old/32_facebook.png'; %>	Sign up with Facebook
+		</a>
+	</div>
+	<div style="clear:both; padding:20px 0px 6px 10px; color:rgb(100,100,100); font-weight:bolder; font-size:18px;">
+		Or Sign up without social networks
+	</div>
+	<div class="infoBlok" style="width:470px; color:rgb(100,100,100)">
+		<div class="infoBlokInside">
+			<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  			<%= devise_error_messages! %>
+
+			<div style="padding:10px;">	
+				<div>	
+					<%= f.text_field :title, {:placeholder=>'Full Name or Username', :autofocus => true, :style=>'width:300px', :required => true } %>
+				</div>
+				<div style="clear:both"></div>
+			</div>
+
+			<div style="padding:10px;">	
+				<div>	
+  					<%= f.email_field :email, {:placeholder=>'Email', :style=>'width:300px', :required => true } %>
+				</div>
+				<div style="clear:both"></div>
+			</div>
+
+			<div style="padding:10px;">	
+				<div>	
+					<%= f.password_field :password, {:placeholder=>'Repeat Password', :style=>'width:300px', :required => true } %>
+				</div>
+				<div style="clear:both"></div>
+			</div>
+
+			<div style="padding:10px;">
+				<div>	
+					<%= f.password_field :password_confirmation, {:placeholder=>'Password (at least 8 characters)', :style=>'width:300px', :required => true } %>
+				</div>
+				<div style="clear:both"></div>
+			</div>
+			<div style="padding:10px;">	
+				<div>
+					<%= resource.humanizer_question %>
+				</div>
+				<div>	
+					<div class="input text">
+						<%= f.text_field :humanizer_answer, :id => "ContactCaptcha", :required => true %>
+            <%= f.hidden_field :humanizer_question_id %>
+					</div>	
+				</div>
+				<div style="clear:both"></div>
+			</div>
+
+			<div style="padding:10px; padding-top:0px;" class="paramTab last">
+				<div>
+					By clicking Sign Up, you agree to our 
+					<%= link_to 'Terms and Conditions.', '/terms', {:target=>'_blank'} %>
+
+					<%= f.submit "Sign up", {:class=>'btnMiddle btnGreen', :style=>'margin-top:10px;'} %>
+				</div>
+				<div style="clear:both"></div>
+			</div>
+		</div>
+	</div>
+	<div style="padding:20px 0px 0px 20px;;">
+		Already have an account? 
+		<%= link_to 'Login here', '/users/sign_in', {:style=>'font-weight:bolder;'} %>
+	</div>
+</div>
+<% end %>

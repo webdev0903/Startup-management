@@ -1,0 +1,140 @@
+<div class="firstLine">
+	<div class="firstLineInside">
+		<div style="height:315px"></div>
+		<a href="<%= url_for '/users/sign_up' %>">
+			<div class="firstLineSignUp">
+				Sign Up Now!
+			</div>
+		</a>
+
+		<a href="<%= url_for '/auth/twitter' %>">
+			<div class="twitterFirstPage"></div>
+		</a>
+		<a href="<%= url_for '/auth/facebook' %>">
+			<div class="fbFirstPage"></div>
+		</a>
+	</div>
+</div>
+<div class="secondLine">
+	<div class="secondLineInside">
+		<div style="float:left; margin-top:110px; width:405px; letter-spacing:-1px;">
+			<%= image_tag 'design/firstPageCommunityTitle.png' %>
+			<br/>
+			Our community has more than <span style="font-weight:bolder; font-size:30px;"><%= @all_users_count %></span> users 
+			and <span style="font-weight:bolder; font-size:30px;"><%= @confirmed_users_count %></span> specialists with fully completed 
+			profiles. 
+			<br/>
+			<br/>
+			This is a fast growing Startup comunity with 
+			<span style="font-weight:bolder; font-size:30px;">120</span> new users every week!
+
+		</div>
+		<div style="float:right; margin-top:100px; padding:15px; width:460px; border-radius:7px; background:#203145;">
+			<% @keywords.each do |k| %>
+				<a href="<%= url_for '/starters/?skill='+k.slug %>">
+					<div class="firstPageKeywordTab">
+						<%= k.title %>
+						<% 
+						if !defined? @keywords_was
+							@keywords_was = 0 
+						end
+
+						if @keywords_was<5 
+						%>
+							<div class="firstPageKeywordCount">
+						<% else %>
+							<div class="firstPageKeywordCount Green">
+						<% 
+						end 
+						@keywords_was = @keywords_was + 1
+						%>
+						<%= k.users_count %></div>
+					</div>
+				</a>
+			<% end %>
+		</div>
+	</div>
+</div>
+<div class="thirdLine">
+	<div class="thirdLineInside">
+		<div style="float:right; margin-top:88px; letter-spacing:-10px; margin-right:33px; font-size:90px; font-weight:bolder; color:#b0c4d5">
+			951
+		</div>
+	</div>
+</div>
+<div class="specialistsLine">
+	<div class="specialistsLineInside">
+		<div style="padding-top:148px;">
+			<% @specialists.each do |u| %>
+				<div style="float:left; margin-left:30px; margin-right:4px;">
+					<% if u.photo.present? %>
+						<a href="<%= url_for user_path(u.slug) %>">
+							<%= image_tag u.photo.url(:thumb), :style=>'width:98px; border-radius:5px;' %>
+						</a>
+					<% end %>
+				</div>
+			<% end %>
+			<% @specialists.each do |u| %>
+				<div style="float:left; margin-top:30px; width:98px; text-align:center;  font-size:17px; margin-left:30px; margin-right:4px;">
+					<% if u.title.present? %>
+						<a href="<%= url_for user_path(u.slug) %>" style="color:#edf2f7;">
+							<%= truncate(u.title, :length=>10, :separator=>' ', :omission => '') %>
+						</a>
+					<% end %>
+					<% if u.profile.present? and u.profile.summary.present? %>
+						<div style="padding-top:5px; font-size:15px; color:#637385; line-height:100%;">
+							<%= truncate(u.profile.summary, :length=>35, :separator=>' ') %>
+						</div>
+					<% end %>
+				</div>
+			<% end %>
+		</div>	
+	</div>
+</div>
+<div class="startupsLine">
+	<div class="startupsLineInside">
+		<div style="padding-top:148px;">
+			<% @startups.each do |s| %>
+				<a href="<%= url_for startup_path(s.slug) %>">
+					<div class="startupsLineStartupTab">
+						<div style="float:left; height:55px;">
+							<% if s.photo.present? %> 
+								<%= image_tag s.photo.url(:thumb), :style=>'width:55px; border-radius:2px;' %>
+							<% end %>
+						</div>
+						<div style="float:left; width:147px; margin-top:7px; margin-left:18px;">
+							<span style="font-size:16px; color:#93a6bb">
+								<%= truncate(s.title, :length=>15, :separator=>' ') %>
+							</span>
+							<br/>
+							<span style="color:#5f748b">
+								<%= s.country.title %>
+							</span>
+						</div>
+					</div>
+				</a>
+			<% end %>
+		</div>
+	</div>
+</div>
+
+<div class="landingBottomLine">
+	<div class="landingBottomLineInside">
+		<div class="landingBottomLeft">
+	  	   © <%= Time.now.year %> StarterPad.com. All Rights Reserved.
+	  	</div>
+	    <div class="landingBottomRight">
+	      <div style="float:right; padding-top:2px">
+	        <% if defined? current_user[:name] %>
+	          <%= link_to "Badges", '/badge_types/index' %>
+	        <% else %>
+	          <%= link_to "Home", '/' %>
+	        <% end %>
+
+	        &nbsp;<%= link_to "Terms", '/terms' %>
+	        &nbsp;<%= link_to "Privacy", '/privacy' %>
+	  	   </div>
+	  	</div>
+	  	<div style="clear:both"></div>
+	</div>
+</div>

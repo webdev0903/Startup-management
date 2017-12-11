@@ -1,0 +1,13 @@
+<%= content_for :title do %>
+  Follow at least 3 Groups
+  <%= link_to 'Skip >>', wizard_users_path(:step => params[:step].to_i + 1), :class => 'btn btn-default pull-right', :id => 'skip-step-2' %>
+  <%= link_to 'Next', wizard_users_path(:step => params[:step].to_i + 1), :class => 'btn btn-success pull-right', :style => 'display:none', :id => 'continue-step-2' %>
+<% end %>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="row">
+      <%= render 'groups/groups', :groups => @groups %>
+      <%= paginate @groups, :previous_label => 'Previous', :next_label => 'Next', :inner_window => 2, :outer_window => 0 %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Good Morning <%= @user.title %>!</h1>
+    <p>
+      We have some news for you:
+    </p>
+    <% @notifications.each do |n| %>
+		<%= notificationParam(n,'mail') %>
+	<% end %>
+    <p>Visit StarterPad.com to respond.</p>
+  </body>
+</html>
+
+

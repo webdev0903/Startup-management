@@ -1,0 +1,2 @@
+  <%= link_to 'Following', user_followerships_path(user_id), :method => :delete, :remote => true, :class => "userFollowingBtn btn #{btn_size} btn-success", :id => "following-link-#{user_id}" %>
+  <%= link_to 'Follow', user_followerships_path(user_id), :method => :post, :remote => true, :class => "userFollowBtn btn #{btn_size} btn-primary", :id => "follow-link-#{user_id}", :style => 'display:none' %>

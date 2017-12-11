@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <%= metamagic :title => "StarterPad - Launching Pad for Startups", :description => "Platform to build Startups. Connect with other entrepreneurs to help each other achieve success. Share tools and tactics to grow your company. Sign up for free today!", :keywords => "startup, startups, entrepreneurs, founders, jobs, careers, business", :author => "StarterPad" %>
+        
+        <!-- Google Authorship and Publisher Markup -->
+		<link rel="author" href="https://plus.google.com/+Starterpad/posts"/>
+		<link rel="publisher" href="https://plus.google.com/+Starterpad/"/>
+
+		<!-- Schema.org markup for Google+ -->
+		<meta itemprop="name" content="StarterPad - Launching Pad for Startups">
+		<meta itemprop="description" content="Platform to build Startups. Connect with other entrepreneurs to help each other achieve success. Share tools and tactics to grow your company. Sign up for free today!">
+		<meta itemprop="image" content="<%= asset_url("Starterpad-screenshot.jpg")%>">
+
+		<!-- Twitter Card data -->
+		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:site" content="@StarterPad">
+		<meta name="twitter:title" content="StarterPad - Launching Pad for Startups">
+		<meta name="twitter:description" content="Platform to build Startups. Connect with other entrepreneurs to help each other achieve success. Share tools and tactics to grow your company. Sign up for free today!">
+		<meta name="twitter:creator" content="@StarterPad">
+		<!-- Twitter summary card with large image must be at least 280x150px -->
+		<meta name="twitter:image:src" content="<%= asset_url("Starterpad-screenshot.jpg")%>">
+
+		<!-- Open Graph data -->
+		<meta property="og:title" content="StarterPad - Launching Pad for Startups" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://starterpad.com" />
+		<meta property="og:image" content="<%= asset_url("Starterpad-screenshot.jpg")%>" />
+		<meta property="og:description" content="Platform to build Startups. Connect with other entrepreneurs to help each other achieve success. Share tools and tactics to grow your company. Sign up for free today!" />
+		<meta property="og:site_name" content="StarterPad" />
+        <link href="//cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.2/spacelab/bootstrap.min.css" rel="stylesheet">
+        <%= stylesheet_link_tag "application", media: "all", :data => {:'turbolinks-track' => true} %>
+        <%= javascript_include_tag "application", :data => {:'turbolinks-track' => true} %>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+		<meta http-equiv="Content-Type" content="application/vnd.wap.xhtml+xml; charset=utf-8" />
+		<meta name="HandheldFriendly" content="true" />
+		<meta name="apple-mobile-web-app-capable" content="yes" /> 
+        <%#= csrf_meta_tags %>
+        <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("7aa3b0b757c3c11b3ffd69125dde1ede");</script><!-- end Mixpanel -->
+	</head>
+	<body>
+		<!-- Google Tag Manager -->
+        <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-MZRQDN"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-MZRQDN');</script>
+        <!-- End Google Tag Manager -->
+        <%= yield %>
+	</body>
+</html>

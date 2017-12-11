@@ -1,0 +1,21 @@
+<% content_for :title do %>
+	<% @user.title %>
+<% end %>
+<div class="row">
+	<div class="col-md-12 userProfile">
+		<div class="userProfileInside">
+			<%= render 'users/partials/profile_left', :user => @user %>
+			<div class="col-md-8 col-sm-9 right">
+				<h2 class="title">Followers</h2>
+				<div class="defaultLayoutLeft">
+					<div class="row">
+						<%= render :partial => 'users/partials/medium_tab', :collection => @followers.includes(:profile), :as => :user %>
+					</div>
+				</div>
+				<div style="float:left; clear: both;">
+					<%= paginate @followers.includes(:profile), :previous_label => 'Previous', :next_label => 'Next', :inner_window => 2, :outer_window => 0 %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

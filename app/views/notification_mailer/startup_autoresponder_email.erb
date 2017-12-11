@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>    
+    <p>Hey <%= @startup.owner.title %>!</p>
+
+		<p>It's been at least two weeks since you posted an update for <%= @startup.title %>. Your followers are probably anxious to hear what progress has been made :)</p>
+
+		<p>It's important to keep everyone updated on your progress, milestones and any other exciting news related to your business. </p>
+
+		<p>Keep in mind that the StarterPad community is made up of potential investors, customers, partners ... heck, we've even had many friendships formed.  Now's a great time to give them something to talk about.</p>
+		
+		<p>Looking for some inspiration?</p>
+		
+		<ul>
+			<li>Share growth figures (new users, revenue, traffic)
+			<li>Talk about new functionality
+			<li>Brag about new products
+			<li>Share any staffing updates
+			<li>Maybe you're focusing on a new marketing strategy?
+			<li>Or maybe you want to ask for help from your followers (such as beta testing, connection requests, etc) </li>
+		</ul>
+		<p>&nbsp;</p>
+		<a style="background-image: -webkit-linear-gradient(#61DD45, #3CB521 50%, #36A41E);background-image: -o-linear-gradient(#61dd45, #3cb521 50%, #36a41e); background-image: -webkit-gradient(linear, left top, left bottom, from(#61DD45), color-stop(50%, #3CB521), to(#36A41E));  background-image: linear-gradient(#61DD45, #3CB521 50%, #36A41E);  background-repeat: no-repeat; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff61dd45', endColorstr='#ff36a41e', GradientType=0); -webkit-filter: none;filter: none; border: 1px solid #2E8A19;padding:10px 20px;font-size:2em;  color: #FFF;background-color: #3CB521; border-color: #3CB521;" href="<%= url_for(startup_url(@startup.url)) %>">Update <%= @startup.title %> Now</a>
+		
+		<hr style="margin: 29px 0;border-bottom: none;clear: both;width: 280px;border-top: 1px solid #B4B4B4;">	
+
+		<p>Update your <a href="<%= url_for(email_settings_url()) %>">email preference</a> to unsubscribe from this email.</p>
+  </body>
+</html>

@@ -1,0 +1,132 @@
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="postTab" id="post<%= post.id %>">
+      <div class="postTabPost">
+        <div class="col-md-2 col-sm-2 postPhoto">
+          <%= link_to profile_path(post.user) do %>
+              <%= image_tag post.user._photo(:thumb), :class => "img-responsive", :onError => "this.onerror=null;this.src='images/user.png';" %>
+          <% end %>
+        </div>
+
+        <div class="col-md-10 col-sm-10 postText">
+          <div class="padPostTitle">
+            <%= link_to post.user.title, profile_path(post.user) %>
+
+            <% if post.group_id? %>
+              <% grp = Group.where(:id => post.group_id).first %>
+              shared post to group
+              <%= link_to grp.title, group_path(post.group_id) %>
+            <% end %>
+
+            <% if post.startup_id? %>
+              <% stp = Startup.where(:id => post.startup_id).first %>
+              shared post to startup
+              <%= link_to stp.title, startup_path(post.startup_id) %>
+            <% end %>
+            
+            <div style="float:right; padding-left:15px; margin-right:1px; margin-top:0px;">
+              <div style="float:right">
+                <% if !defined?(group) %>
+                    <% if post.comments.blank? %>
+                        <a class="addCommentLink postTool" href="#" data-post-id="<%= post.id %>" data-no-turbolink>Comment</a>
+                    <% end %>
+                    <% my_like = post.likes.select { |l| l.user_id == current_user.id } %>
+                    <% unless post.user_id == current_user.id %>
+                        <a class="like postTool" id="like-post-<%= post.id %>" href="#" style="<%= my_like.blank? ? '' : 'display:none;' %>">
+                          <%= image_tag 'old/gem_gray_18.png', :class => 'give-a-gem', :title => "Give a Gem" %>
+                          <%= form_for [post, post.likes.build], :remote => true do |f| %>
+                              <%= f.hidden_field :post_id %>
+                              <%= f.hidden_field :recipient_id, :value => post.user_id %>
+                          <% end %>
+                        </a>
+                    <% end %>
+                    <%= link_to post_like_path(post, my_like), :method => :delete, :remote => true, :style => "float:left; #{my_like.blank? ? 'display:none;' : ''}", :id => "unlike-post-#{post.id}" do %>
+                        <%= image_tag 'old/gem_18.png', :class => 'remove-the-gem', :title => "Remove Gem" %>
+                    <% end %>
+                <% elsif user_signed_in? && (group.members.include?(current_user) || group.user_id == current_user.id) %>
+                    <% if post.comments.blank? %>
+                        <a class="addCommentLink postTool" href="#" data-post-id="<%= post.id %>" data-no-turbolink>Comment</a>
+                    <% end %>
+                    <% my_like = post.likes.select { |l| l.user_id == current_user.id } %>
+                    <a class="like postTool" id="like-post-<%= post.id %>" href="#" style="<%= my_like.blank? ? '' : 'display:none;' %>">
+                      <%= image_tag 'old/gem_gray_18.png', :class => 'give-a-gem', :title => "Give a Gem" %>
+                      <%= form_for [post, post.likes.build], :remote => true do |f| %>
+                          <%= f.hidden_field :post_id %>
+                          <%= f.hidden_field :recipient_id, :value => post.user_id %>
+                      <% end %>
+                    </a>
+                    <%= link_to post_like_path(post, my_like), :method => :delete, :remote => true, :style => "float:left; #{my_like.blank? ? 'display:none;' : ''}", :id => "unlike-post-#{post.id}" do %>
+                        <%= image_tag 'old/gem_18.png', :class => 'remove-the-gem', :title => "Remove Gem" %>
+                    <% end %>
+                <% end %>
+                <div style="float:left; font-size:12px; margin-left:1px;">
+                  (<a id="like-count-<%= post.id %>" href="#" style="font-weight:bolder;">
+                  <%= post.likes_count && post.likes_count > 0 ? post.likes_count : "0" %>
+                </a>)
+                <div style="float:right;font-size:14px; font-weight:normal; margin-left:5px; ">
+                  <%= link_to('Delete', post_path(post), method: :delete, remote: true, :class => "btn btn-danger btn-xs", :data => {:confirm => "Are you sure?"}) if is_admin? %>
+                </div>   
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="showLess">
+            <% if post.text.length > 300 %>
+                <%= auto_link2(simple_format(truncate(post.text, :length => 300, :omission => '...')), :html => {:target => '_blank'}) %>
+                <a href="#" data-no-turbolink class="show-more">show more»</a><br/>
+            <% else %>
+                <%= auto_link(simple_format(post.text), :html => { :target => '_blank' }) %>
+            <% end %>
+            <i class="fa fa-clock-o time_ago"></i>
+            <%= "#{time_ago_in_words(post.created_at)} ago" %>
+          </div>
+
+          <div class="showMore">
+            <%= auto_link(simple_format(post.text), :html => { :target => '_blank' }) %>
+            <a href="#" data-no-turbolink class="show-less" style="font-weight:bolder;">«show less</a><br/>
+            <i class="fa fa-clock-o time_ago"></i>
+            <%= "#{time_ago_in_words(post.created_at)} ago" %>
+          </div>
+        </div>
+        <div style="clear:both"></div>
+      </div>
+
+      <% if !defined?(group) %>
+          <div class="row postTabComments" id="post-comments-<%= post.id %>">
+            <%= render :partial => 'comments/comment', :collection => post.comments, :as => :comment %>
+            <div style="clear:both"></div>
+            <div class="col-md-12 col-sm-12 addComment comment-on-<%= post.id %>" style="<%= post.comments.blank? ? 'display:none' : '' %>">
+              <%= form_for [post, post.comments.build], :html => {:class => 'formAddNewComment'}, :remote => true do |f| %>
+                  <div class="col-md-12 col-sm-12">
+                    <%= f.text_area :text, :cols => "30", :class => 'postCommentTextarea', :rows => "6", :id => "text", :placeholder => "Write a comment...", :style => "min-height: 35px; float:left;" %>
+                    <div class="submit">
+                      <%= button_tag "Post", class: "commentPostBtn", style: "height: 35px; float:left; margin: 0;", 'data-disable-with' => "<i class='fa fa-spinner fa-spin'></i>".html_safe %>
+                    </div>
+                  </div>
+              <% end %>
+            </div>
+            <div style="clear:both"></div>
+          </div>
+      <% elsif user_signed_in? && group.present? && (group.members.include?(current_user) || group.user_id == current_user.id) %>
+          <div class="postTabComments" id="post-comments-<%= post.id %>">
+            <%= render :partial => 'comments/comment', :collection => post.comments, :as => :comment %>
+            <div class="col-md-12 col-sm-12 addComment comment-on-<%= post.id %>" style="<%= post.comments.blank? ? 'display:none' : '' %>">
+              <%= form_for [post, post.comments.build], :html => {:class => 'formAddNewComment'}, :remote => true do |f| %>
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                      <%= f.text_area :text, :cols => "30", :class => 'postCommentTextarea', :rows => "6", :id => "text", :placeholder => "Write a comment...", :style => "min-height: 35px; width:90%; float:left;" %>
+                      <div class="submit">
+                        <%= button_tag "Post", class: "commentPostBtn", style: "height: 35px; float:left; margin: 0;", 'data-disable-with' => "<i class='fa fa-spinner fa-spin'></i>".html_safe %>
+                      </div>
+                    </div>
+                  </div>
+              <% end %>
+            </div>
+            <div style="clear:both"></div>
+          </div>
+      <% else %>
+      <% end %>
+    </div>
+  </div>
+</div>

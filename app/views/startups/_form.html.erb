@@ -1,0 +1,177 @@
+<div class="defaultLayoutLeft gray">
+  <div class="infoBlok">
+    <div>
+      <%= form_for startup, :html => { :multipart => true } do |f| %>
+      <div class="col-md-12 col-sm-12 formRow"> 
+        <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+          <span>Logo / Illustration</span>
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-12 frRight"> 
+          <%= image_tag startup._photo(:middle) %>
+          <br/>
+          
+          <%= f.file_field :photo, :style => "border:0px;" %>
+        </div>
+        <div style="clear:both"></div>
+      </div>  
+   
+      <div class="col-md-12 col-sm-12 formRow"> 
+        <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+          <span>Title</span>
+           <br/>
+          * required
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-12 frRight"> 
+          <%= f.text_field :title %> 
+        </div>
+        <div style="clear:both"></div>
+      </div>  
+      <div class="col-md-12 col-sm-12 formRow"> 
+        <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+          <span>Short summary</span>
+           <br/>
+          * required
+          <br/>
+          Up to 7 words
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-12 frRight"> 
+          <%= f.text_field :summary %> 
+        </div>
+        <div style="clear:both"></div>
+      </div> 
+     
+      <div class="col-md-12 col-sm-12 formRow"> 
+        <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+          <span>Markets</span>
+          <br/>
+          * required
+          <br/>
+          e.g.
+          <span class="keyword">social network</span>
+          <span class="keyword">mobile app</span>
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-12 frRight"> 
+          <%= select_tag 'startup[markets]' , options_for_select(Keyword.markets.order(:title).map{ |c| [c.title, c.url, {'data-followers-count'=>c.followers_count}, {'data-startups-count' => c.startups_count}] }, selected_key = f.object.markets), {:multiple => true, :id => 'startup_markets', :style => "width:100%"} %>
+        </div>
+        <div style="clear:both"></div>
+      </div>
+      
+      <div class="col-md-12 col-sm-12 formRow"> 
+        <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+          <span>Cofounders</span>
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-12 frRight"> 
+          <%= select_tag 'startup[cofounder_ids]' , 
+            options_for_select(current_user.friends.active.includes(:profile).order(:title).map{ |c| [
+                c.title, 
+                c.id, 
+                {'data-url'=>c.photo.url(:small)}
+              ]}, selected_key = f.object.cofounder_ids), {:multiple => true, :id => 'startup_cofounder_ids', :style => "width:100%"} %>
+        </div>
+        <div style="clear:both"></div>
+      </div>
+
+
+      <div class="col-md-12 col-sm-12 formRow"> 
+        <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+          <span>About product</span>
+          <br/>
+          * required
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-12 frRight"> 
+          <%= f.text_area :about, {:style => 'height:100px;', :type => 'textfield'} %>
+        </div>
+        <div style="clear:both"></div>
+      </div> 
+
+      <div class="col-md-12 col-sm-12 formRow"> 
+        <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+          <span>Looking for</span>
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-12 frRight"> 
+          <%= f.text_field :require %>
+        </div>
+        <div style="clear:both"></div>
+      </div> 
+
+      <div class="col-md-12 col-sm-12 formRow"> 
+        <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+          <span>Country</span>
+          <br/>
+          * required
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-12 frRight">
+          <%= f.collection_select(:country_id, Country.all, :id, :title, :include_blank=>'Please select') %>
+        </div>
+        <div style="clear:both"></div>
+      </div>
+
+      <div class="col-md-12 col-sm-12 formRow"> 
+        <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+          <span>City</span>
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-12 frRight"> 
+          <%= f.text_field :city %>
+        </div>
+        <div style="clear:both"></div>
+      </div>
+
+      <div class="col-md-12 col-sm-12 formRow">
+        <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+          <span>Website</span>
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-12 frRight" id="fieldLinks">
+          <%= f.text_field :website, style: "width:100%;" %>
+        </div>
+        <div style="clear:both"></div>
+      </div>
+      <div class="col-md-12 col-sm-12 formRow">
+        <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+          <span>AngelList profile link</span>
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-12 frRight" id="fieldLinks">
+          <%= f.text_field :angellist, style: "width:100%;" %>
+        </div>
+        <div style="clear:both"></div>
+      </div>
+      <div class="col-md-12 col-sm-12 formRow">
+        <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+          <span>Twitter profile link</span> 
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-12 frRight" id="fieldLinks">
+          <%= f.text_field :twitter, style: "width:100%;" %>
+        </div>
+        <div style="clear:both"></div>
+      </div>
+      <div class="col-md-12 col-sm-12 formRow">
+        <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+          <span>Facebook page link</span>  
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-12 frRight" id="fieldLinks">
+          <%= f.text_field :facebook, style: "width:100%;" %>
+        </div>
+        <div style="clear:both"></div>
+      </div>
+
+
+      <div class="col-md-12 col-sm-12 formRow last">
+        <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+          &nbsp;
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-12 frRight">
+          <%= f.submit startup.new_record? ? 'Create' : 'Update', :class => "btn btn-primary", style: "width:100px;" %>
+          <% end %>
+        </div>
+        <div style="clear:both"></div>
+      </div>
+      <% if startup.id.present? %>
+        <div class="col-md-12 col-sm-12 formRow last">
+          <div>
+            <%= link_to 'Remove Startup', startup_path(startup), {:method=>:delete, :confirm=>'Are you sure want to remove this Startup?', :class => "btn btn-danger"} %>
+         </div>
+       </div>
+      <% end %>
+      <div style="clear:both"></div>
+    </div>
+  </div>
+</div>

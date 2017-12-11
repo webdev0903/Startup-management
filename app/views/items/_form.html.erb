@@ -1,0 +1,52 @@
+<div class="infoBlok">
+  <%= form_for @item do |f| %> 
+    <div class="formRow"> 
+      <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+        <i class="fa fa-book"></i> <span>Title</span>
+      </div>
+      <div class="col-md-8 col-sm-8 col-xs-12 frRight"> 
+        <%= f.text_field :title, :required => true %>
+      </div>
+      <div style="clear:both"></div>
+    </div>  
+    <div class="formRow"> 
+      <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+        <i class="fa fa-link"></i> <span>URL</span>
+      </div>
+      <div class="col-md-8 col-sm-8 col-xs-12 frRight"> 
+        <%= f.text_field :url %> 
+      </div>
+      <div style="clear:both"></div>
+    </div>
+    <div class="formRow"> 
+      <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+      </div>
+      <div style="color:#777" class="col-md-8 col-sm-8 col-xs-12 frRight"> 
+        OR
+      </div>
+      <div style="clear:both"></div>
+    </div> 
+    <div class="formRow"> 
+      <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+        <i class="fa fa-pencil-square-o"></i> <span>Content</span>
+        <br/>
+        Describe the topic you're posting about
+      </div>
+      <div class="col-md-8 col-sm-8 col-xs-12 frRight"> 
+        <%= f.text_area :content, :rows => "6" %>
+      </div>
+      <div style="clear:both"></div>
+    </div>  
+
+    <div class="formRow last">
+      <div class="col-md-4 col-sm-4 col-xs-12 frLeft">
+        &nbsp;
+      </div>
+      <div class="col-md-8 col-sm-8 col-xs-12 frRight">
+        <%= f.submit @item.new_record? ? 'Create' : 'Update', :class => "btn btn-primary", :style => "width:100px;" %>
+        <%= @item.new_record? ? '' : link_to('Show', @item,{:class => 'btn btn-default', :style => "width:100px;" })   %>
+      </div>
+      <div style="clear:both"></div>
+    </div>
+  <% end %>
+</div>

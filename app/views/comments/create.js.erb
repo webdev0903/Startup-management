@@ -1,0 +1,14 @@
+<% if @comment.errors.present? %>
+  <% 
+    errors = []
+    @comment.errors.messages.values.each do |message|
+      errors += message
+    end
+  %>
+  $('.pageContent').prepend("<%= j render(partial: '/shared/js_error_messages', collection: errors, as: :error) %>");
+<% else %>
+	$(".comment-on-<%= @comment.post_id %>").before("<%= escape_javascript(render('comments/comment', :comment => @comment)) %>");
+	$(".comment-on-<%= @comment.post_id %> textarea").val('');
+<% end %>
+
+

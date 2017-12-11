@@ -1,0 +1,2 @@
+class UserStatisticsController < ApplicationController
+end

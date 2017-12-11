@@ -1,0 +1,26 @@
+defaults: &defaults
+  twitter:
+    key: <%= 'xJoUVF49JQb9gSbLFnA' %>
+    secret: <%= 'JxVrGgUAxJqXptuls2prveZCTKQLleBSMSu8XQr1l9k' %>
+  facebook:
+    id: <%= '555759104450508' %>
+    secret: <%= 'c085fdfe7499c76ab2a20dfde0cab939' %>
+  madmimi:
+    key: <%= '6bde81d67546706e77458e1a5588da45' %>
+    email: <%= 'support@starterpad.com' %>
+  sendy:
+    key: <%= 'ZacYFtptnejW7snaHIUX' %>
+    list: <%= 'EpcE892sOSp6WBxZA5nLUQHA' %>
+    endpoint: <%= 'http://sendy.bigdatatoolbox.com/subscription?f=siqtu8925q2Yem4xNnRYtkFw1892g1tt17635eHI5jQZoxeMAjNrBcugMm9PdA1MoyUIFxnsak5l0w763I8WkNQt892TbfEA' %>
+    email: <%= 'support@starterpad.com' %>
+development:
+  <<: *defaults
+
+staging:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
